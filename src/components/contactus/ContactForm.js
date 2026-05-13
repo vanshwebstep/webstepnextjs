@@ -5,10 +5,10 @@ import { FaLock, FaPaperPlane } from "react-icons/fa";
 const ContactForm = ({ light = false }) => {
     const inputClasses = light 
         ? "w-full bg-white border border-slate-200 rounded-2xl py-4 px-6 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF1F8E] transition-all duration-300 shadow-sm"
-        : "w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/40 focus:outline-none focus:border-[#FF1F8E] transition-all duration-300 shadow-[0_0_15px_rgba(255,31,142,0.1)] focus:shadow-[0_0_20px_rgba(255,31,142,0.3)] backdrop-blur-md";
+        : "w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-slate-900 placeholder:text-slate-400 → placeholder:text-slate-500 focus:outline-none focus:border-[#FF1F8E] transition-all duration-300 shadow-[0_0_15px_rgba(255,31,142,0.1)] focus:shadow-[0_0_20px_rgba(255,31,142,0.3)] backdrop-blur-md";
 
-    const labelClasses = light ? "text-slate-500" : "text-white/60";
-    const subTextClasses = light ? "text-slate-400" : "text-white/40";
+    const labelClasses = light ? "text-slate-500" : "text-slate-500";
+    const subTextClasses = light ? "text-slate-400" : "text-slate-500";
 
     return (
         <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
@@ -67,7 +67,7 @@ const ContactForm = ({ light = false }) => {
                 ></textarea>
             </div>
 
-            <div className="flex flex-col gap-6 pt-2">
+            <div className="flex flex-col gap-6 pt-0">
                 <div className="flex flex-col gap-3">
                     <label className="flex items-center gap-3 cursor-pointer group">
                         <div className="relative flex items-center justify-center">
@@ -82,7 +82,7 @@ const ContactForm = ({ light = false }) => {
                                 <path d="M1 5L4.5 8.5L13 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
-                        <span className={`text-sm ${labelClasses} group-hover:opacity-100 transition-opacity`}>
+                        <span className={`text-sm ${labelClasses} text-[#000] group-hover:opacity-100 transition-opacity`}>
                             I agree to the <a href="#" className="text-[#FF1F8E] hover:underline font-bold">Privacy Policy</a>
                         </span>
                     </label>

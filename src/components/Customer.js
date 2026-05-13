@@ -1,159 +1,280 @@
 "use client";
-import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import clientMichael from '@/components/img/client_michael.png';
-import clientSarah from '@/components/img/client_sarah.png';
-import riyaArchitect from '@/components/img/riya_architect.png';
-import amanArchitect from '@/components/img/aman_architect.png';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaStar, FaQuoteRight } from 'react-icons/fa';
-import Image from 'next/image';
+import { FiArrowLeft, FiArrowRight, FiBriefcase, FiStar, FiCheckCircle, FiGlobe } from 'react-icons/fi';
 
 const reviews = [
-  { id: 1, name: "Michael O'Malley", role: 'Product Lead, Velocity', content: 'Exceptional technical depth. They didn\'t just build what we asked; they built what we actually needed to scale our infrastructure.', image: clientMichael },
-  { id: 2, name: 'Sarah Jenkins', role: 'Design Director, Aura', content: 'Absolutely phenomenal service. Their UI/UX design transformed our user retention metrics within months of the initial rollout.', image: clientSarah },
-  { id: 3, name: 'Matt Meyer', role: 'CTO, TechCorp', content: 'The communication and project management were top-tier. A true extension of our internal engineering team throughout the lifecycle.', image: amanArchitect },
-  { id: 4, name: 'Riya Sharma', role: 'Creative Partner', content: 'Precision, speed, and innovation. They delivered exactly what we needed, on time and under budget, exceeding our expectations.', image: riyaArchitect },
+  {
+    id: 0,
+    initials: 'MO',
+    name: "Michael O'Malley",
+    role: 'Product Lead, Velocity',
+    content: "Exceptional technical depth. They didn't just build what we asked — they built what we actually needed to scale.",
+    tag: 'Mobile App',
+    accent: '#7C3AED',
+    accentLight: '#ede9fe',
+    accentText: '#5b21b6',
+    avatarFrom: '#7C3AED',
+    avatarTo: '#a855f7',
+    barFrom: '#7C3AED',
+    barTo: '#a855f7',
+  },
+  {
+    id: 1,
+    initials: 'SJ',
+    name: 'Sarah Jenkins',
+    role: 'Design Director, Aura',
+    content: "Absolutely phenomenal. Their UI/UX design transformed our user retention metrics within months of rollout.",
+    tag: 'UI/UX',
+    accent: '#0891B2',
+    accentLight: '#e0f2fe',
+    accentText: '#0369a1',
+    avatarFrom: '#0891B2',
+    avatarTo: '#38bdf8',
+    barFrom: '#0891B2',
+    barTo: '#38bdf8',
+  },
+  {
+    id: 2,
+    initials: 'MM',
+    name: 'Matt Meyer',
+    role: 'CTO, TechCorp',
+    content: "The communication and project management were top-tier. A true extension of our engineering team throughout.",
+    tag: 'Full Stack',
+    accent: '#059669',
+    accentLight: '#d1fae5',
+    accentText: '#065f46',
+    avatarFrom: '#059669',
+    avatarTo: '#34d399',
+    barFrom: '#059669',
+    barTo: '#34d399',
+  },
+  {
+    id: 3,
+    initials: 'RS',
+    name: 'Riya Sharma',
+    role: 'Creative Partner',
+    content: "Precision, speed, and innovation — delivered on time, under budget, exceeding every single expectation we had.",
+    tag: 'Laravel',
+    accent: '#EA580C',
+    accentLight: '#ffedd5',
+    accentText: '#9a3412',
+    avatarFrom: '#EA580C',
+    avatarTo: '#fb923c',
+    barFrom: '#EA580C',
+    barTo: '#fb923c',
+  },
+];
+
+const stats = [
+  { icon: <FiBriefcase />, num: '500+', label: 'Projects Delivered', bg: '#ede9fe', color: '#7C3AED' },
+  { icon: <FiStar />, num: '4.9/5', label: 'Avg Rating', bg: '#e0f2fe', color: '#0891B2' },
+  { icon: <FiCheckCircle />, num: '✓', label: 'Google Certified', bg: '#d1fae5', color: '#059669' },
+  { icon: <FiGlobe />, num: '40+', label: 'Countries', bg: '#ffedd5', color: '#EA580C' },
 ];
 
 const Customer = () => {
-  const settings = {
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: false,
-    dots: true,
-    pauseOnHover: true,
-    responsive: [
-      { breakpoint: 1280, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
-    ],
-  };
+  const [cur, setCur] = useState(0);
+  const timerRef = useRef(null);
+  const total = reviews.length;
+
+  const goTo = (i) => setCur((i + total) % total);
+  const next = () => goTo(cur + 1);
+  const prev = () => goTo(cur - 1);
+
+  const startAuto = () => { timerRef.current = setInterval(() => setCur(c => (c + 1) % total), 4000); };
+  const stopAuto = () => clearInterval(timerRef.current);
+
+  useEffect(() => { startAuto(); return stopAuto; }, []);
+
+  const r = reviews[cur];
 
   return (
-    <section className="relative py-24 md:py-32 bg-white overflow-hidden font-sans">
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        .customer-section * { font-family: 'Roboto', sans-serif; }
+        .tnavbtn:hover { background: #7C3AED !important; color: #fff !important; border-color: #7C3AED !important; }
+        .tdot-pill { transition: all 0.25s; }
+      `}</style>
 
-      {/* Ambient glow */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[900px] h-[900px] bg-[#FF1F8E]/5 rounded-full blur-[180px]" />
-      </div>
+      <section
+        className="customer-section"
+        style={{ background: '#f4f3fa', padding: '5rem 1.5rem' }}
+      >
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
 
-      <div className="relative z-10 container  mx-auto px-6 lg:px-12">
-
-        {/* ── Header ── */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-3 mb-5">
-            <span className="w-10 h-px bg-slate-200" />
-            <span className="text-[10px] font-black tracking-[0.4em] text-[#FF1F8E] uppercase">
-              Success Stories
-            </span>
-            <span className="w-10 h-px bg-slate-200" />
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+         <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white backdrop-blur-md border border-white/60 text-[#FF1F8E] font-bold text-[10px] tracking-[0.3em] uppercase mb-10 shadow-sm">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF1F8E] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF1F8E]"></span>
+          </span>
+          Success Stories 
+        </div>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, color: '#18142e', letterSpacing: '-0.03em', lineHeight: 1, margin: 0 }}>
+              Global Client{' '}
+              <span style={{
+                background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>Success</span>
+            </h2>
+            <p style={{ fontSize: '18px', color: '#8b87a8', marginTop: '0.6rem', fontWeight: 500 }}>
+              Hear directly from teams we've partnered with to build, scale, and launch.
+            </p>
           </div>
 
-          <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.0] tracking-tight mb-6">
-            Global Client{' '}
-            <span className="text-[#FF1F8E]">Success Stories</span>
-          </h2>
+          {/* Slider */}
+          <div
+            style={{ borderRadius: '20px', border: '1.5px solid #eceaf5', background: '#f4f3fa', overflow: 'hidden' }}
+            onMouseEnter={stopAuto}
+            onMouseLeave={startAuto}
+          >
+            {/* Slide */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '70px 1fr auto',
+              alignItems: 'center',
+              gap: '1.4rem',
+              padding: '1.8rem',
+              background: `linear-gradient(180deg, #ede9fe, #FFF)`,
+              position: 'relative',
+              transition: 'background 0.3s',
+            }}>
+              {/* Left accent bar */}
+              <div style={{
+                position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px',
+                background: `linear-gradient(180deg, ${r.barFrom}, ${r.barTo})`,
+                borderRadius: '4px 0 0 4px',
+              }} />
 
-          <p className="text-slate-400 text-base max-w-md mx-auto font-medium">
-            Hear directly from the teams we&apos;ve partnered with to build, scale, and launch.
-          </p>
-        </div>
+              {/* Avatar */}
+              <div style={{
+                width: 50, height: 50, borderRadius: '14px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '16px', fontWeight: 900, color: '#fff', flexShrink: 0,
+                background: `linear-gradient(135deg, ${r.avatarFrom}, ${r.avatarTo})`,
+              }}>
+                {r.initials}
+              </div>
 
-        {/* ── Slider ── */}
-        <div className="relative">
-          <Slider {...settings} className="testimonial-slider pb-16">
-            {reviews.map((review) => (
-              <div key={review.id} className="px-4 outline-none">
-                <div className="group relative bg-white border border-slate-100 rounded-[2.5rem] p-8 flex flex-col min-h-[400px] overflow-hidden hover:border-[#FF1F8E]/25 hover:shadow-[0_8px_50px_rgba(255,31,142,0.08)] transition-all duration-500 shadow-sm">
-
-                  {/* Top accent line on hover */}
-                  <span className="absolute top-0 left-8 right-8 h-[2px] bg-[#FF1F8E]/0 group-hover:bg-[#FF1F8E]/40 transition-colors duration-500 rounded-b-full" />
-
-                  {/* Decorative quote icon */}
-                  <div className="absolute bottom-8 right-8 text-slate-100 group-hover:text-[#FF1F8E]/10 transition-colors duration-500">
-                    <FaQuoteRight size={60} />
-                  </div>
-
-                  {/* Stars */}
-                  <div className="flex gap-1 text-[#FF1F8E] mb-6 relative z-10">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar key={i} size={14} />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <p className="text-slate-500 group-hover:text-slate-700 text-base leading-relaxed mb-8 flex-grow italic relative z-10 transition-colors duration-400">
-                    &quot;{review.content}&quot;
-                  </p>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-4 pt-6 border-t border-slate-100 mt-auto relative z-10">
-                    <div className="w-14 h-14 shrink-0 rounded-2xl overflow-hidden border-2 border-white shadow-lg group-hover:scale-105 transition-transform duration-500">
-                      <Image
-                        src={review.image}
-                        alt={review.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                      />
-                    </div>
-                    <div>
-                      <h6 className="font-black text-slate-900 text-lg leading-tight tracking-tight">
-                        {review.name}
-                      </h6>
-                      <p className="text-[10px] font-bold text-[#FF1F8E] uppercase tracking-[0.25em] mt-0.5">
-                        {review.role}
-                      </p>
-                    </div>
-                  </div>
+              {/* Text */}
+              <div>
+                <p style={{ fontSize: '14px', color: '#3d3660', lineHeight: 1.65, fontWeight: 500, fontStyle: 'italic', marginBottom: '8px' }}>
+                  "{r.content}"
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#18142e' }}>{r.name}</span>
+                  <span style={{ fontSize: '11px', color: '#c4c0d8' }}>·</span>
+                  <span style={{ fontSize: '11px', fontWeight: 600, color: '#8b87a8' }}>{r.role}</span>
                 </div>
               </div>
-            ))}
-          </Slider>
-        </div>
 
-        {/* ── Bottom trust bar ── */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-          {['500+ Projects Delivered', '4.9 / 5.0 Avg. Rating', 'Google Verified', '40+ Countries'].map((item, i) => (
-            <div key={i} className="flex items-center gap-2 text-slate-400">
-              <span className="w-1 h-1 rounded-full bg-[#FF1F8E]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em]">{item}</span>
+              {/* Right: stars + tag */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px', flexShrink: 0 }}>
+                <div style={{ display: 'flex', gap: '2px' }}>
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} size={12} color={r.accent} />
+                  ))}
+                </div>
+                <span style={{
+                  fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
+                  textTransform: 'uppercase', padding: '3px 10px', borderRadius: '100px',
+                  background: r.accentLight, color: r.accentText,
+                }}>
+                  {r.tag}
+                </span>
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <style>{`
-                .testimonial-slider .slick-dots {
-                    bottom: -8px;
-                }
-                .testimonial-slider .slick-dots li {
-                    margin: 0 4px;
-                }
-                .testimonial-slider .slick-dots li button:before {
-                    font-size: 8px;
-                    color: #e2e8f0;
-                    opacity: 1;
-                    transition: all 0.3s ease;
-                }
-                .testimonial-slider .slick-dots li.slick-active button:before {
-                    font-size: 10px;
-                    color: #FF1F8E;
-                }
-                .testimonial-slider .slick-track {
-                    display: flex !important;
-                }
-                .testimonial-slider .slick-slide {
-                    height: inherit !important;
-                }
-                .testimonial-slider .slick-slide > div {
-                    height: 100%;
-                }
-            `}</style>
-    </section>
+            {/* Controls bar */}
+            <div style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: '0.85rem 1.4rem',
+              borderTop: '1.5px solid #eceaf5',
+              background: '#fff',
+            }}>
+              {/* Dots */}
+              <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                {reviews.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    className="tdot-pill"
+                    style={{
+                      width: i === cur ? '22px' : '7px',
+                      height: '7px',
+                      borderRadius: i === cur ? '4px' : '50%',
+                      background: i === cur ? '#7C3AED' : '#e0ddf5',
+                      border: 'none', cursor: 'pointer', padding: 0,
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Counter */}
+              <span style={{ fontSize: '11px', fontWeight: 700, color: '#8b87a8', letterSpacing: '0.1em' }}>
+                {String(cur + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+              </span>
+
+              {/* Arrows */}
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {[{ fn: prev, icon: <FiArrowLeft size={15} /> }, { fn: next, icon: <FiArrowRight size={15} /> }].map((btn, i) => (
+                  <button
+                    key={i}
+                    className="tnavbtn"
+                    onClick={btn.fn}
+                    style={{
+                      width: 34, height: 34, borderRadius: '10px',
+                      border: '1.5px solid #e0ddf5', background: '#fff',
+                      color: '#7C3AED', cursor: 'pointer',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    {btn.icon}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Stats bar */}
+          <div style={{
+            marginTop: '1.2rem', background: '#fff',
+            border: '1.5px solid #eceaf5', borderRadius: '20px',
+            padding: '1.2rem 1.6rem',
+            display: 'flex', alignItems: 'center',
+            justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem',
+          }}>
+            {stats.map((s, i) => (
+              <React.Fragment key={i}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: 38, height: 38, borderRadius: '10px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '16px', background: s.bg, color: s.color, flexShrink: 0,
+                  }}>
+                    {s.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#18142e', lineHeight: 1 }}>{s.num}</div>
+                    <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8b87a8', marginTop: '1px' }}>{s.label}</div>
+                  </div>
+                </div>
+                {i < stats.length - 1 && (
+                  <div style={{ width: '1px', height: '32px', background: '#eceaf5', flexShrink: 0 }} />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+        </div>
+      </section>
+    </>
   );
 };
 

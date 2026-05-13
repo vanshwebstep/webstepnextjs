@@ -12,6 +12,7 @@ import Customer from '../Customer';
 import Experience from '../Experience';
 import MarketingTeam from '../MarketingTeam';
 import FormSection from '../FormSection';
+import HomePage from '../fullHomePage';
 
 const AnimatedSection = ({ children, delay = 0, className = "", direction = "up" }) => {
   const getInitial = () => {
@@ -65,9 +66,7 @@ const Home = () => {
           <Services />
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2} direction="up">
-          <OurExpertize />
-        </AnimatedSection>
+       
 
         <AnimatedSection delay={0.2} direction="left">
           <Process />
@@ -88,7 +87,9 @@ const Home = () => {
         <AnimatedSection delay={0.2} direction="right">
           <Experience />
         </AnimatedSection>
-
+ <AnimatedSection delay={0.2} direction="up">
+          <OurExpertize />
+        </AnimatedSection>
         <AnimatedSection delay={0.2} direction="up">
           <MarketingTeam />
         </AnimatedSection>
@@ -96,6 +97,10 @@ const Home = () => {
         <AnimatedSection delay={0.2} direction="up">
           <FormSection />
         </AnimatedSection>
+
+         {/* <AnimatedSection delay={0.2} direction="up">
+          <HomePage />
+        </AnimatedSection> */}
       </div>
     </main>
   );

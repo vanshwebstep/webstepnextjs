@@ -43,3 +43,17 @@
 
 
 }
+/* FloatingWhatsApp input fix */
+.floating-whatsapp-input input,
+.floating-whatsapp input[type="text"],
+[class*="floating-whatsapp"] input {
+  pointer-events: all !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  position: relative !important;
+  z-index: 99999 !important;
+}
+
+[class*="floating-whatsapp"] {
+  z-index: 99999 !important;
+}

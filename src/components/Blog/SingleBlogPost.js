@@ -1,0 +1,564 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import blog1 from '@/components/img/blog1.png';
+import blog2 from '@/components/img/blog2.png';
+import blog3 from '@/components/img/blog3.png';
+import blog4 from '@/components/img/blog4.png';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
+import {
+    FaCalendarAlt,
+    FaUser,
+    FaEye,
+    FaArrowRight,
+    FaArrowLeft,
+    FaTwitter,
+    FaLinkedinIn,
+    FaFacebookF,
+    FaLink,
+    FaTag,
+    FaClock,
+    FaHeart,
+    FaRegHeart,
+    FaChevronRight,
+} from "react-icons/fa";
+
+const POST = {
+    id: 1,
+    title: "Which eCommerce Platform is Best for SEO in 2024?",
+    slug: "best-ecommerce-platform-seo",
+    category: "Technology",
+    author: "Admin",
+    date: "Nov 30, 2023",
+    readTime: "6 min read",
+    views: 1240,
+    likes: 87,
+    url: "@/components/img/blog1.png",
+    imageSrc: blog1,
+    tags: ["SEO", "eCommerce", "Shopify", "Digital Marketing"],
+    content: [
+        {
+            type: "lead",
+            text: "For any eCommerce website, SEO is the single most powerful lever for sustainable growth. Unlike paid ads, organic traffic compounds over time — making platform choice a long-term strategic decision.",
+        },
+        {
+            type: "h2",
+            text: "Why Platform Matters for SEO",
+        },
+        {
+            type: "p",
+            text: "Search engines crawl your site's technical architecture, page speed, structured data, and URL patterns. Different platforms handle each of these uniquely. Choosing the wrong platform can put you at a structural disadvantage before you write a single word of content.",
+        },
+        {
+            type: "h2",
+            text: "Top Contenders at a Glance",
+        },
+        {
+            type: "list",
+            items: [
+                "Shopify — Best balance of usability and SEO features out of the box.",
+                "WooCommerce — Maximum flexibility for technical SEO customisation.",
+                "BigCommerce — Enterprise-grade structured data support.",
+                "Squarespace — Clean markup but limited advanced control.",
+                "Wix — Improved dramatically since 2022 but still lags behind.",
+            ],
+        },
+        {
+            type: "h2",
+            text: "Our Recommendation",
+        },
+        {
+            type: "p",
+            text: "For most growing businesses, Shopify paired with a dedicated SEO app like TechnoScore's custom SEO suite delivers the best ROI. WooCommerce wins when you need granular control and already run WordPress. Either way, the platform is only 20% of the equation — content strategy and link building drive the remaining 80%.",
+        },
+        {
+            type: "quote",
+            text: "SEO is not about gaming the system. It is about learning how to play by the rules.",
+            author: "Jordan Kasteler",
+        },
+        {
+            type: "p",
+            text: "TechnoScore has helped 200+ clients migrate and optimise their eCommerce stores. Our process starts with a full technical audit and ends with measurable results — typically a 40–120% increase in organic sessions within six months.",
+        },
+    ],
+};
+
+const RELATED = [
+    {
+        id: 2,
+        title: "What Is The Difference Between eCommerce And Dropshipping?",
+        slug: "ecommerce-vs-dropshipping",
+        date: "Nov 30, 2023",
+        views: 30,
+        imageSrc: blog2,
+        category: "Business",
+    },
+    {
+        id: 3,
+        title: "How to Integrate eCommerce Into Your Website?",
+        date: "Nov 30, 2023",
+        slug: "integrate-ecommerce-website",
+        views: 45,
+        imageSrc: blog3,
+        category: "Development",
+    },
+    {
+        id: 4,
+        title: "How To Use AI In eCommerce?",
+        slug: "ai-in-ecommerce",
+        date: "Dec 10, 2023",
+        views: 61,
+        imageSrc: blog4,
+        category: "AI",
+    },
+];
+
+/* ─── HELPERS ─── */
+const GradientText = ({ children, className = "" }) => (
+    <span
+        className={className}
+        style={{
+            background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+        }}
+    >
+        {children}
+    </span>
+);
+
+const PingDot = () => (
+    <span className="relative flex h-2.5 w-2.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF1F8E] opacity-75" />
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF1F8E]" />
+    </span>
+);
+
+/* ─── CONTENT BLOCKS ─── */
+const ContentBlock = ({ block }) => {
+    switch (block.type) {
+        case "lead":
+            return (
+                <p className="text-xl md:text-2xl font-semibold text-slate-700 leading-relaxed border-l-4 border-pink-400 pl-6 py-2 mb-8">
+                    {block.text}
+                </p>
+            );
+        case "h2":
+            return (
+                <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-12 mb-5 tracking-tight">
+                    {block.text}
+                </h2>
+            );
+        case "p":
+            return (
+                <p className="text-slate-600 text-lg leading-relaxed mb-6">{block.text}</p>
+            );
+        case "list":
+            return (
+                <ul className="space-y-3 mb-8">
+                    {block.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-600 text-base">
+                            <FaChevronRight className="text-pink-500 mt-1 flex-shrink-0" />
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            );
+        case "quote":
+            return (
+                <blockquote
+                    className="relative my-10 px-10 py-8 rounded-3xl overflow-hidden"
+                    style={{ background: "linear-gradient(135deg, #fdf4ff 0%, #eff6ff 100%)" }}
+                >
+                    <div className="absolute top-4 left-6 text-7xl font-serif text-pink-200 leading-none select-none">"</div>
+                    <p className="relative z-10 text-xl md:text-2xl font-semibold text-slate-700 italic leading-snug mb-3">
+                        {block.text}
+                    </p>
+                    <p className="text-sm font-bold text-pink-500 tracking-widest uppercase">— {block.author}</p>
+                </blockquote>
+            );
+        default:
+            return null;
+    }
+};
+
+/* ─── SHARE BUTTON ─── */
+const ShareBtn = ({ icon: Icon, label, color }) => (
+    <button
+        className="flex items-center gap-2 px-5 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-white"
+        style={{ background: color }}
+    >
+        <Icon />
+        {label}
+    </button>
+);
+
+/* ─── RELATED CARD ─── */
+const RelatedCard = ({ post, router }) => (
+    <div className="group flex flex-col rounded-[2rem] overflow-hidden bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_80px_rgba(236,72,153,0.13)] transition-all duration-500 hover:-translate-y-2">
+        {/* Image wrapper — fixed height, overflow hidden on parent handles crop */}
+        <div className="relative h-44 overflow-hidden bg-gradient-to-br from-pink-200 via-purple-200 to-cyan-200">
+            {post.imageSrc && (
+                <Image
+                    src={post.imageSrc}
+                    alt={post.title}
+                    width={post.imageSrc.width || 600}
+                    height={post.imageSrc.height || 176}
+                    className="w-full h-full object-cover"
+                />
+            )}
+            {/* dark overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+            <span className="absolute bottom-3 left-4 px-3 py-1 bg-white/90 rounded-full text-[10px] font-bold text-pink-600 tracking-wider">
+                {post.category}
+            </span>
+        </div>
+
+        <div className="p-6 flex flex-col flex-grow">
+            <div className="flex items-center gap-4 text-xs text-slate-400 font-semibold mb-3">
+                <span className="flex items-center gap-1"><FaCalendarAlt className="text-pink-400" />{post.date}</span>
+                <span className="flex items-center gap-1"><FaEye className="text-orange-400" />{post.views}</span>
+            </div>
+            <h4 className="text-base font-extrabold text-slate-900 leading-snug mb-4 flex-grow group-hover:text-pink-600 transition-colors">
+                {post.title}
+            </h4>
+            <button
+                onClick={() => router.push(`/blog/${post.slug}`)}
+                className="flex items-center gap-2 text-pink-600 text-sm font-extrabold tracking-wide group/link"
+            >
+                Read More <FaArrowRight className="group-hover/link:translate-x-1 transition-transform" />
+            </button>
+        </div>
+    </div>
+);
+
+/* ─── PROGRESS BAR ─── */
+const ReadingProgress = () => {
+    const [progress, setProgress] = useState(0);
+    useEffect(() => {
+        const onScroll = () => {
+            const el = document.documentElement;
+            const scrolled = el.scrollTop;
+            const total = el.scrollHeight - el.clientHeight;
+            setProgress(total > 0 ? (scrolled / total) * 100 : 0);
+        };
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+    return (
+        <div className="fixed top-0 left-0 w-full h-1 z-50">
+            <div
+                className="h-full transition-all duration-100"
+                style={{
+                    width: `${progress}%`,
+                    background: "linear-gradient(90deg, #E879F9, #A855F7, #38BDF8)",
+                }}
+            />
+        </div>
+    );
+};
+
+/* ─── MAIN PAGE ─── */
+const SingleBlogPage = ({ post = POST, relatedPosts = RELATED }) => {
+    const [liked, setLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(post.likes);
+    const [copied, setCopied] = useState(false);
+    const router = useRouter();
+
+    console.log('POST', post);
+    const handleLike = () => {
+        setLiked((p) => !p);
+        setLikeCount((c) => (liked ? c - 1 : c + 1));
+    };
+
+    const handleCopy = () => {
+        navigator.clipboard?.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <>
+            <ReadingProgress />
+
+            <div
+                className="min-h-screen font-roboto"
+                style={{
+                    background: "linear-gradient(160deg, #f0fdf9 0%, #ecfdf5 30%, #f0fdfa 60%, #f7fffe 100%)",
+                }}
+            >
+                {/* ── HERO ── */}
+                <section className="relative pt-20 pb-0 px-6 overflow-hidden">
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-pink-100 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-100 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+
+                    <div className="container mx-auto max-w-4xl mt-20 relative z-10">
+                        {/* Breadcrumb */}
+                        <nav className="flex items-center gap-2 text-sm text-slate-400 font-semibold mb-8">
+                            <Link href="/" className="hover:text-pink-500 transition-colors">Home</Link>
+                            <FaChevronRight className="text-xs" />
+                            <Link href="/blog" className="hover:text-pink-500 transition-colors">Blog</Link>
+                            <FaChevronRight className="text-xs" />
+                            <span className="text-slate-600 truncate max-w-xs">{post.title}</span>
+                        </nav>
+
+                        {/* Badge */}
+                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 text-[#FF1F8E] font-bold text-[10px] tracking-[0.3em] uppercase mb-6 shadow-sm">
+                            <PingDot />
+                            {post.category}
+                        </div>
+
+                        {/* Title */}
+                        <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-8">
+                            {post.title.split(" ").slice(0, 4).join(" ")}{" "}
+                            <GradientText>
+                                {post.title.split(" ").slice(4).join(" ")}
+                            </GradientText>
+                        </h1>
+
+                        {/* Meta row */}
+                        <div className="flex flex-wrap items-center gap-6 text-sm font-semibold text-slate-500 mb-10">
+                            <div className="flex items-center gap-2">
+                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center">
+                                    <FaUser className="text-pink-500 text-sm" />
+                                </div>
+                                <span className="text-slate-800">{post.author}</span>
+                            </div>
+                            <span className="flex items-center gap-1.5"><FaCalendarAlt className="text-pink-400" />{post.date}</span>
+                            <span className="flex items-center gap-1.5"><FaClock className="text-purple-400" />{post.readTime}</span>
+                            <span className="flex items-center gap-1.5"><FaEye className="text-orange-400" />{post.views.toLocaleString()} Views</span>
+                            <button
+                                onClick={handleLike}
+                                className="flex items-center gap-1.5 transition-all duration-300 hover:scale-110"
+                            >
+                                {liked
+                                    ? <FaHeart className="text-pink-500 text-base" />
+                                    : <FaRegHeart className="text-pink-400 text-base" />}
+                                <span className={liked ? "text-pink-500" : ""}>{likeCount}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* ── HERO IMAGE ──
+                        KEY FIX: No fill prop. Use width/height from the imported
+                        image object (Next.js static imports expose .width/.height).
+                        Parent div clips to desired height via overflow-hidden.
+                        Position relative + inset-0 overlay sits cleanly on top.
+                    ── */}
+                    <div className="container mx-auto max-w-5xl">
+                        <div
+                            className="relative rounded-[2.5rem] overflow-hidden shadow-[0_40px_120px_rgba(0,0,0,0.15)]"
+                            style={{ height: 'clamp(288px, 40vw, 480px)' }}
+                        >
+                            {/* Fallback shown if imageSrc is missing */}
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background: "linear-gradient(135deg, #f9a8d4 0%, #c084fc 40%, #67e8f9 100%)",
+                                }}
+                            />
+
+                            {post.imageSrc && (
+                                
+                                <Image
+                                    src={post.imageSrc}
+                                    alt={post.title}
+                                    width={post.imageSrc.width}
+                                    height={post.imageSrc.height}
+                                    priority
+                                    style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                    }}
+                                />
+                            )}
+
+                            {/* Dark overlay on top */}
+                            <div
+                                className="absolute inset-0 pointer-events-none"
+                                style={{
+                                    background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)",
+                                    zIndex: 1,
+                                }}
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                {/* ── BODY ── */}
+                <section className="py-20 px-6">
+                    <div className="container mx-auto max-w-7xl">
+                        <div className="flex flex-col lg:flex-row gap-16 items-start">
+
+                            {/* ── ARTICLE ── */}
+                            <article className="lg:w-2/3 w-full">
+                                {post.content.map((block, i) => (
+                                    <ContentBlock key={i} block={block} />
+                                ))}
+
+                                {/* Tags */}
+                                <div className="mt-12 flex flex-wrap items-center gap-3">
+                                    <FaTag className="text-pink-400 text-sm" />
+                                    {post.tags.map((tag) => (
+                                        <span
+                                            key={tag}
+                                            className="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-semibold text-slate-600 hover:border-pink-400 hover:text-pink-600 transition-colors cursor-pointer shadow-sm"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                {/* Share */}
+                                <div className="mt-12 p-8 rounded-[2rem] bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_rgba(0,0,0,0.07)]">
+                                    <p className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-5">Share this article</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        <ShareBtn icon={FaTwitter} label="Twitter" color="#1DA1F2" />
+                                        <ShareBtn icon={FaLinkedinIn} label="LinkedIn" color="#0077B5" />
+                                        <ShareBtn icon={FaFacebookF} label="Facebook" color="#1877F2" />
+                                        <button
+                                            onClick={handleCopy}
+                                            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl font-semibold text-sm border border-slate-200 text-slate-600 bg-white hover:border-pink-400 hover:text-pink-600 transition-all duration-300 hover:scale-105 shadow-sm"
+                                        >
+                                            <FaLink />
+                                            {copied ? "Copied!" : "Copy Link"}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Author card */}
+                                <div className="mt-10 p-8 rounded-[2rem] overflow-hidden relative bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_rgba(0,0,0,0.07)]">
+                                    <div className="absolute top-0 right-0 w-48 h-48 bg-pink-100 rounded-full blur-[60px] pointer-events-none" />
+                                    <div className="flex items-start gap-6 relative z-10">
+                                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-pink-400 to-purple-400 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                            <FaUser className="text-white text-3xl" />
+                                        </div>
+                                        <div>
+                                            <p className="text-xs font-bold text-pink-500 tracking-widest uppercase mb-1">Written by</p>
+                                            <h4 className="text-xl font-black text-slate-900 mb-2">{post.author}</h4>
+                                            <p className="text-slate-500 text-sm leading-relaxed">
+                                                Senior content strategist at TechnoScore with 10+ years of experience in digital marketing, eCommerce, and SEO. Passionate about turning complex tech topics into actionable insights.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Back */}
+                                <div className="mt-10">
+                                    <button className="flex items-center gap-2 text-slate-500 font-bold text-sm hover:text-pink-600 transition-colors group">
+                                        <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+                                        Back to Blog
+                                    </button>
+                                </div>
+                            </article>
+
+                            {/* ── SIDEBAR ── */}
+                            <aside className="lg:w-1/3 w-full lg:sticky lg:top-24 space-y-8">
+
+                                {/* Table of Contents */}
+                                <div className="p-7 rounded-[2rem] bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_rgba(0,0,0,0.07)]">
+                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/60 border border-white/60 text-[#FF1F8E] font-bold text-[10px] tracking-[0.25em] uppercase mb-5 shadow-sm">
+                                        <PingDot />
+                                        Contents
+                                    </div>
+                                    <ul className="space-y-3">
+                                        {post.content
+                                            .filter((b) => b.type === "h2")
+                                            .map((b, i) => (
+                                                <li key={i}>
+                                                    <a
+                                                        href="#"
+                                                        className="flex items-start gap-3 text-sm text-slate-600 font-semibold hover:text-pink-600 transition-colors group"
+                                                    >
+                                                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center text-[10px] font-black text-pink-500 mt-0.5">
+                                                            {i + 1}
+                                                        </span>
+                                                        <span className="group-hover:translate-x-0.5 transition-transform">{b.text}</span>
+                                                    </a>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </div>
+
+                                {/* Newsletter */}
+                                <div
+                                    className="relative p-[2px] rounded-[2rem] shadow-[0_20px_60px_rgba(236,72,153,0.2)]"
+                                    style={{ background: "linear-gradient(135deg, #E879F9, #A855F7, #38BDF8)" }}
+                                >
+                                    <div className="rounded-[2rem] bg-white/90 backdrop-blur-xl p-7">
+                                        <h3 className="text-xl font-black text-slate-900 mb-2">
+                                            Stay <GradientText>Updated</GradientText>
+                                        </h3>
+                                        <p className="text-slate-500 text-sm mb-5">Get the latest insights straight to your inbox.</p>
+                                        <input
+                                            type="email"
+                                            placeholder="Your email address"
+                                            className="w-full bg-white border border-slate-200 rounded-2xl py-3 px-5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-pink-500 transition-all duration-300 shadow-sm text-sm mb-3"
+                                        />
+                                        <button
+                                            className="w-full py-3 rounded-2xl text-white font-bold text-sm tracking-wide shadow-lg transition-all duration-300 hover:shadow-pink-500/40 hover:scale-[1.02]"
+                                            style={{ background: "linear-gradient(135deg, #FF1F8E, #A855F7)" }}
+                                        >
+                                            Subscribe Now →
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Popular Tags */}
+                                <div className="p-7 rounded-[2rem] bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_rgba(0,0,0,0.07)]">
+                                    <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-5">Popular Tags</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {["SEO", "eCommerce", "AI", "Shopify", "Digital Marketing", "Web Design", "Dropshipping", "UX"].map((t) => (
+                                            <span
+                                                key={t}
+                                                className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-500 hover:border-pink-400 hover:text-pink-600 transition-all cursor-pointer shadow-sm hover:scale-105"
+                                            >
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                            </aside>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ── RELATED POSTS ── */}
+                <section
+                    className="py-20 px-6 relative overflow-hidden"
+                    style={{
+                        background: "linear-gradient(160deg, #f0fdf9 0%, #ecfdf5 30%, #f0fdfa 60%, #f7fffe 100%)",
+                    }}
+                >
+                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+                    <div className="container mx-auto max-w-7xl">
+                        <div className="text-center mb-14">
+                            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 text-[#FF1F8E] font-bold text-[10px] tracking-[0.3em] uppercase mb-5 shadow-sm">
+                                <PingDot />
+                                Keep Reading
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                                Related <GradientText>Articles</GradientText>
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                            {relatedPosts.map((p) => (
+                                <RelatedCard key={p.id} post={p} router={router} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </>
+    );
+};
+
+export default SingleBlogPage;

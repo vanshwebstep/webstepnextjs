@@ -13,6 +13,7 @@ const team = [
     image: riyaArchitect,
     bio: "A visionary polymath with over 12 years of experience engineering high-end digital ecosystems. Riya specializes in merging human-centric design with bulletproof backend scalability.",
     expertise: ["Brand Engineering", "Digital Ecosystems", "Strategic Innovation"],
+    accent: "violet",
     stats: [
       { label: "Successful Projects", value: "250+", icon: <FiTarget /> },
       { label: "Industry Awards", value: "15+", icon: <FiAward /> },
@@ -26,6 +27,7 @@ const team = [
     image: amanArchitect,
     bio: "An elite software architect who thrives on complexity. Aman leads our technical division, ensuring every line of code is optimized for extreme performance and global scale.",
     expertise: ["System Architecture", "Cloud Infrastructure", "DevOps Mastery"],
+    accent: "cyan",
     stats: [
       { label: "Systems Deployed", value: "80+", icon: <FiTarget /> },
       { label: "Code Coverage", value: "99%", icon: <FiAward /> },
@@ -35,35 +37,88 @@ const team = [
 ];
 
 const socials = [
-  { icon: <FiLinkedin />, label: "LinkedIn", href: "#" },
-  { icon: <FiInstagram />, label: "Instagram", href: "#" },
-  { icon: <FiTwitter />, label: "Twitter", href: "#" },
+  { icon: <FiLinkedin />, label: "LinkedIn", href: "#", hoverColor: "#0077b5" },
+  { icon: <FiInstagram />, label: "Instagram", href: "#", hoverColor: "#e1306c" },
+  { icon: <FiTwitter />, label: "Twitter", href: "#", hoverColor: "#1da1f2" },
 ];
+
+/* Accent tokens — add more members by extending this map */
+const accentTokens = {
+  violet: {
+    role: "text-violet-500",
+    dot: "bg-violet-500",
+    border: "border-violet-500/40",
+    statHoverBorder: "hover:border-violet-400/40",
+    statHoverVal: "group-hover:text-violet-500",
+    statIcon: "text-violet-500",
+    thumbRing: "ring-violet-500",
+    thumbShadow: "[box-shadow:0_0_0_3px_rgba(139,92,246,0.2)]",
+  },
+  cyan: {
+    role: "text-cyan-500",
+    dot: "bg-cyan-500",
+    border: "border-cyan-500/40",
+    statHoverBorder: "hover:border-cyan-400/40",
+    statHoverVal: "group-hover:text-cyan-500",
+    statIcon: "text-cyan-500",
+    thumbRing: "ring-cyan-500",
+    thumbShadow: "[box-shadow:0_0_0_3px_rgba(6,182,212,0.2)]",
+  },
+};
 
 const MarketingTeam = () => {
   const [activeMember, setActiveMember] = useState(0);
-  const member = team[activeMember];
+  const [switching, setSwitching] = useState(false);
+  const [displayed, setDisplayed] = useState(0);   // what's actually rendered
+
+  const member = team[displayed];
+  const tokens = accentTokens[member.accent];
+
+  const handleSwitch = (idx) => {
+    if (idx === activeMember || switching) return;
+    setSwitching(true);
+    setActiveMember(idx);
+    setTimeout(() => {
+      setDisplayed(idx);
+      setSwitching(false);
+    }, 180);
+  };
 
   return (
-    <section className="relative py-24 md:py-32 bg-white overflow-hidden font-sans">
+    <section className="relative py-24 md:py-32 bg-white overflow-hidden">
 
       {/* Ambient blobs */}
-      <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#FF1F8E]/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D400CC]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-violet-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12">
 
         {/* ── Header ── */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-3 mb-5">
-            <span className="w-10 h-px bg-slate-200" />
-            <span className="text-[10px] font-black tracking-[0.4em] text-[#FF1F8E] uppercase">
-              The Visionaries
+
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 text-[#FF1F8E] font-bold text-[10px] tracking-[0.3em] uppercase mb-10 shadow-sm">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF1F8E] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF1F8E]"></span>
             </span>
-            <span className="w-10 h-px bg-slate-200" />
+            The Visionaries
           </div>
+          {/* <span className="text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase">
+              The Visionaries
+            </span> */}
+
           <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
-            Meet the <span className="text-[#FF1F8E]">Architects</span>
+            Meet the{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Architects
+            </span>
           </h2>
         </div>
 
@@ -76,18 +131,19 @@ const MarketingTeam = () => {
               <Image
                 src={member.image}
                 alt={member.name}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-90 transition-all duration-[1200ms]"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 opacity-90 transition-all duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)]"
               />
 
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent" />
 
-              {/* Top-left icon circle */}
-              <div className="absolute top-8 left-8 w-16 h-16 rounded-full border border-white/20 backdrop-blur-md flex items-center justify-center text-white">
+              {/* Arrow badge */}
+              <div className="absolute top-8 left-8 w-16 h-16 rounded-full border border-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:bg-violet-500/50 group-hover:rotate-45 group-hover:scale-110">
                 <FiArrowUpRight size={24} />
               </div>
 
-              {/* Member name overlay */}
+              {/* Member overlay */}
               <div className="absolute bottom-10 left-10 right-10 z-10">
                 <p className="text-white/50 text-[9px] font-bold uppercase tracking-[0.35em] mb-2">
                   {member.role}
@@ -115,7 +171,10 @@ const MarketingTeam = () => {
                   key={i}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 text-sm hover:bg-[#FF1F8E] hover:text-white hover:border-[#FF1F8E] hover:scale-110 transition-all duration-300 shadow-lg"
+                  className="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 text-sm transition-all duration-300 shadow-lg hover:scale-110 hover:-translate-x-0.5"
+                  style={{ "--hover-color": s.hoverColor }}
+                  onMouseEnter={e => { e.currentTarget.style.color = s.hoverColor; e.currentTarget.style.borderColor = s.hoverColor; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = ""; e.currentTarget.style.borderColor = ""; }}
                 >
                   {s.icon}
                 </a>
@@ -124,21 +183,26 @@ const MarketingTeam = () => {
           </div>
 
           {/* RIGHT — Details */}
-          <div className="w-full lg:w-1/2 lg:pt-6">
-
+          <div
+            className="w-full lg:w-1/2 lg:pt-6"
+            style={{ opacity: switching ? 0 : 1, transform: switching ? "translateY(8px)" : "translateY(0)", transition: "opacity 0.18s ease, transform 0.18s ease" }}
+          >
             {/* Name + role */}
-            <div className="mb-8">
+            <div
+              className="mb-8"
+              style={{ animation: !switching ? "fadeUp 0.45s cubic-bezier(.22,1,.36,1) forwards" : "none" }}
+            >
               <h3 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-none mb-4">
                 {member.name}
               </h3>
-              <p className="text-[#FF1F8E] font-black uppercase tracking-[0.35em] text-[11px] flex items-center gap-3">
-                <span className="w-8 h-px bg-[#FF1F8E]" />
+              <p className={`font-black uppercase tracking-[0.35em] text-[11px] flex items-center gap-3 ${tokens.role}`}>
+                <span className={`w-8 h-px ${tokens.dot}`} />
                 {member.role}
               </p>
             </div>
 
             {/* Bio */}
-            <p className="text-slate-500 text-lg leading-relaxed font-medium italic mb-10 border-l-2 border-[#FF1F8E]/30 pl-5">
+            <p className={`text-slate-500 text-lg leading-relaxed font-medium italic mb-10 border-l-2 pl-5 ${tokens.border}`}>
               &quot;{member.bio}&quot;
             </p>
 
@@ -147,10 +211,10 @@ const MarketingTeam = () => {
               {member.stats.map((s, i) => (
                 <div
                   key={i}
-                  className="group p-5 rounded-2xl bg-white border border-slate-100 hover:border-[#FF1F8E]/25 hover:shadow-[0_4px_20px_rgba(255,31,142,0.07)] transition-all duration-300 cursor-default"
+                  className={`group p-5 rounded-2xl bg-white border border-slate-100 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-md ${tokens.statHoverBorder}`}
                 >
-                  <div className="text-[#FF1F8E] mb-3 text-base">{s.icon}</div>
-                  <p className="text-2xl font-black text-slate-900 mb-1 group-hover:text-[#FF1F8E] transition-colors duration-300">
+                  <div className={`mb-3 text-base ${tokens.statIcon}`}>{s.icon}</div>
+                  <p className={`text-2xl font-black text-slate-900 mb-1 transition-colors duration-300 ${tokens.statHoverVal}`}>
                     {s.value}
                   </p>
                   <p className="text-[8px] font-bold uppercase tracking-widest text-slate-400 leading-snug">
@@ -162,31 +226,35 @@ const MarketingTeam = () => {
 
             {/* Member selector */}
             <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center pt-8 border-t border-slate-100">
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300 shrink-0">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 shrink-0">
                 Our Team
               </span>
 
               <div className="flex gap-3 p-2 bg-slate-50 border border-slate-100 rounded-2xl">
-                {team.map((m, idx) => (
-                  <button
-                    key={m.id}
-                    onClick={() => setActiveMember(idx)}
-                    title={m.name}
-                    className={`relative w-12 h-12 rounded-xl overflow-hidden transition-all duration-300 ${activeMember === idx
-                      ? 'ring-2 ring-[#FF1F8E] ring-offset-2 scale-110 shadow-lg grayscale-0 opacity-100'
-                      : 'opacity-40 grayscale hover:opacity-80 hover:grayscale-0 hover:scale-105'
-                      }`}
-                  >
-                    <Image src={m.image} alt={m.name} className="w-full h-full object-cover" />
-                  </button>
-                ))}
+                {team.map((m, idx) => {
+                  const t = accentTokens[m.accent];
+                  const isActive = activeMember === idx;
+                  return (
+                    <button
+                      key={m.id}
+                      onClick={() => handleSwitch(idx)}
+                      title={m.name}
+                      className={`relative w-12 h-12 rounded-xl overflow-hidden transition-all duration-300 ${isActive
+                          ? `ring-2 ring-offset-2 scale-110 shadow-lg grayscale-0 opacity-100 ring-${m.accent === "violet" ? "violet" : "cyan"}-500 ${t.thumbShadow}`
+                          : "opacity-40 grayscale hover:opacity-80 hover:grayscale-0 hover:scale-105"
+                        }`}
+                    >
+                      <Image src={m.image} alt={m.name} fill className="object-cover" />
+                    </button>
+                  );
+                })}
               </div>
 
               <div className="h-px flex-grow bg-slate-100 hidden sm:block" />
 
               <a
                 href="#"
-                className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#FF1F8E] transition-colors duration-300 group"
+                className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-700 transition-colors duration-300 group"
               >
                 Full Studio Team
                 <FiArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
@@ -195,6 +263,13 @@ const MarketingTeam = () => {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0);    }
+        }
+      `}</style>
     </section>
   );
 };
