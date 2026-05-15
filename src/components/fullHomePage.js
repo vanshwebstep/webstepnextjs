@@ -869,7 +869,7 @@ const ContactSection = () => (
 
       <div className="flex flex-col lg:flex-row rounded-[3rem] overflow-hidden border border-slate-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)]">
         {/* Left */}
-        <div className="w-full lg:w-[42%] p-12 md:p-16 flex flex-col justify-center gap-10 bg-white border-b lg:border-b-0 lg:border-r border-slate-100">
+        <div className="w-full lg:w-[42%] p-0 md:p-16 flex flex-col justify-center gap-10 bg-white border-b lg:border-b-0 lg:border-r border-slate-100">
           {INFO_ITEMS.map((item,i) => (
             <div key={i} className="ws-info-item flex gap-5 items-start group cursor-default">
               <div className="ws-info-icon flex-shrink-0 transition-all duration-500 rounded-2xl border border-slate-100 bg-white flex items-center justify-center text-lg" style={{ width:52, height:52, color:item.accent }}>
@@ -900,7 +900,7 @@ const ContactSection = () => (
         </div>
 
         {/* Right — Form */}
-        <div className="w-full lg:w-[58%] p-12 md:p-16 flex flex-col" style={{ background:"#f8fafc" }}>
+        <div className="w-full lg:w-[58%] p-0 md:p-16 flex flex-col" style={{ background:"#f8fafc" }}>
           <div className="mb-10">
             <h3 className="text-4xl font-black text-slate-900 tracking-tight mb-2" >Initiate Inquiry</h3>
             <p className="text-slate-500 text-lg font-medium leading-relaxed">Complete the form and our specialists will engage with you shortly.</p>

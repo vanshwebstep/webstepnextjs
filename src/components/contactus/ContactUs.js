@@ -23,7 +23,7 @@ const ContactUs = () => {
                 {/* Soft Gradient Glow */}
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2"></div>
 
-                <div className="container mx-auto relative z-10 px-6">
+                <div className="container mx-auto relative z-10 pt-10 px-6">
                     <AnimatedSection delay={0.1} direction="up">
                         <div className="text-center max-w-3xl mx-auto">
 
@@ -216,7 +216,7 @@ const ContactUs = () => {
                     <div className="lg:col-span-8 space-y-8">
 
                         <AnimatedSection delay={0.3} direction="right">
-                            <div className="pb-20 md:pb-24 relative z-10 px-6 overflow-hidden bg-white">
+                            <div className="pb-20 md:pb-24 relative z-10 md:px-6 overflow-hidden bg-white">
 
                                 {/* Ambient blobs */}
 
@@ -227,7 +227,7 @@ const ContactUs = () => {
 
                                     {/* ✨ Inner Clean Card */}
                                     <div className="relative p-[2px] rounded-[3rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_60px_rgba(236,72,153,0.25)]">
-                                        <div className="rounded-[3rem] backdrop-blur-xl bg-white/90 p-10 md:p-10">
+                                        <div className="rounded-[3rem] backdrop-blur-xl bg-white/90 p-6 md:p-10">
                                             <div className="mb-10">
                                                 <h2 className="text-[clamp(2rem,3vw,3rem)] font-extrabold tracking-tight leading-[1.1]">
                                                     <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">

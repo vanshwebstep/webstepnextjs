@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FiSmartphone, FiLayout, FiServer, FiCheckCircle, FiArrowRight } from 'react-icons/fi';
 import { FaLaravel, FaNodeJs, FaPhp, FaWordpress } from 'react-icons/fa';
@@ -63,6 +63,7 @@ const servicesData = [
   },
 ];
 
+// Desktop bento span styles (6-col grid)
 const spanStyles = {
   b1: { gridColumn: 'span 2' },
   b2: { gridColumn: 'span 2' },
@@ -74,12 +75,36 @@ const spanStyles = {
   b8: { gridColumn: 'span 2' },
 };
 
-function BentoBox({ service }) {
+// Tablet bento span styles (4-col grid)
+const spanStylesTablet = {
+  b1: { gridColumn: 'span 2' },
+  b2: { gridColumn: 'span 2' },
+  b3: { gridColumn: 'span 2' },
+  b4: { gridColumn: 'span 2' },
+  b5: { gridColumn: 'span 2' },
+  b6: { gridColumn: 'span 2' },
+  b7: { gridColumn: 'span 2' },
+  b8: { gridColumn: 'span 2' },
+};
+
+function useWindowWidth() {
+  const [width, setWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
+  useEffect(() => {
+    const handler = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
+  return width;
+}
+
+function BentoBox({ service, spanStyle }) {
   const [hovered, setHovered] = useState(false);
   const isWide = service.span === 'b4' || service.span === 'b5';
 
   return (
-    <Link href={service.href} style={{ textDecoration: 'none', ...spanStyles[service.span] }}>
+    <Link href={service.href} style={{ textDecoration: 'none', ...spanStyle }}>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -94,6 +119,7 @@ function BentoBox({ service }) {
           cursor: 'pointer',
           boxShadow: hovered ? `0 8px 30px ${service.accent}20` : 'none',
           height: '100%',
+          minHeight: '160px',
           display: 'flex',
           flexDirection: 'column',
         }}
@@ -144,6 +170,7 @@ function BentoBox({ service }) {
           fontSize: '10px', fontWeight: 700,
           letterSpacing: '0.2em', textTransform: 'uppercase',
           color: service.accent, marginBottom: '4px',
+          margin: '0 0 4px 0',
         }}>
           {service.tag}
         </p>
@@ -156,8 +183,9 @@ function BentoBox({ service }) {
           marginBottom: '6px',
           letterSpacing: '-0.01em',
           lineHeight: 1.2,
+          margin: '0 0 6px 0',
         }}>
-          {isWide ? service.fullTitle : service.title}
+          {service.fullTitle}
         </h3>
 
         {/* Description */}
@@ -168,6 +196,7 @@ function BentoBox({ service }) {
           fontWeight: 500,
           marginBottom: '0.8rem',
           flex: 1,
+          margin: '0 0 0.8rem 0',
         }}>
           {service.description}
         </p>
@@ -191,11 +220,25 @@ function BentoBox({ service }) {
 }
 
 const ServicesPage = () => {
+  const width = useWindowWidth();
+
+  const isMobile = width < 640;
+  const isTablet = width >= 640 && width < 1024;
+  const isDesktop = width >= 1024;
+
+  const gridCols = isMobile ? 'repeat(1, 1fr)' : isTablet ? 'repeat(4, 1fr)' : 'repeat(6, 1fr)';
+
+  const getSpanStyle = (span) => {
+    if (isMobile) return { gridColumn: 'span 1' };
+    if (isTablet) return spanStylesTablet[span];
+    return spanStyles[span];
+  };
+
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
-        .services-section * { font-family: 'Roboto', sans-serif; }
+        .services-section * { font-family: 'Roboto', sans-serif; box-sizing: border-box; }
         .cta-services-btn:hover { background: #7C3AED !important; }
       `}</style>
 
@@ -203,7 +246,7 @@ const ServicesPage = () => {
         className="services-section"
         style={{
           background: '#fff',
-          padding: '10rem 1.5rem',
+          padding: isMobile ? '5rem 1rem' : isTablet ? '7rem 1.5rem' : '10rem 1.5rem',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -220,7 +263,7 @@ const ServicesPage = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '3rem' }}>
             <div style={{
               display: 'flex', alignItems: 'center',
               justifyContent: 'center', gap: '12px', marginBottom: '1rem',
@@ -236,7 +279,7 @@ const ServicesPage = () => {
             </div>
 
             <h2 style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontSize: isMobile ? '2.2rem' : 'clamp(2.5rem, 5vw, 4rem)',
               fontWeight: 900,
               color: '#0f172a',
               letterSpacing: '-0.03em',
@@ -258,12 +301,12 @@ const ServicesPage = () => {
           {/* Bento Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gap: '10px',
+            gridTemplateColumns: gridCols,
+            gap: isMobile ? '8px' : '10px',
             marginBottom: '2.5rem',
           }}>
             {servicesData.map((s) => (
-              <BentoBox key={s.id} service={s} />
+              <BentoBox key={s.id} service={s} spanStyle={getSpanStyle(s.span)} />
             ))}
           </div>
 
@@ -274,12 +317,14 @@ const ServicesPage = () => {
                 className="cta-services-btn"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '10px',
-                  padding: '14px 36px',
+                  padding: isMobile ? '12px 24px' : '14px 36px',
                   background: '#0f172a', color: '#fff',
                   border: 'none', borderRadius: '100px',
                   fontWeight: 700, fontSize: '12px',
                   letterSpacing: '0.2em', textTransform: 'uppercase',
                   cursor: 'pointer', transition: 'background 0.2s',
+                  width: isMobile ? '100%' : 'auto',
+                  justifyContent: 'center',
                 }}
               >
                 Explore All Services <FiArrowRight size={14} />

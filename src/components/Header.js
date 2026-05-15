@@ -44,7 +44,7 @@ const Header = () => {
           </div>
 
           {/* Right Section */}
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-6 whitespace-nowrap">
 
             {/* Phone */}
             <div className="flex items-center gap-3 group cursor-pointer">

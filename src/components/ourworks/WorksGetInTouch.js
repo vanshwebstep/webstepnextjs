@@ -81,10 +81,10 @@ const FormSection = () => {
         </div>
 
         {/* ── Main Card ── */}
-        <div className="flex flex-col lg:flex-row rounded-[3rem] border border-slate-100 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.07)] overflow-hidden bg-white">
+        <div className="flex flex-col lg:flex-row space-y-6 rounded-[3rem] border border-slate-100 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.07)] overflow-hidden bg-white">
 
           {/* ─── LEFT: Info panel ─── */}
-          <div className="w-full lg:w-[42%] p-12 md:p-16 flex flex-col justify-between ">
+          <div className="w-full lg:w-[42%] p-0 md:p-16 flex flex-col justify-between ">
 
             <div className="relative p-8 rounded-[2.5rem] backdrop-blur-xl bg-white/70 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-pink-700">
 
@@ -231,11 +231,11 @@ const FormSection = () => {
           </div>
 
           {/* ─── RIGHT: Form panel ─── */}
-          <div className="w-full lg:w-[58%] p-12 md:p-16 ">
+          <div className="w-full lg:w-[58%] p-0 md:p-16 ">
 
             {/* Form header */}
             <div className="relative p-[2px] rounded-[3rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_60px_rgba(236,72,153,0.25)]">
-              <div className="rounded-[3rem] backdrop-blur-xl bg-white/90 p-10 md:p-10">
+              <div className="rounded-[3rem] backdrop-blur-xl bg-white/90 p-6 md:p-10">
                 <div className="mb-10">
                   <h2 className="text-[clamp(2rem,3vw,3rem)] font-extrabold tracking-tight leading-[1.1]">
                     <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">

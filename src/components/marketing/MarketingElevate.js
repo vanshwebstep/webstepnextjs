@@ -1,11 +1,11 @@
 import React from 'react';
-import mobileapp from "@/components/img/mobile_app_development2.png";
+import marketing from "@/components/img/software.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
-import { FaMobileAlt, FaLayerGroup, FaCheckCircle } from 'react-icons/fa';
+import { FaBullhorn, FaChartLine, FaAd } from 'react-icons/fa';
 import Link from 'next/link';
 
-const MobileElevate = () => {
+const MarketingElevate = () => {
   return (
     <section className="py-16 md:py-24 bg-white relative z-10 px-6 overflow-hidden font-roboto">
 
@@ -51,7 +51,7 @@ const MobileElevate = () => {
                     style={{ background: "linear-gradient(135deg, rgba(255,31,142,0.4), rgba(168,85,247,0.4), rgba(56,189,248,0.4))" }}
                   >
                     <div className="bg-white p-6 rounded-3xl shadow-xl transform group-hover:scale-105 transition-transform duration-500">
-                      <Image src={mobileapp} alt="Professional Mobile Developers" className="w-full h-auto max-w-[200px]" />
+                      <Image src={marketing} alt="Marketing Experts" className="w-full h-auto max-w-[200px]" />
                     </div>
                   </div>
                   <div
@@ -88,13 +88,13 @@ const MobileElevate = () => {
                           backgroundClip: "text",
                         }}
                       >
-                        Certified Expertise
+                        Performance Marketing
                       </span>
                     </div>
 
                     {/* Heading */}
                     <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-[0.95]">
-                      Hire Certified{" "}
+                      Hire Expert{" "}
                       <span
                         className="relative inline-block"
                         style={{
@@ -104,7 +104,7 @@ const MobileElevate = () => {
                           backgroundClip: "text",
                         }}
                       >
-                        Mobile Developers
+                        Marketing Strategists
                         <span className="absolute left-0 -bottom-2 w-full h-[5px] rounded-full
                           bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400
                           blur-sm opacity-70 animate-pulse" />
@@ -117,17 +117,17 @@ const MobileElevate = () => {
                     </div>
 
                     <p className="text-slate-600 text-lg leading-relaxed">
-                      Our mobile app developers are experts in building high-performing applications
-                      that engage users and drive results. We focus on modern design and technical excellence.
+                      Our marketing team blends creativity with analytics to build campaigns that
+                      consistently outperform benchmarks and grow your revenue predictably.
                     </p>
                   </div>
 
                   {/* Feature pills */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 mb-12 gap-4">
                     {[
-                      { icon: <FaMobileAlt />,   label: "Native Apps"  },
-                      { icon: <FaLayerGroup />,  label: "Hybrid Stack" },
-                      { icon: <FaCheckCircle />, label: "Store Ready"  },
+                      { icon: <FaBullhorn />, label: "Paid Ads" },
+                      { icon: <FaChartLine />, label: "Analytics" },
+                      { icon: <FaAd />, label: "ROI Focused" },
                     ].map((item, index) => (
                       <div
                         key={index}
@@ -157,8 +157,8 @@ const MobileElevate = () => {
                   </div>
 
                   {/* CTA */}
-             <Link
-                    href="/contactus"
+                  <Link
+                    href="/customize-package"
                     className="mt-12 px-10 py-5 rounded-2xl text-[11px] font-black capitalize
                       tracking-[0.25em] text-white shadow-lg hover:-translate-y-1
                       hover:shadow-purple-500/40 transition-all duration-300"
@@ -167,7 +167,7 @@ const MobileElevate = () => {
                       boxShadow: "0 6px 24px rgba(168,85,247,0.3)",
                     }}
                   >
-                    Launch Your App
+                    Launch My Campaign
                   </Link>
 
                 </AnimatedSection>
@@ -180,4 +180,4 @@ const MobileElevate = () => {
   );
 };
 
-export default MobileElevate;
+export default MarketingElevate;

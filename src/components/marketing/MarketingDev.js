@@ -2,11 +2,11 @@ import React from 'react';
 import ExpertsForm from '../ExpertsForm';
 import AnimatedSection from '../AnimatedSection';
 
-const FullStackDev = () => {
+const MarketingDev = () => {
   return (
     <section className="py-16 md:py-24 bg-slate-50 relative z-10 px-6 overflow-hidden font-roboto">
 
-      {/* Decorative background glows — matches Blogs page */}
+      {/* Decorative background glows */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-purple-50 rounded-full blur-[120px] opacity-60 pointer-events-none" />
@@ -19,7 +19,7 @@ const FullStackDev = () => {
             <div className="lg:w-3/5">
               <div className="mb-10">
 
-                {/* Glass badge — same as Blogs */}
+                {/* Glass badge */}
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl
                   bg-white/50 backdrop-blur-xl border border-white/60
                   shadow-[0_10px_30px_rgba(0,0,0,0.08)] mb-6
@@ -37,13 +37,13 @@ const FullStackDev = () => {
                       backgroundClip: "text",
                     }}
                   >
-                    Scalable Solutions
+                    Data-Driven Strategy
                   </span>
                 </div>
 
                 {/* Heading */}
                 <h2 className="text-4xl md:text-5xl font-extrabold leading-[0.95] text-slate-900 mb-4 tracking-tight">
-                  End-to-End{" "}
+                  Full-Funnel{" "}
                   <span
                     className="relative inline-block"
                     style={{
@@ -53,16 +53,15 @@ const FullStackDev = () => {
                       backgroundClip: "text",
                     }}
                   >
-                    Full Stack
-                    {/* Animated underline glow — matches Blogs */}
+                    Marketing
                     <span className="absolute left-0 -bottom-2 w-full h-[5px] rounded-full
                       bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400
                       blur-sm opacity-70 animate-pulse" />
                   </span>{" "}
-                  Solutions
+                  That Delivers
                 </h2>
 
-                {/* Divider — matches Blogs */}
+                {/* Divider */}
                 <div className="relative w-20 h-1.5 rounded-full bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mb-8">
                   <div className="absolute inset-0 blur-md opacity-70 bg-gradient-to-r from-pink-400 to-cyan-400" />
                 </div>
@@ -70,18 +69,18 @@ const FullStackDev = () => {
                 {/* Body text */}
                 <div className="space-y-5 text-slate-500 text-lg leading-relaxed">
                   <p>
-                    Our full-stack development team brings together the best of both worlds — stunning
-                    frontend experiences and robust, high-performance backends. We specialize in building
-                    applications that are not only visually appealing but also highly functional and secure.
+                    Marketing without data is just guesswork. Our team combines creative storytelling
+                    with deep analytics to ensure every campaign delivers measurable ROI — from brand
+                    awareness to bottom-of-funnel conversions.
                   </p>
                   <p>
-                    Whether you&apos;re looking for a React-based frontend with a Node.js backend or a more
-                    traditional PHP stack, our experts have the skills to deliver a seamless digital product.
+                    Whether you need paid social, Google Ads, influencer campaigns, or a full-funnel
+                    strategy, we build and manage programmes that grow consistently month over month.
                   </p>
                   <p>
-                    From ideation and UI/UX design to database architecture and cloud deployment, we handle
-                    the entire development lifecycle so you can focus on{" "}
-                    <span className="text-slate-900 font-semibold">growing your business.</span>
+                    We handle everything — strategy, creative, execution, and reporting — so your
+                    team can focus on{" "}
+                    <span className="text-slate-900 font-semibold">what you do best.</span>
                   </p>
                 </div>
 
@@ -90,7 +89,6 @@ const FullStackDev = () => {
 
             {/* ── LEFT FORM ── */}
             <div className="lg:w-2/5 w-full">
-              {/* Gradient border wrapper — matches Blogs QuoteForm */}
               <div
                 className="relative p-[2px] rounded-[3rem]"
                 style={{
@@ -111,4 +109,4 @@ const FullStackDev = () => {
   );
 };
 
-export default FullStackDev;
+export default MarketingDev;

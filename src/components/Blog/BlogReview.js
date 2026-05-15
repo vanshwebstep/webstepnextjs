@@ -48,7 +48,7 @@ const BlogReview = () => {
                 <FaShieldAlt size={60} />
             </motion.div>
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto md:px-6 relative z-10">
 
                 {/* 🔥 GLASS MAIN CARD */}
                 <div className="relative rounded-[3rem] p-10 md:p-16 bg-white/60 backdrop-blur-2xl border border-white/40 shadow-[0_30px_80px_rgba(0,0,0,0.08)] overflow-hidden">
@@ -109,7 +109,7 @@ const BlogReview = () => {
                     </AnimatedSection>
 
                     {/* 🔥 LOGOS GRID */}
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-8 space-y-4">
                         {reviews.map((item, index) => (
                             <AnimatedSection key={index} delay={index * 0.1} direction="up">
 

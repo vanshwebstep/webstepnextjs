@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import dev from "@/components/img/development-company.png";
 import { FaStar } from 'react-icons/fa';
@@ -45,8 +45,24 @@ const trustAvatars = [
     { letter: '+', bg: '#EA580C' },
 ];
 
+function useWindowWidth() {
+    const [width, setWidth] = useState(
+        typeof window !== 'undefined' ? window.innerWidth : 1200
+    );
+    useEffect(() => {
+        const handler = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', handler);
+        return () => window.removeEventListener('resize', handler);
+    }, []);
+    return width;
+}
+
 const Experience = () => {
     const sectionRef = useRef(null);
+    const width = useWindowWidth();
+    const isMobile = width < 640;
+    const isTablet = width >= 640 && width < 1024;
+    const isDesktop = width >= 1024;
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -76,6 +92,11 @@ const Experience = () => {
                     50%       { opacity: 0.45; transform: scale(1.5); }
                 }
                 .ex-pulse-dot { animation: ex-pulse 2s ease-in-out infinite; }
+
+                @keyframes ping {
+                    75%, 100% { transform: scale(2); opacity: 0; }
+                }
+                .ex-ping { animation: ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
 
                 .ex-fade {
                     opacity: 0;
@@ -157,6 +178,7 @@ const Experience = () => {
                 }
 
                 .ex-btn-primary {
+                    display: inline-block;
                     padding: 13px 26px;
                     background: #0a0a0a;
                     color: #fff;
@@ -167,7 +189,9 @@ const Experience = () => {
                     border-radius: 12px;
                     border: none;
                     cursor: pointer;
+                    text-decoration: none;
                     transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+                    text-align: center;
                 }
                 .ex-btn-primary:hover {
                     background: #7C3AED;
@@ -175,6 +199,7 @@ const Experience = () => {
                     transform: translateY(-1px);
                 }
                 .ex-btn-secondary {
+                    display: inline-block;
                     padding: 13px 22px;
                     background: transparent;
                     color: #64748b;
@@ -185,19 +210,32 @@ const Experience = () => {
                     border-radius: 12px;
                     border: 1.5px solid #e2e8f0;
                     cursor: pointer;
+                    text-decoration: none;
                     transition: border-color 0.3s, color 0.3s, transform 0.2s;
+                    text-align: center;
                 }
                 .ex-btn-secondary:hover {
                     border-color: rgba(124,58,237,0.45);
                     color: #7C3AED;
                     transform: translateY(-1px);
                 }
+
+                @media (max-width: 639px) {
+                    .ex-stat-num { font-size: 1.6rem; }
+                    .ex-img-card { padding: 18px; border-radius: 20px; }
+                    .ex-stat-card { padding: 16px; }
+                }
             `}</style>
 
             <section
                 ref={sectionRef}
-                className="ex-section relative bg-white overflow-hidden"
-                style={{ padding: '80px 28px' }}
+                className="ex-section"
+                style={{
+                    background: '#fff',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    padding: isMobile ? '52px 16px' : isTablet ? '64px 24px' : '80px 28px',
+                }}
             >
                 {/* Decorative blobs */}
                 <div style={{ position: 'absolute', top: -100, right: -100, width: 450, height: 450, borderRadius: '50%', background: 'rgba(124,58,237,0.06)', filter: 'blur(80px)', pointerEvents: 'none' }} />
@@ -207,15 +245,29 @@ const Experience = () => {
                 <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
                     {/* ── Header ── */}
-                    <div className="ex-fade" style={{ textAlign: 'center', marginBottom: 52 }}>
-                     <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white backdrop-blur-md border border-white/60 text-[#FF1F8E] font-bold text-[10px] tracking-[0.3em] uppercase mb-10 shadow-sm">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF1F8E] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF1F8E]"></span>
-          </span>
-         Google Verified
-        </div>
-                        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, color: '#0a0a0a', letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 12 }}>
+                    <div className="ex-fade" style={{ textAlign: 'center', marginBottom: isMobile ? 36 : 52 }}>
+
+                        {/* Badge — pure inline styles, no Tailwind */}
+                        <div style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '10px',
+                            padding: '8px 18px', borderRadius: '16px',
+                            background: '#fff', border: '1px solid rgba(255,255,255,0.6)',
+                            color: '#FF1F8E', fontWeight: 700, fontSize: '10px',
+                            letterSpacing: '0.3em', textTransform: 'uppercase',
+                            marginBottom: '1.2rem', boxShadow: '0 1px 6px rgba(0,0,0,0.05)',
+                        }}>
+                            <span style={{ position: 'relative', display: 'inline-flex', width: 10, height: 10 }}>
+                                <span className="ex-ping" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: '#FF1F8E', opacity: 0.75 }} />
+                                <span style={{ position: 'relative', width: 10, height: 10, borderRadius: '50%', background: '#FF1F8E', display: 'inline-block' }} />
+                            </span>
+                            Google Verified
+                        </div>
+
+                        <h2 style={{
+                            fontSize: isMobile ? '2rem' : 'clamp(2.5rem, 5vw, 4rem)',
+                            fontWeight: 900, color: '#0a0a0a',
+                            letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 12,
+                        }}>
                             A 5-Star{' '}
                             <span style={{
                                 background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
@@ -224,24 +276,31 @@ const Experience = () => {
                                 backgroundClip: 'text',
                             }}>
                                 Rated Brand
-                                <span style={{ position: 'absolute', bottom: -20, left: 0, width: '100%', height: 3, background: 'rgba(124,58,237,0.15)', borderRadius: 4 }} />
                             </span>
                         </h2>
-                        <p style={{ fontSize: 18, color: '#94a3b8', fontWeight: 500, lineHeight: 1.7, maxWidth: 440, margin: '0 auto' }}>
+                        <p style={{
+                            fontSize: isMobile ? 15 : 18,
+                            color: '#94a3b8', fontWeight: 500, lineHeight: 1.7,
+                            maxWidth: 440, margin: '0 auto',
+                        }}>
                             We don&apos;t just build software — we engineer growth, as a committed extension of your team.
                         </p>
                     </div>
 
-                    {/* ── Two-column layout ── */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr)', gap: 28, alignItems: 'start' }}>
+                    {/* ── Two-column layout (stacks on mobile/tablet) ── */}
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isDesktop ? 'minmax(0,1fr) minmax(0,1fr)' : '1fr',
+                        gap: isMobile ? 20 : 28,
+                        alignItems: 'start',
+                    }}>
 
                         {/* LEFT — Image card */}
                         <div className="ex-img-card ex-fade" style={{ transitionDelay: '0.1s' }}>
                             <Image
                                 src={dev}
                                 alt="Enterprise Development"
-                                className="w-full h-auto"
-                                style={{ borderRadius: 18, marginBottom: 22 }}
+                                style={{ width: '100%', height: 'auto', borderRadius: 18, marginBottom: 22, display: 'block' }}
                             />
 
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -260,7 +319,12 @@ const Experience = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                                 {reviews.map((r, i) => (
                                     <div key={i} className="ex-review-row">
-                                        <div style={{ width: 34, height: 34, borderRadius: '50%', background: r.avatarBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 900, color: r.avatarColor, flexShrink: 0 }}>
+                                        <div style={{
+                                            width: 34, height: 34, borderRadius: '50%',
+                                            background: r.avatarBg, flexShrink: 0,
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            fontSize: 13, fontWeight: 900, color: r.avatarColor,
+                                        }}>
                                             {r.name[0]}
                                         </div>
                                         <div>
@@ -277,7 +341,11 @@ const Experience = () => {
                             <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#93989e', marginBottom: 10 }}>
                                 Why Teams Choose Us
                             </p>
-                            <h3 style={{ fontSize: 'clamp(1.6rem,3vw,2.2rem)', fontWeight: 900, color: '#0a0a0a', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 28 }}>
+                            <h3 style={{
+                                fontSize: isMobile ? '1.5rem' : 'clamp(1.6rem,3vw,2.2rem)',
+                                fontWeight: 900, color: '#0a0a0a',
+                                letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 28,
+                            }}>
                                 Numbers that speak{' '}
                                 <span style={{
                                     background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
@@ -287,8 +355,13 @@ const Experience = () => {
                                 }}>for themselves</span>
                             </h3>
 
-                            {/* Stat grid — each card its own color */}
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 28 }}>
+                            {/* Stat grid */}
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(2, 1fr)',
+                                gap: isMobile ? 10 : 12,
+                                marginBottom: 28,
+                            }}>
                                 {stats.map((item, idx) => (
                                     <div
                                         key={idx}
@@ -314,28 +387,50 @@ const Experience = () => {
                             {/* Divider */}
                             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 22 }}>
                                 <div style={{ flex: 1, height: 1, background: '#f0f0f4' }} />
-                                <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#cbd5e1' }}>Trusted Worldwide</span>
+                                <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#cbd5e1', whiteSpace: 'nowrap' }}>Trusted Worldwide</span>
                                 <div style={{ flex: 1, height: 1, background: '#f0f0f4' }} />
                             </div>
 
                             {/* Buttons */}
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-                                 <Link
-                                            href="/case-study" className="ex-btn-primary">Read Our Reviews</Link>
-                             <Link
-            href="/case-study" className="ex-btn-secondary">View Case Studies →</Link>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: isMobile ? 'column' : 'row',
+                                flexWrap: 'wrap',
+                                gap: 10,
+                            }}>
+                                <Link href="/case-study" className="ex-btn-primary"
+                                    style={{ flex: isMobile ? '1' : 'unset' }}
+                                >
+                                    Read Our Reviews
+                                </Link>
+                                <Link href="/case-study" className="ex-btn-secondary"
+                                    style={{ flex: isMobile ? '1' : 'unset' }}
+                                >
+                                    View Case Studies →
+                                </Link>
                             </div>
 
                             {/* Trust bar */}
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 20, padding: '14px 18px', background: '#fafafa', border: '1px solid #f0f0f4', borderRadius: 14 }}>
-                                <div style={{ display: 'flex' }}>
+                            <div style={{
+                                display: 'flex', alignItems: 'center', gap: 12, marginTop: 20,
+                                padding: isMobile ? '12px 14px' : '14px 18px',
+                                background: '#fafafa', border: '1px solid #f0f0f4', borderRadius: 14,
+                            }}>
+                                <div style={{ display: 'flex', flexShrink: 0 }}>
                                     {trustAvatars.map((av, i) => (
-                                        <div key={i} style={{ width: 28, height: 28, borderRadius: '50%', background: av.bg, border: '2px solid #fff', marginLeft: i === 0 ? 0 : -8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 900, color: '#fff', zIndex: trustAvatars.length - i, position: 'relative' }}>
+                                        <div key={i} style={{
+                                            width: 28, height: 28, borderRadius: '50%',
+                                            background: av.bg, border: '2px solid #fff',
+                                            marginLeft: i === 0 ? 0 : -8,
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            fontSize: 10, fontWeight: 900, color: '#fff',
+                                            zIndex: trustAvatars.length - i, position: 'relative',
+                                        }}>
                                             {av.letter}
                                         </div>
                                     ))}
                                 </div>
-                                <p style={{ fontSize: 11, fontWeight: 600, color: '#64748b' }}>
+                                <p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: '#64748b', margin: 0 }}>
                                     <span style={{ color: '#7C3AED', fontWeight: 800 }}>500+ teams</span> trust us across 40+ countries
                                 </p>
                             </div>

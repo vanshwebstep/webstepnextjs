@@ -795,7 +795,7 @@ const ServiceDetailPage = ({ serviceSlug = "web-development" }) => {
       {/* Breadcrumb */}
       <div className="relative z-10 border-b border-slate-100 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-6 max-w-6xl py-4 flex items-center gap-2">
-          <a href="/services" className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 hover:text-slate-600 transition-colors">Services</a>
+        <Link href="/services/" className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 hover:text-slate-600 transition-colors">Services</Link>
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
           <span
             className="text-[11px] font-semibold uppercase tracking-[0.2em]"
@@ -1163,56 +1163,62 @@ const ServiceDetailPage = ({ serviceSlug = "web-development" }) => {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={BRAND.primary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {service.relatedServices.map((related, i) => {
-              const [hov, setHov] = useState(false);
-              return (
-                <motion.a
-                  key={i}
-                  href={`/services/${related.slug}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  onMouseEnter={() => setHov(true)}
-                  onMouseLeave={() => setHov(false)}
-                  className="block rounded-2xl p-6 border transition-all duration-300 no-underline"
-                  style={{
-                    borderColor: hov ? "rgba(255,31,142,0.35)" : "#e2e8f0",
-                    background: hov ? "linear-gradient(135deg, #FFF0F7, #FAF5FF, #fff)" : "#fff",
-                    boxShadow: hov ? "0 10px 30px -8px rgba(255,31,142,0.2)" : "0 2px 8px rgba(0,0,0,0.03)",
-                    transform: hov ? "translateY(-3px)" : "translateY(0)",
-                  }}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p
-                        className="text-[10px] font-bold uppercase tracking-[0.25em] mb-1"
-                        style={{
-                          background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          backgroundClip: "text",
-                        }}
-                      >
-                        {related.subTitle}
-                      </p>
-                      <h4 className="text-xl font-extrabold text-slate-800">{related.title}</h4>
-                    </div>
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-                      style={{
-                        background: hov ? BRAND.gradient : "#f1f5f9",
-                        color: hov ? "#fff" : BRAND.primary,
-                      }}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                    </div>
-                  </div>
-                </motion.a>
-              );
-            })}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {service.relatedServices.map((related, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.1 }}
+      whileHover={{ y: -3 }}
+    >
+      <Link
+        href={`/services/${related.slug}`}
+        className="group block rounded-2xl p-6 border transition-all duration-300 no-underline bg-white hover:bg-gradient-to-br hover:from-pink-50 hover:via-purple-50 hover:to-white hover:shadow-[0_10px_30px_-8px_rgba(255,31,142,0.2)] hover:border-pink-300"
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <p
+              className="text-[10px] font-bold uppercase tracking-[0.25em] mb-1"
+              style={{
+                background:
+                  "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              {related.subTitle}
+            </p>
+
+            <h4 className="text-xl font-extrabold text-slate-800">
+              {related.title}
+            </h4>
           </div>
+
+          <div
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-slate-100 text-pink-500 group-hover:text-white group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-500"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  ))}
+</div>
         </div>
       </section>
 

@@ -124,7 +124,7 @@ const Software = () => {
           <div className="w-full lg:w-2/5">
            
               <div className=" relative p-[2px] rounded-[3rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_60px_rgba(236,72,153,0.25)] mt-20">
-                <div className="rounded-[3rem] backdrop-blur-xl bg-white/90 p-10 md:p-10">
+                <div className="rounded-[3rem] backdrop-blur-xl bg-white/90 p-6 md:p-10">
 
                   <div className="relative z-10">
               <ExpertsForm />

@@ -124,7 +124,7 @@ const Menu = ({ mobile = false, closeMenu, scrolled = false }) => {
 
     return (
         <nav className={`w-full ${mobile ? "block" : "flex items-center justify-center font-roboto"}`}>
-            <ul className={`${mobile ? "flex flex-col" : "flex items-center gap-1"}`}>
+            <ul className={`${mobile ? "flex flex-col" : "flex items-center gap-1 whitespace-nowrap"}`}>
                 {navLinks.map((link, idx) => (
                     <li key={idx} className={mobile ? "w-full" : "relative group"}>
 

@@ -164,7 +164,7 @@ const FormSection = () => {
             </div>
 
             {/* RIGHT — Form */}
-            <div className="w-full lg:w-[58%] p-12 md:p-16 bg-gradient-to-br from-white to-slate-50 flex flex-col">
+            <div className="w-full lg:w-[58%] p-6 md:p-16 bg-gradient-to-br from-white to-slate-50 flex flex-col">
               <div className="mb-10">
                 <h3 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
                   Initiate Inquiry

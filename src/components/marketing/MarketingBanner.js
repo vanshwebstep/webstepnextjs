@@ -1,16 +1,15 @@
-
-'use client';
 import React from 'react';
-import mobileapp from "@/components/img/mobile_app_development2.png";
+import marketing from "@/components/img/software.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import Link from 'next/link';
 
-const FullStackBanner = () => {
-  return (
-    <section className="py-16 md:py-24  bg-white relative z-10 px-6 overflow-hidden font-roboto">
 
-      {/* Decorative background glows — matches Blogs page */}
+const MarketingBanner = () => {
+  return (
+    <section className="py-16 md:py-24 bg-white relative z-10 px-6 overflow-hidden font-roboto">
+
+      {/* Decorative background glows */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-50 rounded-full blur-[120px] opacity-60 pointer-events-none" />
@@ -23,7 +22,7 @@ const FullStackBanner = () => {
             <div className="lg:w-3/5">
               <div className="mb-10 text-center lg:text-left">
 
-                {/* Glass badge — same style as Blogs */}
+                {/* Glass badge */}
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl
                   bg-white/50 backdrop-blur-xl border border-white/60
                   shadow-[0_10px_30px_rgba(0,0,0,0.08)] mb-6
@@ -41,13 +40,13 @@ const FullStackBanner = () => {
                       backgroundClip: "text",
                     }}
                   >
-                    End-to-End Excellence
+                    Growth-Driven Marketing
                   </span>
                 </div>
 
                 {/* Heading */}
                 <h1 className="text-4xl md:text-6xl font-extrabold leading-[0.95] text-slate-900 mb-4 tracking-tight">
-                  Premium{" "}
+                  Powerful{" "}
                   <span
                     className="relative inline-block"
                     style={{
@@ -57,49 +56,43 @@ const FullStackBanner = () => {
                       backgroundClip: "text",
                     }}
                   >
-                    Full Stack
-                    {/* Animated underline glow — matches Blogs */}
+                    Digital Marketing
                     <span className="absolute left-0 -bottom-2 w-full h-[6px] rounded-full
                       bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400
                       blur-sm opacity-70 animate-pulse" />
                   </span>{" "}
-                  Development
+                  Solutions
                 </h1>
 
-                {/* Divider — matches Blogs */}
+                {/* Divider */}
                 <div className="relative w-20 h-1.5 rounded-full bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mb-6 mx-auto lg:mx-0">
                   <div className="absolute inset-0 blur-md opacity-70 bg-gradient-to-r from-pink-400 to-cyan-400" />
                 </div>
 
                 <p className="text-slate-500 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl">
-                  We help enterprises with full-stack mobile app development, web development,
-                  and custom software. Our developers have in-depth experience in both{" "}
-                  <span className="text-slate-900 font-semibold">backend & frontend</span>{" "}
-                  technologies.
+                  We craft data-driven digital marketing strategies that amplify your brand, attract
+                  qualified leads, and turn clicks into customers. From paid ads to organic growth —{" "}
+                  <span className="text-slate-900 font-semibold">every campaign built to convert.</span>
                 </p>
 
-                {/* CTA Buttons */}
                 <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                   <Link
-                    href="/customize-package"
-                    className="px-8 py-4 rounded-2xl text-[11px] font-black capitalize tracking-[0.2em] text-white
-                      shadow-lg hover:shadow-purple-500/40 hover:-translate-y-1 transition-all duration-300"
+                  href="/customize-package"
+                    className="px-8 py-4 rounded-2xl text-[11px] font-black capitalize tracking-[0.2em]
+                      text-white hover:-translate-y-1 transition-all duration-300"
                     style={{
                       background: "linear-gradient(135deg, #FF79C6 0%, #A855F7 50%)",
                       boxShadow: "0 6px 24px rgba(168,85,247,0.3)",
                     }}
                   >
-                    Start Your Project
+                    Grow My Brand
                   </Link>
                   <Link 
-                                    href="/works"
-                    className="px-8 py-4 bg-white rounded-2xl text-[11px] font-black capitalize tracking-[0.2em]
-                      text-slate-900 shadow-sm transition-all duration-300"
-                    style={{ border: "1px solid #e2e8f0" }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = "#A855F7"}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = "#e2e8f0"}
-                  >
-                    Our Process
+                  href="/case-study"
+                  className="px-8 py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl
+                    text-[11px] font-black capitalize tracking-[0.2em] shadow-sm
+                    hover:border-purple-400 hover:-translate-y-1 transition-all duration-300">
+                    View Case Studies
                   </Link>
                 </div>
 
@@ -109,14 +102,10 @@ const FullStackBanner = () => {
             {/* ── RIGHT IMAGE ── */}
             <div className="lg:w-2/5 flex justify-center">
               <div className="relative group">
-
-                {/* Hover glow */}
                 <div
                   className="absolute inset-0 rounded-[3rem] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                   style={{ background: "linear-gradient(135deg, rgba(232,121,249,0.25), rgba(168,85,247,0.2), rgba(56,189,248,0.15))" }}
                 />
-
-                {/* Gradient border wrapper — matches Blogs QuoteForm */}
                 <div
                   className="relative p-[2px] rounded-[3rem]"
                   style={{
@@ -124,19 +113,10 @@ const FullStackBanner = () => {
                     boxShadow: "0 20px 60px rgba(236,72,153,0.2)",
                   }}
                 >
-                  <div
-                    className="rounded-[3rem] bg-white/90 backdrop-blur-xl p-8
-                      transform group-hover:-translate-y-2 transition-all duration-500"
-                  >
-                    <Image
-                      src={mobileapp}
-                      alt="Full Stack Development"
-                      className="w-full h-auto max-w-[300px]"
-                    />
+                  <div className="rounded-[3rem] bg-white/90 backdrop-blur-xl p-8 transform group-hover:-translate-y-2 transition-all duration-500">
+                    <Image src={marketing} alt="Digital Marketing" className="w-full h-auto max-w-[300px]" />
                   </div>
                 </div>
-
-                {/* Floating accent dots */}
                 <div
                   className="absolute -top-4 -right-4 w-10 h-10 rounded-full opacity-80"
                   style={{ background: "linear-gradient(135deg, #FF1F8E, #A855F7)" }}
@@ -145,7 +125,6 @@ const FullStackBanner = () => {
                   className="absolute -bottom-4 -left-4 w-6 h-6 rounded-full opacity-60"
                   style={{ background: "linear-gradient(135deg, #A855F7, #38BDF8)" }}
                 />
-
               </div>
             </div>
 
@@ -156,4 +135,4 @@ const FullStackBanner = () => {
   );
 };
 
-export default FullStackBanner;
+export default MarketingBanner;
