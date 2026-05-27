@@ -246,7 +246,7 @@ const ServicesPage = () => {
         className="services-section"
         style={{
           background: '#fff',
-          padding: isMobile ? '5rem 1rem' : isTablet ? '7rem 1.5rem' : '10rem 1.5rem',
+          padding: isMobile ? '8rem 1rem' : isTablet ? '9rem 1.5rem' : '10rem 1.5rem',
           position: 'relative',
           overflow: 'hidden',
         }}

@@ -192,26 +192,28 @@ function ServiceRow({ service, index }) {
 
         {/* CTA Arrow */}
         <div className="pl-6 lg:pl-0 shrink-0">
-          <Link
-            href={`/services/${service.slug}`}
-            animate={{
-              background: hovered ? service.accent : "#ffffff",
-              color: hovered ? "#fff" : service.accent,
-            }}
-            whileHover={{ scale: 1.12, rotate: 6 }}
-            whileTap={{ scale: 0.92 }}
-            transition={{ duration: 0.3 }}
-            className="w-11 h-11 rounded-full flex items-center justify-center border transition-all duration-300"
-            style={{
-              borderColor: service.accent + "50",
-              boxShadow: hovered
-                ? `0 10px 30px -5px ${service.accent}40`
-                : "0 2px 6px rgba(0,0,0,0.05)",
-            }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-            </svg>
+          <Link href={`/services/${service.slug}`}>
+            <motion.span
+              animate={{
+                background: hovered ? service.accent : "#ffffff",
+                color: hovered ? "#fff" : service.accent,
+              }}
+              whileHover={{ scale: 1.12, rotate: 6 }}
+              whileTap={{ scale: 0.92 }}
+              transition={{ duration: 0.3 }}
+              className="w-11 h-11 rounded-full flex items-center justify-center border transition-all duration-300"
+              style={{
+                borderColor: service.accent + "50",
+                boxShadow: hovered
+                  ? `0 10px 30px -5px ${service.accent}40`
+                  : "0 2px 6px rgba(0,0,0,0.05)",
+              }}
+            >
+
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+              </svg>
+            </motion.span>
           </Link>
         </div>
       </div>
@@ -366,9 +368,8 @@ const Services = () => {
                 </svg>
               </Link>
 
-             <Link
+              <Link
                 href="/services"
-                whileHover={{ x: 3 }}
                 className="text-sm text-slate-400 hover:text-slate-700 flex items-center gap-2 transition-colors duration-300 font-medium"
               >
                 See all services

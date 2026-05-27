@@ -8,6 +8,7 @@ const services = [
   "seo",
   "digital-marketing",
   "app-development",
+  "mobile-app-development",
   "branding",
   "ecommerce",
   "psd-to-html",

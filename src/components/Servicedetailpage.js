@@ -917,8 +917,7 @@ const ServiceDetailPage = ({ serviceSlug = "web-development" }) => {
               >
                 <Link
                   href="/customize-package"
-                  whileHover={{ scale: 1.05, boxShadow: "0 16px 40px rgba(168,85,247,0.4)" }}
-                  whileTap={{ scale: 0.97 }}
+             
                   className="flex items-center gap-3 px-8 py-4 rounded-2xl text-sm font-bold text-white tracking-wide"
                   style={{
                     background: "linear-gradient(135deg, #FF79C6 0%, #A855F7 50%)",
@@ -930,7 +929,7 @@ const ServiceDetailPage = ({ serviceSlug = "web-development" }) => {
                 </Link>
                 <Link
                   href="/works"
-                  whileHover={{ x: 4 }}
+                 
                   className="text-sm font-semibold flex items-center gap-2"
                   style={{ color: BRAND.dark }}
                 >
@@ -1267,9 +1266,7 @@ const ServiceDetailPage = ({ serviceSlug = "web-development" }) => {
 
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  href="/packages"
-                  whileHover={{ scale: 1.05, boxShadow: "0 16px 40px rgba(168,85,247,0.4)" }}
-                  whileTap={{ scale: 0.97 }}
+                  href="/packages" 
                   className="flex items-center gap-3 px-8 py-4 rounded-2xl text-sm font-bold text-white"
                   style={{ background: "linear-gradient(135deg, #FF79C6 0%, #A855F7 50%)", boxShadow: "0 6px 24px rgba(168,85,247,0.3)" }}
                 >
@@ -1278,7 +1275,6 @@ const ServiceDetailPage = ({ serviceSlug = "web-development" }) => {
                 </Link>
                 <Link
                   href="/contactus"
-                  whileHover={{ x: 3 }}
                   className="text-sm font-semibold flex items-center gap-2"
                   style={{ color: BRAND.dark }}
                 >
