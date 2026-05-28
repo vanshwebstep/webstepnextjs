@@ -26,93 +26,92 @@ import {
 } from "react-icons/fa";
 
 const POST = {
-    id: 1,
-    title: "Which eCommerce Platform is Best for SEO in 2024?",
-    slug: "best-ecommerce-platform-seo",
-    category: "Technology",
-    author: "Admin",
-    date: "Nov 30, 2023",
-    readTime: "6 min read",
-    views: 1240,
-    likes: 87,
-    url: "@/components/img/blog1.png",
-    imageSrc: blog1,
-    tags: ["SEO", "eCommerce", "Shopify", "Digital Marketing"],
-    content: [
-        {
-            type: "lead",
-            text: "For any eCommerce website, SEO is the single most powerful lever for sustainable growth. Unlike paid ads, organic traffic compounds over time — making platform choice a long-term strategic decision.",
-        },
-        {
-            type: "h2",
-            text: "Why Platform Matters for SEO",
-        },
-        {
-            type: "p",
-            text: "Search engines crawl your site's technical architecture, page speed, structured data, and URL patterns. Different platforms handle each of these uniquely. Choosing the wrong platform can put you at a structural disadvantage before you write a single word of content.",
-        },
-        {
-            type: "h2",
-            text: "Top Contenders at a Glance",
-        },
-        {
-            type: "list",
-            items: [
-                "Shopify — Best balance of usability and SEO features out of the box.",
-                "WooCommerce — Maximum flexibility for technical SEO customisation.",
-                "BigCommerce — Enterprise-grade structured data support.",
-                "Squarespace — Clean markup but limited advanced control.",
-                "Wix — Improved dramatically since 2022 but still lags behind.",
-            ],
-        },
-        {
-            type: "h2",
-            text: "Our Recommendation",
-        },
-        {
-            type: "p",
-            text: "For most growing businesses, Shopify paired with a dedicated SEO app like TechnoScore's custom SEO suite delivers the best ROI. WooCommerce wins when you need granular control and already run WordPress. Either way, the platform is only 20% of the equation — content strategy and link building drive the remaining 80%.",
-        },
-        {
-            type: "quote",
-            text: "SEO is not about gaming the system. It is about learning how to play by the rules.",
-            author: "Jordan Kasteler",
-        },
-        {
-            type: "p",
-            text: "TechnoScore has helped 200+ clients migrate and optimise their eCommerce stores. Our process starts with a full technical audit and ends with measurable results — typically a 40–120% increase in organic sessions within six months.",
-        },
-    ],
+  id: 1,
+  title: "Which eCommerce Platform is Best for SEO in 2026?",
+  slug: "best-ecommerce-platform-seo",
+  category: "E-Commerce",
+  author: "Webstep Team",
+  date: "Mar 15, 2025",
+  readTime: "6 min read",
+  views: 1240,
+  likes: 87,
+  imageSrc: blog1,
+  tags: ["SEO", "Shopify", "WordPress", "eCommerce", "Laravel"],
+  content: [
+    {
+      type: "lead",
+      text: "For any eCommerce website, SEO is the single most powerful lever for sustainable growth. Unlike paid ads, organic traffic compounds over time — making platform choice a long-term strategic decision.",
+    },
+    {
+      type: "h2",
+      text: "Why Platform Choice Matters for SEO",
+    },
+    {
+      type: "p",
+      text: "Search engines crawl your site's technical architecture, page speed, structured data, and URL patterns. Different platforms handle each of these uniquely — and choosing the wrong one can put you at a structural disadvantage before you write a single word of content.",
+    },
+    {
+      type: "h2",
+      text: "Top Contenders at a Glance",
+    },
+    {
+      type: "list",
+      items: [
+        "Shopify — Best out-of-the-box SEO with fast hosting and clean URL structures.",
+        "WordPress + WooCommerce — Maximum flexibility for technical SEO customisation.",
+        "Custom Laravel Store — Full control over every SEO element, ideal for scale.",
+        "BigCommerce — Enterprise-grade structured data support.",
+        "Squarespace — Clean markup but limited for advanced SEO strategies.",
+      ],
+    },
+    {
+      type: "h2",
+      text: "Our Recommendation",
+    },
+    {
+      type: "p",
+      text: "For most growing businesses, Shopify delivers the best balance of speed, usability, and SEO out of the box. WordPress with WooCommerce wins when you need granular control. And if you're at serious scale, a custom Laravel store gives you full ownership over every technical detail. At Webstep Solutions, we've built all three — and we tailor our recommendation to your specific business goals.",
+    },
+    {
+      type: "quote",
+      text: "SEO is not about gaming the system. It is about learning how to play by the rules.",
+      author: "Jordan Kasteler",
+    },
+    {
+      type: "p",
+      text: "Webstep Solutions has helped 300+ clients build and optimise their eCommerce stores across Shopify, WordPress, and Laravel. Our process starts with a full technical SEO audit and ends with measurable results — typically a 40–120% increase in organic sessions within six months.",
+    },
+  ],
 };
 
 const RELATED = [
-    {
-        id: 2,
-        title: "What Is The Difference Between eCommerce And Dropshipping?",
-        slug: "ecommerce-vs-dropshipping",
-        date: "Nov 30, 2023",
-        views: 30,
-        imageSrc: blog2,
-        category: "Business",
-    },
-    {
-        id: 3,
-        title: "How to Integrate eCommerce Into Your Website?",
-        date: "Nov 30, 2023",
-        slug: "integrate-ecommerce-website",
-        views: 45,
-        imageSrc: blog3,
-        category: "Development",
-    },
-    {
-        id: 4,
-        title: "How To Use AI In eCommerce?",
-        slug: "ai-in-ecommerce",
-        date: "Dec 10, 2023",
-        views: 61,
-        imageSrc: blog4,
-        category: "AI",
-    },
+  {
+    id: 2,
+    title: "Shopify vs Custom Laravel Store — What's Right for Your Business?",
+    slug: "shopify-vs-laravel-ecommerce",
+    date: "Apr 02, 2025",
+    views: 94,
+    imageSrc: blog2,
+    category: "E-Commerce",
+  },
+  {
+    id: 3,
+    title: "How AI Chatbots Are Transforming Customer Support in 2025",
+    slug: "ai-chatbots-customer-support-2025",
+    date: "May 10, 2025",
+    views: 76,
+    imageSrc: blog3,
+    category: "AI Integration",
+  },
+  {
+    id: 4,
+    title: "React vs Next.js in 2025 — Which Should You Build With?",
+    slug: "react-vs-nextjs-2025",
+    date: "Mar 15, 2025",
+    views: 128,
+    imageSrc: blog4,
+    category: "Web Development",
+  },
 ];
 
 /* ─── HELPERS ─── */
@@ -442,9 +441,11 @@ const SingleBlogPage = ({ post = POST, relatedPosts = RELATED }) => {
                                         <div>
                                             <p className="text-xs font-bold text-pink-500 tracking-widest uppercase mb-1">Written by</p>
                                             <h4 className="text-xl font-black text-slate-900 mb-2">{post.author}</h4>
-                                            <p className="text-slate-500 text-sm leading-relaxed">
-                                                Senior content strategist at TechnoScore with 10+ years of experience in digital marketing, eCommerce, and SEO. Passionate about turning complex tech topics into actionable insights.
-                                            </p>
+                                          <p className="text-slate-500 text-sm leading-relaxed">
+  Senior content strategist at Webstep Solutions with 10+ years of experience 
+  in web development, eCommerce, and digital marketing. Passionate about turning 
+  complex tech topics into clear, actionable insights.
+</p>
                                         </div>
                                     </div>
                                 </div>
@@ -514,7 +515,7 @@ const SingleBlogPage = ({ post = POST, relatedPosts = RELATED }) => {
                                 <div className="p-7 rounded-[2rem] bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_60px_rgba(0,0,0,0.07)]">
                                     <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-5">Popular Tags</p>
                                     <div className="flex flex-wrap gap-2">
-                                        {["SEO", "eCommerce", "AI", "Shopify", "Digital Marketing", "Web Design", "Dropshipping", "UX"].map((t) => (
+                                       {["React.js", "Next.js", "Shopify", "WordPress", "Laravel", "AI Chatbots", "SEO", "Node.js"].map((t) => (
                                             <span
                                                 key={t}
                                                 className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-500 hover:border-pink-400 hover:text-pink-600 transition-all cursor-pointer shadow-sm hover:scale-105"

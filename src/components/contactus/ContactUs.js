@@ -110,7 +110,7 @@ const ContactUs = () => {
                                     <div>
                                         <h4 className="font-black text-slate-900 text-sm mb-2">Call Us</h4>
                                         <p className="text-slate-500 font-bold text-sm">
-                                            +91 97818-90033
+                                            +91 79739-38927
                                         </p>
                                     </div>
                                 </div>

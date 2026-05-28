@@ -72,11 +72,11 @@ const Home = () => {
           <Process />
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2} direction="right">
+        {/* <AnimatedSection delay={0.2} direction="right">
           <ServicesPage />
-        </AnimatedSection>
-
-        {/* <AnimatedSection delay={0.2} direction="up">
+        </AnimatedSection> */}
+{/* 
+        <AnimatedSection delay={0.2} direction="up">
           <Design />
         </AnimatedSection> */}
 

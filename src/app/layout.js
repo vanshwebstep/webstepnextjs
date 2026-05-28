@@ -2,7 +2,7 @@ import { Oswald, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
+import OfferTopbar from "@/components/OfferTopbar"
 const oswald = Oswald({
   subsets: ["latin"],
   variable: "--font-oswald",
@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${oswald.variable} ${roboto.variable}`}>
       <body className="antialiased font-sans">
+        <OfferTopbar />
         <Header />
         {children}
         <Footer />

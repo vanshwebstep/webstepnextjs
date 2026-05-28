@@ -9,14 +9,14 @@ const team = [
   {
     id: 1,
     name: "Riya Sharma",
-    role: "Founder & Creative Director",
+    role: "Founder & Product Strategist",
     image: riyaArchitect,
-    bio: "A visionary polymath with over 12 years of experience engineering high-end digital ecosystems. Riya specializes in merging human-centric design with bulletproof backend scalability.",
-    expertise: ["Brand Engineering", "Digital Ecosystems", "Strategic Innovation"],
+    bio: "A visionary digital strategist with over 12 years of experience engineering high-performance web applications. Riya specializes in translating complex startup ideas and enterprise requirements into seamless, high-converting digital solutions.",
+    expertise: ["React & Next.js", "Product Architecture", "Enterprise Scalability"],
     accent: "violet",
     stats: [
-      { label: "Successful Projects", value: "250+", icon: <FiTarget /> },
-      { label: "Industry Awards", value: "15+", icon: <FiAward /> },
+      { label: "Projects Delivered", value: "250+", icon: <FiTarget /> },
+      { label: "Global Clients", value: "120+", icon: <FiAward /> },
       { label: "Years Experience", value: "12Y", icon: <FiUsers /> },
     ],
   },
@@ -25,13 +25,13 @@ const team = [
     name: "Aman Gupta",
     role: "Head of Engineering",
     image: amanArchitect,
-    bio: "An elite software architect who thrives on complexity. Aman leads our technical division, ensuring every line of code is optimized for extreme performance and global scale.",
-    expertise: ["System Architecture", "Cloud Infrastructure", "DevOps Mastery"],
+    bio: "An elite software architect who thrives on cross-platform engineering complexity. Aman leads our development division, ensuring every custom web application, mobile app, and API is optimized for ultimate speed, security, and global scale.",
+    expertise: ["Full-Stack Dev", "Mobile App Architect", "Cloud Infrastructure"],
     accent: "cyan",
     stats: [
-      { label: "Systems Deployed", value: "80+", icon: <FiTarget /> },
-      { label: "Code Coverage", value: "99%", icon: <FiAward /> },
-      { label: "Uptime Delivery", value: "100%", icon: <FiUsers /> },
+      { label: "Apps & Sites Live", value: "80+", icon: <FiTarget /> },
+      { label: "Client Satisfaction", value: "99%", icon: <FiAward /> },
+      { label: "System Uptime", value: "100%", icon: <FiUsers /> },
     ],
   },
 ];
@@ -101,11 +101,8 @@ const MarketingTeam = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF1F8E] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF1F8E]"></span>
             </span>
-            The Visionaries
+            Webstep Core
           </div>
-          {/* <span className="text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase">
-              The Visionaries
-            </span> */}
 
           <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
             Meet the{" "}
@@ -117,7 +114,7 @@ const MarketingTeam = () => {
                 backgroundClip: 'text',
               }}
             >
-              Architects
+              Innovators
             </span>
           </h2>
         </div>
@@ -256,7 +253,7 @@ const MarketingTeam = () => {
                 href="#"
                 className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-700 transition-colors duration-300 group"
               >
-                Full Studio Team
+                Full Tech Team
                 <FiArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
             </div>

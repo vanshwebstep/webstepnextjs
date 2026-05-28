@@ -9,12 +9,11 @@ import Link from "next/link";
 // DATA
 // ─────────────────────────────────────────────────────────────────────────────
 const STATS = [
-  { num: "500+", label: "Projects Delivered", sub: "Across 30+ industries" },
-  { num: "200+", label: "Happy Clients", sub: "From startups to Fortune 500" },
-  { num: "20+", label: "Years Experience", sub: "Since 2004" },
+  { num: "500+", label: "Projects Delivered", sub: "Across 20+ industries" },
+  { num: "300+", label: "Happy Clients", sub: "From startups to enterprises" },
+  { num: "15+", label: "Years Experience", sub: "Since 2010" },
   { num: "98%", label: "Client Retention", sub: "Long-term partnerships" },
 ];
-
 const CATEGORIES = ["All", "Healthcare", "E-Commerce", "SaaS", "Education", "Fintech", "Non-Profit", "Enterprise"];
 
 const CASE_STUDIES = [
@@ -40,7 +39,8 @@ const CASE_STUDIES = [
     ],
     deliverables: ["Custom booking engine", "Patient mobile app", "Admin dashboard", "Automated SMS/Email reminders", "Real-time slot management"],
     testimonial: {
-      quote: "TechnoScore didn't just build software — they fundamentally transformed how our patients experience care.",
+     quote: "Webstep Solutions didn't just build software — they fundamentally transformed how our patients experience care.",
+
       author: "Dr. Sarah Linton",
       role: "CEO, Dr. Treat Inc.",
       avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&q=80",
@@ -73,7 +73,7 @@ const CASE_STUDIES = [
     ],
     deliverables: ["Headless React storefront", "Laravel commerce API", "Redis caching layer", "Stripe payment integration", "AWS auto-scaling setup"],
     testimonial: {
-      quote: "We went from dreading sales peaks to welcoming them. The platform handles everything flawlessly.",
+quote: "Our users went from confused to confident. Webstep made complex finance feel approachable.",
       author: "Marcus Webb",
       role: "CTO, ShopVault Ltd.",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
@@ -106,7 +106,7 @@ const CASE_STUDIES = [
     ],
     deliverables: ["LMS web platform", "Live WebRTC classrooms", "Mobile student app", "Automated grading engine", "Analytics dashboard"],
     testimonial: {
-      quote: "EduForge became our backbone overnight. Teachers love it. Students love it. Parents love it.",
+quote: "We went from dreading sales peaks to welcoming them. Webstep built something truly bulletproof.",
       author: "Prof. Amara Osei",
       role: "Director, EduForge Group",
       avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
@@ -225,7 +225,6 @@ const PROCESS_STEPS = [
   { num: "04", title: "Build & Iterate", desc: "Agile 2-week sprints. You see working software every fortnight — no black box development.", icon: "⚙️", color: "#f59e0b", accent: "#fef3c7" },
   { num: "05", title: "Launch & Scale", desc: "Careful staged rollout, performance monitoring, and post-launch optimisation built into every engagement.", icon: "🚀", color: "#10b981", accent: "#d1fae5" },
 ];
-
 const INDUSTRIES = [
   { name: "Healthcare", count: 42, icon: "🏥" },
   { name: "E-Commerce", count: 68, icon: "🛒" },
@@ -504,8 +503,8 @@ const Hero = () => {
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
           className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-12">
-          500+ projects. 200+ clients. Every case study here is a story of a real problem solved — with measurable, verified outcomes you can hold us to.
-        </motion.p>
+  500+ projects. 300+ clients. Every case study here is a story of a real problem 
+  solved — with measurable, verified outcomes you can hold us to.        </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.45 }}
           className="flex flex-wrap items-center justify-center gap-4">
           <a href="#featured" className="group flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-white text-[15px] transition-all duration-300 hover:scale-105"
@@ -788,7 +787,7 @@ const Process = () => (
         </div>
         <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">Our proven process</h2>
         <p className="text-slate-500 text-lg mt-4 max-w-xl mx-auto leading-relaxed">
-          Every engagement follows a battle-tested framework honed over 500+ projects and two decades.
+Every engagement follows a battle-tested framework honed over 500+ projects and 15+ years.
         </p>
       </Reveal>
       <div className="relative">
@@ -903,7 +902,7 @@ const CTABanner = () => (
               </span>
             </h2>
             <p className="text-slate-500 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              Join 200+ companies who turned their biggest challenges into their biggest competitive advantages.
+Join 300+ companies who turned their biggest challenges into their biggest competitive advantages.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link href="/contactus"

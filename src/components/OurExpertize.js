@@ -8,68 +8,68 @@ import Link from "next/link";
 const EXPERTISE = [
   {
     id: "01",
-    title: "Web App Development",
-    tagline: "Full-stack excellence",
+    title: "Custom Web Development",
+    tagline: "Next-Gen Scalability",
     description:
-      "Building high-performance, scalable web ecosystems using cutting-edge stacks that adapt, scale, and dominate.",
+      "Engineering lightning-fast, responsive, and secure web applications using React and Next.js. Tailored perfectly for disruptive startups and scaling enterprise infrastructures.",
     accent: "#22D3EE",
     accentRgb: "34,211,238",
-    features: ["React & Next.js", "API-first Architecture", "Cloud Native"],
+    features: ["React & Next.js Ecosystem", "API-First Architecture", "Cloud Native (AWS/Vercel)"],
     icon: <FiMonitor size={20} />,
   },
   {
     id: "02",
-    title: "iOS Solutions",
-    tagline: "Native Apple craft",
+    title: "iOS Engineering",
+    tagline: "Premium Mobile Craft",
     description:
-      "Native Apple experiences crafted for performance, elegance, and seamless user delight on every device.",
+      "Crafting intuitive, high-performance native iOS applications built with Swift and SwiftUI to ensure seamless performance and elegant user journeys.",
     accent: "#34D399",
     accentRgb: "52,211,153",
-    features: ["Swift & SwiftUI", "App Store Ready", "Offline First"],
+    features: ["Swift & SwiftUI", "App Store Deployment", "Secure Apple Core Integrations"],
     icon: <FaApple size={20} />,
   },
   {
     id: "03",
-    title: "Android Apps",
-    tagline: "Global mobile reach",
+    title: "Android Applications",
+    tagline: "Robust Global Reach",
     description:
-      "Dynamic Android development for a global mobile audience with fluid, pixel-perfect interfaces.",
+      "Building versatile, adaptive, and highly secure Android apps using Kotlin to capture and retain massive target audiences across millions of devices.",
     accent: "#60A5FA",
     accentRgb: "96,165,250",
-    features: ["Kotlin Compose", "Material You", "Play Store"],
+    features: ["Kotlin & Jetpack Compose", "Material 3 Ecosystem", "Play Store Optimization"],
     icon: <FaAndroid size={20} />,
   },
   {
     id: "04",
-    title: "E-Commerce",
-    tagline: "Revenue-first design",
+    title: "E-Commerce Architectures",
+    tagline: "High-Conversion Retail",
     description:
-      "High-conversion retail platforms engineered for seamless growth and unforgettable shopping journeys.",
+      "Designing custom e-commerce infrastructure with lightning-fast checkouts, flexible product models, and secure enterprise payment gateway synchronizations.",
     accent: "#A78BFA",
     accentRgb: "167,139,250",
-    features: ["Headless Commerce", "Checkout UX", "Growth Analytics"],
+    features: ["Headless Commerce Layouts", "Optimized Checkout UX", "Advanced Sales Analytics"],
     icon: <FiShoppingCart size={20} />,
   },
   {
     id: "05",
-    title: "Tech Consultancy",
-    tagline: "Future-proof strategy",
+    title: "Technical Consultancy",
+    tagline: "Future-Proof Strategy",
     description:
-      "Strategic technology roadmaps to future-proof your digital presence and outpace every competitor.",
+      "Providing comprehensive system architecture reviews, code audits, and strategic digital roadmaps to safely guide businesses through modernization workflows.",
     accent: "#FB923C",
     accentRgb: "251,146,60",
-    features: ["Architecture Review", "Tech Audit", "Scaling Plans"],
+    features: ["Infrastructure Auditing", "Database Optimization", "Scalability Roadmaps"],
     icon: <FiCpu size={20} />,
   },
   {
     id: "06",
-    title: "Digital Marketing",
-    tagline: "Data-driven growth",
+    title: "Performance & SEO Growth",
+    tagline: "Data-Driven Results",
     description:
-      "Data-driven strategies that dominate search landscapes and convert audiences into loyal, recurring clients.",
+      "Deploying precise Core Web Vitals optimization, advanced technical SEO tactics, and high-converting marketing strategies to put your digital assets on top.",
     accent: "#F472B6",
     accentRgb: "244,114,182",
-    features: ["SEO & SEM", "Content Strategy", "CRO"],
+    features: ["Core Web Vitals Tuning", "Technical SEO Audits", "Conversion Rate Optimization"],
     icon: <FiTrendingUp size={20} />,
   },
 ];
@@ -356,9 +356,8 @@ const OurExpertize = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF1F8E] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF1F8E]"></span>
               </span>
-              Our Expertise
+              Our Capabilities
             </div>
-
 
             <motion.h2
               initial={{ opacity: 0, y: 40 }}
@@ -395,11 +394,10 @@ const OurExpertize = () => {
               className="text-base leading-relaxed mb-6"
               style={{ color: "rgba(255, 255, 255, 0.86)" }}
             >
-              We leverage elite technical stacks to build products that redefine
-              market standards and outlast the competition.
+              We design and deliver custom software frameworks configured specifically to grow your audience and protect core operations.
             </p>
             <div className="flex gap-8">
-              {[["150+", "Projects"], ["8+", "Years"], ["98%", "Retention"]].map(
+              {[["250+", "Solutions"], ["12Y+", "Combined"], ["99%", "Uptime"]].map(
                 ([val, label]) => (
                   <div key={label}>
                     <div
@@ -461,11 +459,10 @@ const OurExpertize = () => {
             className="text-sm font-medium"
             style={{ color: "rgba(255, 255, 255, 0.86)" }}
           >
-            Ready to transform your digital vision into reality?
+            Ready to transform your digital blueprint into optimized deployment?
           </p>
 
           <div className="flex items-center gap-4">
-
             <Link
               href="/customize-package"
               className="relative overflow-hidden flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-bold text-white"
@@ -492,7 +489,6 @@ const OurExpertize = () => {
                 <polyline points="12 5 19 12 12 19" />
               </motion.svg>
             </Link>
-
 
             <Link
               href="/works"

@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-[9999] transition-all duration-500 ${
+        className={`fixed top-[3rem] left-0 w-full z-[9999] transition-all duration-500 ${
           scrolled
             ? "bg-white/80 backdrop-blur-2xl py-3 border-b border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.05)]"
             : "bg-white/80 backdrop-blur-2xl py-3 border-b border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.05)]"
@@ -56,10 +56,10 @@ const Header = () => {
                   Expert Support
                 </span>
                 <a
-                  href="tel:9781890033"
+                  href="tel:7973938927"
                   className="text-[14px] font-bold text-slate-900 hover:text-[#FF1F8E] transition-colors"
                 >
-                  97818-90033
+                  79739-38927
                 </a>
               </div>
             </div>
@@ -103,7 +103,7 @@ const Header = () => {
                       Expert Support
                     </span>
                     <span className="text-lg font-bold text-slate-900">
-                      97818-90033
+                      79739-38927
                     </span>
                   </div>
                   <FiPhone size={22} className="text-[#FF1F8E]" />

@@ -219,7 +219,7 @@ export default function CustomizePackage() {
   };
 
   return (
-    <section className="py-20 text-slate-900 min-h-screen px-4 md:px-8 bg-slate-50">
+    <section className="py-36 text-slate-900 min-h-screen px-4 md:px-8 bg-slate-50">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center my-12">

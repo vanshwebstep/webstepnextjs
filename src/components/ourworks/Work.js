@@ -1,149 +1,84 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import drTreatCase from '@/components/img/dr-treat-case.png';
 import stillwellHansenWork from '@/components/img/Stillwell-Hansen-work.png';
 import retrievrWork1 from '@/components/img/Retrievr-work1.png';
 import graceMercyWork from '@/components/img/Grace-Mercy-work.png';
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
-import { FaExternalLinkAlt, FaReact, FaNodeJs, FaPhp, FaLaravel } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiMongodb, SiMysql, SiVuedotjs, SiAmazonwebservices } from 'react-icons/si';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import Link from "next/link";
 
 // ── Filter categories ──────────────────────────────────────────────────────────
-const CATEGORIES = ["All", "UI & UX", "Education", "Front End Dev", "Development", "PHP", "Laravel", "Node.js"];
+const CATEGORIES = ["All", "UI & UX", "Shopify", "WordPress", "Front End Dev", "Development", "PHP", "Laravel", "Node.js", "AI"];
 
-// ── Full projects data ─────────────────────────────────────────────────────────
+// ── Projects data — Webstep Solutions ─────────────────────────────────────────
 const ALL_PROJECTS = [
     {
         img: drTreatCase,
         title: "Dr. Treat",
-        category: "Healthcare / UX Design",
-        tags: ["UI & UX", "Development"],
-        tech: ["React", "Figma"],
+        category: "Healthcare / React.js",
+        tags: ["UI & UX", "Development", "Front End Dev"],
+        tech: ["React", "Node.js", "Tailwind"],
         desc: "Patient-centric healthcare platform with intuitive UX flows and real-time appointment scheduling.",
         year: "2023",
     },
     {
         img: stillwellHansenWork,
         title: "Stillwell Hansen",
-        category: "Infrastructure / Development",
-        tags: ["Development", "Node.js"],
-        tech: ["Node.js", "MongoDB"],
+        category: "Infrastructure / Next.js",
+        tags: ["Development", "Node.js", "Front End Dev"],
+        tech: ["Next.js", "Node.js", "MongoDB"],
         desc: "Large-scale infrastructure project portal with real-time progress tracking and team collaboration.",
         year: "2023",
     },
     {
         img: retrievrWork1,
         title: "Retrievr",
-        category: "SaaS / Mobile App",
-        tags: ["Node.js", "Development", "Laravel"],
-        tech: ["Laravel", "Vue", "AWS"],
-        desc: "Smart asset tracking SaaS app used by 10,000+ businesses across North America.",
+        category: "SaaS / Laravel",
+        tags: ["Node.js", "Development", "Laravel", "PHP"],
+        tech: ["Laravel", "Vue", "MySQL"],
+        desc: "Smart asset-tracking SaaS used by 10,000+ businesses across North America.",
         year: "2022",
     },
     {
         img: graceMercyWork,
         title: "Grace Mercy",
-        category: "Non-Profit / Web Design",
-        tags: ["UI & UX", "Front End Dev"],
-        tech: ["Next.js", "Tailwind"],
-        desc: "Emotionally driven web presence for a non-profit, growing online donations by 3x.",
+        category: "Non-Profit / WordPress",
+        tags: ["UI & UX", "WordPress", "Front End Dev"],
+        tech: ["WordPress", "Tailwind"],
+        desc: "Emotionally driven web presence for a non-profit — grew online donations by 3×.",
         year: "2022",
-    }
-    // {
-    //     img: drTreatCase,          // replace with real image
-    //     title: "EduForge LMS",
-    //     category: "Education / Development",
-    //     tags: ["Education", "Front End Dev", "PHP"],
-    //     tech: ["PHP", "React", "MySQL"],
-    //     desc: "Full-stack learning management system serving 50,000+ students across 120 institutions.",
-    //     year: "2024",
-    // },
-    // {
-    //     img: stillwellHansenWork,  // replace with real image
-    //     title: "ShopVault",
-    //     category: "E-Commerce / Laravel",
-    //     tags: ["Laravel", "PHP", "Development"],
-    //     tech: ["Laravel", "MySQL", "Stripe"],
-    //     desc: "High-performance e-commerce engine handling $2M+ in monthly transactions.",
-    //     year: "2023",
-    // },
-    // {
-    //     img: retrievrWork1,        // replace with real image
-    //     title: "NovaDash",
-    //     category: "Analytics / Front End",
-    //     tags: ["Front End Dev", "UI & UX"],
-    //     tech: ["React", "D3.js", "Tailwind"],
-    //     desc: "Real-time analytics dashboard used by marketing teams to track multi-channel performance.",
-    //     year: "2024",
-    // },
-    // {
-    //     img: graceMercyWork,       // replace with real image
-    //     title: "LeafOS",
-    //     category: "IoT / Node.js Platform",
-    //     tags: ["Node.js", "Development", "Front End Dev"],
-    //     tech: ["Node.js", "Vue", "AWS"],
-    //     desc: "Smart farming IoT platform connecting 500+ sensors for crop monitoring and automation.",
-    //     year: "2024",
-    // },
-    // {
-    //     img: drTreatCase,          // replace with real image
-    //     title: "Clarix ERP",
-    //     category: "Enterprise / PHP",
-    //     tags: ["PHP", "Laravel", "Development"],
-    //     tech: ["PHP", "Laravel", "React"],
-    //     desc: "Modular ERP system for mid-sized enterprises — HR, inventory, finance in one platform.",
-    //     year: "2023",
-    // },
-    // {
-    //     img: stillwellHansenWork,  // replace with real image
-    //     title: "Pixel Academy",
-    //     category: "Education / UI Design",
-    //     tags: ["Education", "UI & UX"],
-    //     tech: ["Next.js", "Figma"],
-    //     desc: "Creative coding school with gamified learning paths and live peer code reviews.",
-    //     year: "2024",
-    // },
-    // {
-    //     img: retrievrWork1,        // replace with real image
-    //     title: "StudyCircle",
-    //     category: "Education / Node.js",
-    //     tags: ["Education", "Node.js", "Front End Dev"],
-    //     tech: ["Node.js", "Vue", "WebRTC"],
-    //     desc: "Live tutoring platform with WebRTC-powered breakout rooms and AI-assisted quizzes.",
-    //     year: "2024",
-    // },
-    // {
-    //     img: graceMercyWork,       // replace with real image
-    //     title: "FundPath",
-    //     category: "Fintech / Development",
-    //     tags: ["Development", "Node.js", "UI & UX"],
-    //     tech: ["Node.js", "React", "Plaid"],
-    //     desc: "Investment tracking dashboard with automated portfolio rebalancing and tax reporting.",
-    //     year: "2023",
-    // },
+    },
 ];
 
-// ── Tech icon map ──────────────────────────────────────────────────────────────
+// ── Tech color map ─────────────────────────────────────────────────────────────
 const TECH_COLORS = {
-    "React": "bg-sky-100 text-sky-700",
-    "Node.js": "bg-green-100 text-green-700",
-    "PHP": "bg-indigo-100 text-indigo-700",
-    "Laravel": "bg-red-100 text-red-700",
-    "Next.js": "bg-slate-100 text-slate-700",
-    "Vue": "bg-emerald-100 text-emerald-700",
-    "Tailwind": "bg-cyan-100 text-cyan-700",
-    "MongoDB": "bg-green-100 text-green-800",
-    "MySQL": "bg-blue-100 text-blue-700",
-    "AWS": "bg-orange-100 text-orange-700",
-    "Figma": "bg-purple-100 text-purple-700",
-    "Stripe": "bg-violet-100 text-violet-700",
-    "D3.js": "bg-yellow-100 text-yellow-700",
-    "WebRTC": "bg-pink-100 text-pink-700",
-    "Plaid": "bg-teal-100 text-teal-700",
-    "default": "bg-gray-100 text-gray-600",
+    "React":      "bg-sky-100 text-sky-700",
+    "Next.js":    "bg-slate-100 text-slate-700",
+    "Vue":        "bg-emerald-100 text-emerald-700",
+    "Node.js":    "bg-green-100 text-green-700",
+    "PHP":        "bg-indigo-100 text-indigo-700",
+    "Laravel":    "bg-red-100 text-red-700",
+    "WordPress":  "bg-blue-100 text-blue-700",
+    "Shopify":    "bg-lime-100 text-lime-700",
+    "Tailwind":   "bg-cyan-100 text-cyan-700",
+    "MongoDB":    "bg-green-100 text-green-800",
+    "MySQL":      "bg-blue-100 text-blue-700",
+    "AWS":        "bg-orange-100 text-orange-700",
+    "Figma":      "bg-purple-100 text-purple-700",
+    "AI":         "bg-pink-100 text-pink-700",
+    "default":    "bg-gray-100 text-gray-600",
 };
+
+// ── Stats — Webstep ke real numbers ───────────────────────────────────────────
+const STATS = [
+    { num: "15+",  label: "Years Experience" },
+    { num: "500+", label: "Projects Delivered" },
+    { num: "300+", label: "Happy Clients" },
+    { num: "98%",  label: "Client Retention" },
+    { num: "13+",  label: "Technologies" },
+];
 
 // ── Filter Bar ─────────────────────────────────────────────────────────────────
 const FilterBar = ({ activeFilter, setActiveFilter }) => {
@@ -188,7 +123,7 @@ const FilterBar = ({ activeFilter, setActiveFilter }) => {
 
 // ── Project Card ───────────────────────────────────────────────────────────────
 const ProjectCard = ({ project, index }) => (
-    <AnimatedSection key={index} delay={0.08 * (index + 1)} direction="up">
+    <AnimatedSection delay={0.08 * (index + 1)} direction="up">
         <div className="group relative rounded-[2rem] overflow-hidden
             border border-purple-100/60
             bg-white/70 backdrop-blur-md
@@ -210,8 +145,7 @@ const ProjectCard = ({ project, index }) => (
                 {/* Year badge */}
                 <div className="absolute top-4 left-4 z-10
                     bg-white/90 backdrop-blur-md rounded-full
-                    px-3 py-1 text-[10px] font-bold text-slate-500 tracking-widest uppercase
-                    shadow-sm">
+                    px-3 py-1 text-[10px] font-bold text-slate-500 tracking-widest uppercase shadow-sm">
                     {project.year}
                 </div>
 
@@ -284,11 +218,10 @@ const Work = () => {
         <section
             className="py-20 md:py-28 relative z-10 px-6 font-roboto overflow-hidden"
             style={{
-                background:
-                    "linear-gradient(160deg, #f0fdf9 0%, #ecfdf5 30%, #f0fdfa 60%, #f7fffe 100%)",
+                background: "linear-gradient(160deg, #f0fdf9 0%, #ecfdf5 30%, #f0fdfa 60%, #f7fffe 100%)",
             }}
         >
-            {/* ── Background Glow Orbs ── */}
+            {/* Background glows */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-50 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
@@ -298,7 +231,6 @@ const Work = () => {
                 {/* ── Header ── */}
                 <AnimatedSection delay={0.1} direction="up" className="text-center mb-16">
 
-                    {/* Glass Badge */}
                     <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl
                         bg-white/50 backdrop-blur-xl border border-white/60
                         text-[#FF1F8E] font-semibold text-[11px] tracking-[0.35em] uppercase
@@ -311,9 +243,8 @@ const Work = () => {
                         Our Work &amp; Case Studies
                     </div>
 
-                    {/* Heading */}
                     <h2 className="relative text-5xl text-slate-900 md:text-7xl font-extrabold tracking-tight leading-[0.9] mb-6">
-                        <span className="block text-slate-900">Our work—drawn from</span>
+                        <span className="block text-slate-900">Real projects, real results —</span>
                         <span
                             className="relative inline-block"
                             style={{
@@ -322,23 +253,21 @@ const Work = () => {
                                 WebkitTextFillColor: "transparent",
                             }}
                         >
-                            20+ years
+                            15+ years
                             <span className="absolute left-0 -bottom-2 w-full h-[6px] rounded-full
                                 bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400
                                 blur-sm opacity-70 animate-pulse" />
                         </span>{" "}
-                        of projects
+                        of excellence
                     </h2>
 
-                    {/* Subtitle */}
+                    {/* ── Updated description ── */}
                     <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
-                        Twenty years in business has yielded hundreds of client partnerships,
-                        each with their own challenges, each uniquely rewarding.{" "}
-                        <span className="text-slate-900 font-semibold">TechnoScore</span>{" "}
-                        delivers powerful, scalable, and future-ready digital solutions.
+                        From React & Next.js web apps to WordPress, Shopify, Laravel, and AI-powered
+                        solutions — <span className="text-slate-900 font-semibold">Webstep Solutions</span> has
+                        delivered 500+ projects that drive real business growth across every major platform.
                     </p>
 
-                    {/* Divider */}
                     <div className="relative w-20 h-1.5 rounded-full bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 mx-auto">
                         <div className="absolute inset-0 blur-md opacity-70 bg-gradient-to-r from-pink-400 to-cyan-400" />
                     </div>
@@ -353,12 +282,16 @@ const Work = () => {
                 {filteredProjects.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
                         {filteredProjects.map((project, index) => (
-                            <ProjectCard key={`${activeFilter}-${project.title}`} project={project} index={index} />
+                            <ProjectCard
+                                key={`${activeFilter}-${project.title}`}
+                                project={project}
+                                index={index}
+                            />
                         ))}
                     </div>
                 ) : (
                     <div className="text-center py-24">
-                        <p className="text-slate-400 font-semibold text-lg">No projects found in this category yet.</p>
+                        <p className="text-slate-400 font-semibold text-lg">No projects in this category yet.</p>
                         <button
                             onClick={() => setActiveFilter("All")}
                             className="mt-4 text-purple-500 font-semibold text-sm hover:text-purple-700 transition-colors"
@@ -368,16 +301,10 @@ const Work = () => {
                     </div>
                 )}
 
-                {/* ── Stats Row ── */}
+                {/* ── Stats Row — Webstep numbers ── */}
                 <AnimatedSection delay={0.6} direction="up" className="mt-4 mb-14">
                     <div className="flex flex-wrap justify-center gap-10">
-                        {[
-                            { num: "20+", label: "Years Experience" },
-                            { num: "500+", label: "Projects Delivered" },
-                            { num: "200+", label: "Happy Clients" },
-                            { num: "98%", label: "Client Retention" },
-                            { num: "40+", label: "Tech Experts" },
-                        ].map((stat) => (
+                        {STATS.map((stat) => (
                             <div key={stat.label} className="text-center">
                                 <p
                                     className="text-4xl font-extrabold"
@@ -398,10 +325,11 @@ const Work = () => {
                 {/* ── CTA ── */}
                 <AnimatedSection delay={0.7} direction="up" className="text-center">
                     <Link
-              href="/case-study" className="group relative px-10 py-4 rounded-2xl text-white font-semibold overflow-hidden
-                        bg-gradient-to-r from-pink-500 to-purple-500
-                        shadow-lg hover:shadow-purple-500/40 hover:shadow-2xl
-                        hover:scale-105 transition-all duration-300">
+                        href="/case-study"
+                        className="group relative px-10 py-4 rounded-2xl text-white font-semibold overflow-hidden
+                            bg-gradient-to-r from-pink-500 to-purple-500
+                            shadow-lg hover:shadow-purple-500/40 hover:shadow-2xl
+                            hover:scale-105 transition-all duration-300">
                         <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             style={{ background: "linear-gradient(135deg, #E879F9 0%, #A855F7 50%, #38BDF8 100%)" }} />
                         <span className="relative z-10">View More Case Studies →</span>
