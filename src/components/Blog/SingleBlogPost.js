@@ -267,7 +267,6 @@ const SingleBlogPage = ({ post = POST, relatedPosts = RELATED }) => {
     const [copied, setCopied] = useState(false);
     const router = useRouter();
 
-    console.log('POST', post);
     const handleLike = () => {
         setLiked((p) => !p);
         setLikeCount((c) => (liked ? c - 1 : c + 1));

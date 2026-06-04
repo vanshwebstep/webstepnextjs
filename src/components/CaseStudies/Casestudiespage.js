@@ -4,6 +4,7 @@ import { motion, useInView, useScroll, useTransform, AnimatePresence } from "fra
 import { FaArrowRight, FaQuoteLeft, FaStar, FaExternalLinkAlt, FaArrowLeft, FaCheck } from "react-icons/fa";
 import { HiOutlineArrowUpRight, HiOutlineChevronDown, HiXMark } from "react-icons/hi2";
 import Link from "next/link";
+import { fetchContent } from "@/lib/contentApi";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA
@@ -328,7 +329,7 @@ const CaseStudyDetail = ({ cs, onClose }) => {
                     {cs.category}
                   </span>
                   <h2 className="text-white text-4xl font-extrabold leading-tight">{cs.title}</h2>
-                  <p className="text-white/70 text-[14px] mt-1 italic">"{cs.tagline}"</p>
+                  <p className="text-white/70 text-[14px] mt-1 italic">&ldquo;{cs.tagline}&rdquo;</p>
                 </div>
                 <div className="text-right hidden md:block">
                   <p className="text-white/50 text-[10px] uppercase tracking-wider">{cs.year}</p>
@@ -414,7 +415,7 @@ const CaseStudyDetail = ({ cs, onClose }) => {
               style={{ background: `linear-gradient(135deg, ${cs.darkBg}18, ${cs.color}12)`, border: `1.5px solid ${cs.color}25` }}>
               <FaQuoteLeft className="text-5xl mb-4 opacity-20" style={{ color: cs.color }} />
               <p className="text-slate-700 text-[17px] leading-relaxed italic mb-6 font-medium">
-                "{cs.testimonial.quote}"
+                &ldquo;{cs.testimonial.quote}&rdquo;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden ring-2" style={{ "--tw-ring-color": `${cs.color}50` }}>
@@ -550,8 +551,8 @@ const StatsTicker = () => (
 // ─────────────────────────────────────────────────────────────────────────────
 // FEATURED CASE STUDIES
 // ─────────────────────────────────────────────────────────────────────────────
-const FeaturedStudies = ({ onOpen }) => {
-  const featured = CASE_STUDIES.filter(c => c.featured);
+const FeaturedStudies = ({ caseStudies, onOpen }) => {
+  const featured = caseStudies.filter(c => c.featured);
   return (
     <section id="featured" className="py-24 px-6"
       style={{ background: "linear-gradient(160deg, #f0fdf9 0%, #fdf4ff 60%, #eff6ff 100%)" }}>
@@ -587,7 +588,7 @@ const FeaturedStudies = ({ onOpen }) => {
                         <h3 className="text-slate-900 text-2xl font-extrabold">{cs.title}</h3>
                       </div>
                     </div>
-                    <p className="text-slate-500 text-[15px] leading-relaxed mb-6 italic">"{cs.tagline}"</p>
+                    <p className="text-slate-500 text-[15px] leading-relaxed mb-6 italic">&ldquo;{cs.tagline}&rdquo;</p>
                     <div className="grid grid-cols-3 gap-3 mb-7 p-4 rounded-2xl border"
                       style={{ background: cs.accent, borderColor: `${cs.color}22` }}>
                       {cs.metrics.map(m => (
@@ -624,11 +625,16 @@ const FeaturedStudies = ({ onOpen }) => {
 // ─────────────────────────────────────────────────────────────────────────────
 // ALL CASE STUDIES GRID
 // ─────────────────────────────────────────────────────────────────────────────
-const AllStudies = ({ onOpen }) => {
+const AllStudies = ({ caseStudies, categories, onOpen }) => {
   const [active, setActive] = useState("All");
-  const filtered = active === "All" ? CASE_STUDIES : CASE_STUDIES.filter(c => c.tags.includes(active));
-  const counts = CATEGORIES.reduce((acc, cat) => {
-    acc[cat] = cat === "All" ? CASE_STUDIES.length : CASE_STUDIES.filter(c => c.tags.includes(cat)).length;
+
+  useEffect(() => {
+    if (!categories.includes(active)) setActive("All");
+  }, [active, categories]);
+
+  const filtered = active === "All" ? caseStudies : caseStudies.filter(c => c.tags?.includes(active));
+  const counts = categories.reduce((acc, cat) => {
+    acc[cat] = cat === "All" ? caseStudies.length : caseStudies.filter(c => c.tags?.includes(cat)).length;
     return acc;
   }, {});
 
@@ -644,7 +650,7 @@ const AllStudies = ({ onOpen }) => {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="flex flex-wrap gap-3 mb-12">
-            {CATEGORIES.map(cat => (
+            {categories.map(cat => (
               <button key={cat} onClick={() => setActive(cat)}
                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-semibold tracking-wide border transition-all duration-300
                   ${active === cat ? "text-white border-transparent scale-105 shadow-lg" : "bg-white text-slate-500 border-slate-200 hover:border-purple-200 hover:text-purple-600 hover:scale-105"}`}
@@ -728,8 +734,8 @@ const AllStudies = ({ onOpen }) => {
 // ─────────────────────────────────────────────────────────────────────────────
 // TESTIMONIALS
 // ─────────────────────────────────────────────────────────────────────────────
-const Testimonials = () => {
-  const testimonials = CASE_STUDIES.map(c => ({ ...c.testimonial, project: c.title, color: c.color, accent: c.accent, lightText: c.lightText }));
+const Testimonials = ({ caseStudies }) => {
+  const testimonials = caseStudies.map(c => ({ ...c.testimonial, project: c.title, color: c.color, accent: c.accent, lightText: c.lightText }));
   return (
     <section className="py-24 px-6"
       style={{ background: "linear-gradient(160deg, #f0fdf9 0%, #fdf4ff 60%, #eff6ff 100%)" }}>
@@ -751,7 +757,7 @@ const Testimonials = () => {
                   {[...Array(5)].map((_, s) => <FaStar key={s} className="text-amber-400 text-[12px]" />)}
                 </div>
                 <FaQuoteLeft style={{ color: `${t.color}25` }} className="text-3xl mb-3" />
-                <p className="text-slate-600 text-[14px] leading-relaxed flex-1 mb-6 italic">"{t.quote}"</p>
+                <p className="text-slate-600 text-[14px] leading-relaxed flex-1 mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
                   <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2" style={{ "--tw-ring-color": `${t.color}50` }}>
                     <img src={t.avatar} alt={t.author} className="w-full h-full object-cover" />
@@ -935,6 +941,20 @@ Join 300+ companies who turned their biggest challenges into their biggest compe
 // ─────────────────────────────────────────────────────────────────────────────
 export default function CaseStudiesPage() {
   const [activeStudy, setActiveStudy] = useState(null);
+  const [categories, setCategories] = useState(CATEGORIES);
+  const [caseStudies, setCaseStudies] = useState(CASE_STUDIES);
+
+  useEffect(() => {
+    let mounted = true;
+
+    fetchContent('case-studies', { categories: CATEGORIES, caseStudies: CASE_STUDIES }).then((data) => {
+      if (!mounted) return;
+      setCategories(data.categories?.length ? data.categories : CATEGORIES);
+      setCaseStudies(data.caseStudies?.length ? data.caseStudies : CASE_STUDIES);
+    });
+
+    return () => { mounted = false; };
+  }, []);
 
   const handleOpen = (cs) => setActiveStudy(cs);
   const handleClose = () => setActiveStudy(null);
@@ -950,10 +970,10 @@ export default function CaseStudiesPage() {
       <main className="bg-white min-h-screen">
         <Hero />
         <StatsTicker />
-        <FeaturedStudies onOpen={handleOpen} />
+        <FeaturedStudies caseStudies={caseStudies} onOpen={handleOpen} />
         <TrustStrip />
-        <AllStudies onOpen={handleOpen} />
-        <Testimonials />
+        <AllStudies caseStudies={caseStudies} categories={categories} onOpen={handleOpen} />
+        <Testimonials caseStudies={caseStudies} />
         <Process />
         <Industries />
         <CTABanner />

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import drTreatCase from '@/components/img/dr-treat-case.png';
 import stillwellHansenWork from '@/components/img/Stillwell-Hansen-work.png';
 import retrievrWork1 from '@/components/img/Retrievr-work1.png';
@@ -8,6 +9,7 @@ import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import Link from "next/link";
+import { fetchContent } from '@/lib/contentApi';
 
 // ── Filter categories ──────────────────────────────────────────────────────────
 const CATEGORIES = ["All", "UI & UX", "Shopify", "WordPress", "Front End Dev", "Development", "PHP", "Laravel", "Node.js", "AI"];
@@ -81,17 +83,17 @@ const STATS = [
 ];
 
 // ── Filter Bar ─────────────────────────────────────────────────────────────────
-const FilterBar = ({ activeFilter, setActiveFilter }) => {
-    const counts = CATEGORIES.reduce((acc, cat) => {
+const FilterBar = ({ activeFilter, setActiveFilter, categories, projects }) => {
+    const counts = categories.reduce((acc, cat) => {
         acc[cat] = cat === "All"
-            ? ALL_PROJECTS.length
-            : ALL_PROJECTS.filter(p => p.tags.includes(cat)).length;
+            ? projects.length
+            : projects.filter(p => p.tags?.includes(cat)).length;
         return acc;
     }, {});
 
     return (
         <div className="flex flex-wrap justify-center gap-3 mb-14">
-            {CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
                 <button
                     key={cat}
                     onClick={() => setActiveFilter(cat)}
@@ -209,10 +211,27 @@ const ProjectCard = ({ project, index }) => (
 // ── Main Work component ────────────────────────────────────────────────────────
 const Work = () => {
     const [activeFilter, setActiveFilter] = useState("All");
+    const [categories, setCategories] = useState(CATEGORIES);
+    const [projects, setProjects] = useState(ALL_PROJECTS);
+
+    useEffect(() => {
+        let mounted = true;
+
+        fetchContent('portfolio', { categories: CATEGORIES, projects: ALL_PROJECTS }).then((data) => {
+            if (!mounted) return;
+            const nextCategories = data.categories?.length ? data.categories : CATEGORIES;
+            const nextProjects = data.projects?.length ? data.projects : ALL_PROJECTS;
+            setCategories(nextCategories);
+            setProjects(nextProjects);
+            setActiveFilter((current) => nextCategories.includes(current) ? current : "All");
+        });
+
+        return () => { mounted = false; };
+    }, []);
 
     const filteredProjects = activeFilter === "All"
-        ? ALL_PROJECTS
-        : ALL_PROJECTS.filter(p => p.tags.includes(activeFilter));
+        ? projects
+        : projects.filter(p => p.tags?.includes(activeFilter));
 
     return (
         <section
@@ -275,7 +294,12 @@ const Work = () => {
 
                 {/* ── Filter Bar ── */}
                 <AnimatedSection delay={0.2} direction="up">
-                    <FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+                    <FilterBar
+                        activeFilter={activeFilter}
+                        setActiveFilter={setActiveFilter}
+                        categories={categories}
+                        projects={projects}
+                    />
                 </AnimatedSection>
 
                 {/* ── Project Grid ── */}

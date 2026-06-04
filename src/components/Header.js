@@ -1,20 +1,38 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { FiPhone, FiArrowRight } from "react-icons/fi";
 import logo from "@/components/img/logo.png";
 import Menu from "./Menu";
-import AIChatWidget from "../components/AIChat/AIChatWidget"; // ✅ AI chat widget
+
+const AIChatWidget = dynamic(() => import("./AIChat/AIChatWidget"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [chatReady, setChatReady] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const loadChat = () => setChatReady(true);
+
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(loadChat, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const id = window.setTimeout(loadChat, 1500);
+    return () => window.clearTimeout(id);
   }, []);
 
   return (
@@ -117,8 +135,7 @@ const Header = () => {
         )}
       </header>
 
-      {/* ✅ AI Chat Widget — FloatingWhatsApp replace kar diya */}
-      <AIChatWidget />
+      {chatReady && <AIChatWidget />}
     </>
   );
 };

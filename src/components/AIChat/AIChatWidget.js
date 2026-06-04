@@ -30,8 +30,6 @@ const AIChatWidget = () => {
     const trimmed = input.trim();
     if (!trimmed || isLoading) return;
 
-    console.log("✅ 1. Message send ho raha hai:", trimmed);
-
     const userMsg = { role: "user", content: trimmed };
     const updatedMessages = [...messages, userMsg];
     setMessages(updatedMessages);
@@ -39,21 +37,13 @@ const AIChatWidget = () => {
     setIsLoading(true);
 
     try {
-      console.log("✅ 2. API call ho rahi hai /demo/webstepnext/api/chat");
-      console.log("✅ 3. Bheje ja rahe messages:", JSON.stringify(updatedMessages, null, 2));
-
       const res = await fetch("https://webstepnextnode.vercel.app/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: updatedMessages }),
       });
 
-      console.log("✅ 4. Response status:", res.status, res.statusText);
-
       const data = await res.json();
-
-      console.log("✅ 5. Full response data:", JSON.stringify(data, null, 2));
-      console.log("✅ 6. AI ka reply:", data.reply);
 
       setMessages((prev) => [
         ...prev,
@@ -61,9 +51,7 @@ const AIChatWidget = () => {
       ]);
 
     } catch (err) {
-      console.error("❌ ERROR aaya:", err);
-      console.error("❌ Error message:", err.message);
-      console.error("❌ Error stack:", err.stack);
+      console.error("Chat request failed:", err);
 
       setMessages((prev) => [
         ...prev,
@@ -74,7 +62,6 @@ const AIChatWidget = () => {
       ]);
     } finally {
       setIsLoading(false);
-      console.log("✅ 7. Loading band ho gayi");
     }
   };
 
@@ -88,10 +75,8 @@ const AIChatWidget = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
         .ws-widget * {
-          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-family: inherit;
           box-sizing: border-box;
         }
 
@@ -323,7 +308,7 @@ const AIChatWidget = () => {
           border-radius: 14px;
           padding: 10px 14px;
           font-size: 13.5px;
-          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-family: inherit;
           resize: none;
           outline: none;
           color: #1e293b;

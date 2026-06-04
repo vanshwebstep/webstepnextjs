@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaAngleDown } from 'react-icons/fa';
 import {
@@ -58,7 +59,10 @@ const submenus = {
 
 // ─── Mega Menu Panel ───────────────────────────────────────────────────────────
 
-const MegaPanel = ({ data, mobile, closeMenu }) => (
+const MegaPanel = ({ data, mobile, closeMenu, pathname }) => {
+    const isItemActive = (href) => pathname === href || pathname.startsWith(`${href}/`);
+
+    return (
     <div className={mobile ? "mt-2" : ""}>
         {data.featured && (
             <div className={`flex items-center gap-2 mb-4 ${mobile ? "px-1" : ""}`}>
@@ -75,18 +79,30 @@ const MegaPanel = ({ data, mobile, closeMenu }) => (
                         {group.heading}
                     </p>
                     <ul className="flex flex-col gap-1">
-                        {group.items.map((item, ii) => (
+                        {group.items.map((item, ii) => {
+                            const itemActive = isItemActive(item.href);
+
+                            return (
                             <li key={ii}>
                                 <Link
                                     href={item.href}
                                     onClick={closeMenu}
-                                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 group/item transition-all duration-200"
+                                    aria-current={itemActive ? "page" : undefined}
+                                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl group/item transition-all duration-200 ${
+                                        itemActive
+                                            ? "bg-[#FF1F8E]/10 text-[#FF1F8E]"
+                                            : "hover:bg-slate-50"
+                                    }`}
                                 >
-                                    <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover/item:bg-[#FF1F8E]/10 group-hover/item:text-[#FF1F8E] transition-all duration-200 shrink-0">
+                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center group-hover/item:bg-[#FF1F8E]/10 group-hover/item:text-[#FF1F8E] transition-all duration-200 shrink-0 ${
+                                        itemActive ? "bg-[#FF1F8E] text-white" : "bg-slate-100 text-slate-500"
+                                    }`}>
                                         <item.icon size={14} />
                                     </div>
                                     <div className="flex flex-col leading-tight">
-                                        <span className="text-[12px] font-semibold text-slate-800 group-hover/item:text-[#FF1F8E] transition-colors">
+                                        <span className={`text-[12px] font-semibold group-hover/item:text-[#FF1F8E] transition-colors ${
+                                            itemActive ? "text-[#FF1F8E]" : "text-slate-800"
+                                        }`}>
                                             {item.name}
                                         </span>
                                         {!mobile && item.desc && (
@@ -95,37 +111,68 @@ const MegaPanel = ({ data, mobile, closeMenu }) => (
                                     </div>
                                 </Link>
                             </li>
-                        ))}
+                            );
+                        })}
                     </ul>
                 </div>
             ))}
         </div>
     </div>
-);
+    );
+};
 
 // ─── Main Menu ─────────────────────────────────────────────────────────────────
 
 const Menu = ({ mobile = false, closeMenu, scrolled = false }) => {
     const [activeSubmenu, setActiveSubmenu] = useState(null);
+    const pathname = usePathname();
 
     const navLinks = [
         { name: "Home",      href: "/"          },
-        { name: "Services",  href: "#",         submenuKey: "services"  },
-        { name: "Portfolio", href: "/works",    submenuKey: "portfolio" },
+        {
+            name: "Services",
+            href: "#",
+            submenuKey: "services",
+            activePaths: [
+                "/services", "/php", "/fullstack", "/laravel", "/uiux",
+                "/wordpress", "/mobileApp", "/nodejs", "/softwaretesting",
+                "/seo", "/marketing",
+            ],
+        },
+        {
+            name: "Portfolio",
+            href: "/works",
+            submenuKey: "portfolio",
+            activePaths: ["/works", "/case-study", "/projects"],
+        },
         { name: "About",     href: "/about"     },
         { name: "Blog",      href: "/blog"      },
         { name: "Packages",  href: "/packages"  },
         { name: "Contact",   href: "/contactus" },
     ];
 
-    const linkClasses = mobile
-        ? "flex items-center justify-between w-full py-4 text-slate-700 hover:text-[#FF1F8E] font-semibold text-[14px] tracking-wide uppercase border-b border-slate-100 transition-all"
-        : `relative px-4 py-2 ${scrolled ? "text-slate-900" : "text-slate-600"} hover:text-[#FF1F8E] font-semibold text-[12px] tracking-[0.18em] uppercase transition-all duration-300`;
+    const isLinkActive = (link) => {
+        if (link.href === "/") return pathname === "/";
+
+        const paths = link.activePaths || [link.href];
+        return paths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+    };
+
+    const getLinkClasses = (active) => mobile
+        ? `flex items-center justify-between w-full py-4 font-semibold text-[14px] tracking-wide uppercase border-b border-slate-100 transition-all ${
+            active ? "text-[#FF1F8E]" : "text-slate-700 hover:text-[#FF1F8E]"
+        }`
+        : `relative px-4 py-2 font-semibold text-[12px] tracking-[0.18em] uppercase transition-all duration-300 ${
+            active ? "text-[#FF1F8E]" : `${scrolled ? "text-slate-900" : "text-slate-600"} hover:text-[#FF1F8E]`
+        }`;
 
     return (
         <nav className={`w-full ${mobile ? "block" : "flex items-center justify-center font-roboto"}`}>
             <ul className={`${mobile ? "flex flex-col" : "flex items-center gap-1 whitespace-nowrap"}`}>
-                {navLinks.map((link, idx) => (
+                {navLinks.map((link, idx) => {
+                    const active = isLinkActive(link);
+
+                    return (
                     <li key={idx} className={mobile ? "w-full" : "relative group"}>
 
                         {link.submenuKey ? (
@@ -136,14 +183,17 @@ const Menu = ({ mobile = false, closeMenu, scrolled = false }) => {
                             >
                                 <button
                                     onClick={mobile ? () => setActiveSubmenu(activeSubmenu === link.submenuKey ? null : link.submenuKey) : undefined}
-                                    className={`${linkClasses} flex items-center gap-1.5 whitespace-nowrap`}
+                                    aria-current={active ? "page" : undefined}
+                                    className={`${getLinkClasses(active)} flex items-center gap-1.5 whitespace-nowrap`}
                                 >
                                     {link.name}
                                     <FaAngleDown
-                                        className={`text-[10px] shrink-0 transition-all duration-300 ${activeSubmenu === link.submenuKey ? "rotate-180 text-[#FF1F8E]" : "opacity-50"}`}
+                                        className={`text-[10px] shrink-0 transition-all duration-300 ${activeSubmenu === link.submenuKey ? "rotate-180 text-[#FF1F8E]" : active ? "text-[#FF1F8E]" : "opacity-50"}`}
                                     />
                                     {!mobile && (
-                                        <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#FF1F8E] transition-all duration-300 group-hover:w-full" />
+                                        <span className={`absolute left-0 bottom-0 h-[2px] bg-[#FF1F8E] transition-all duration-300 ${
+                                            active ? "w-full" : "w-0 group-hover:w-full"
+                                        }`} />
                                     )}
                                 </button>
 
@@ -163,6 +213,7 @@ const Menu = ({ mobile = false, closeMenu, scrolled = false }) => {
                                             <MegaPanel
                                                 data={submenus[link.submenuKey]}
                                                 mobile={mobile}
+                                                pathname={pathname}
                                                 closeMenu={() => {
                                                     setActiveSubmenu(null);
                                                     if (mobile && closeMenu) closeMenu();
@@ -176,18 +227,22 @@ const Menu = ({ mobile = false, closeMenu, scrolled = false }) => {
                         ) : (
                             <Link
                                 href={link.href}
-                                className={linkClasses}
+                                className={getLinkClasses(active)}
+                                aria-current={active ? "page" : undefined}
                                 onClick={mobile ? closeMenu : undefined}
                             >
                                 {link.name}
                                 {!mobile && (
-                                    <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#FF1F8E] transition-all duration-300 group-hover:w-full" />
+                                    <span className={`absolute left-0 bottom-0 h-[2px] bg-[#FF1F8E] transition-all duration-300 ${
+                                        active ? "w-full" : "w-0 group-hover:w-full"
+                                    }`} />
                                 )}
                             </Link>
                         )}
 
                     </li>
-                ))}
+                    );
+                })}
             </ul>
         </nav>
     );
