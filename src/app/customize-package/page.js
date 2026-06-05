@@ -1,5 +1,5 @@
 import CustomizePackage from '@/components/CustomizePackage';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export const metadata = {
   title: "Customize Your Package | Webstep Solutions",
@@ -9,7 +9,9 @@ export const metadata = {
 export default function CustomizePackagePage() {
   return (
     <main className="min-h-screen bg-slate-50">
-      <CustomizePackage />
+      <Suspense fallback={null}>
+        <CustomizePackage />
+      </Suspense>
     </main>
   );
 }

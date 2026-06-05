@@ -4,13 +4,14 @@
 // Falls back to hardcoded data if API is unavailable
 
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   FaLaptopCode, FaShoppingCart, FaBriefcase, FaPaintBrush,
   FaSearch, FaPenNib, FaCreditCard, FaShareAlt,
   FaCheckCircle, FaTrash, FaGripVertical, FaPlus, FaMinus
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchCustomOptions, submitLead } from '@/lib/contentApi';
+import { fetchCustomOptions, submitLead, submitPlanInquiry } from '@/lib/contentApi';
 
 // ─── Icon map (add more here if you add icons in admin) ───────────────────────
 const ICON_MAP = {
@@ -65,8 +66,10 @@ function hydrateIcons(items) {
 }
 
 export default function CustomizePackage() {
+  const searchParams = useSearchParams();
   const [itemsData, setItemsData] = useState(hydrateIcons(FALLBACK_ITEMS));
   const [loadingOptions, setLoadingOptions] = useState(true);
+  const [selectedPlan, setSelectedPlan] = useState(null);
 
   const [selections, setSelections] = useState({
     websiteType: null, pages: null, design: null, features: []
@@ -76,8 +79,11 @@ export default function CustomizePackage() {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [contactInfo, setContactInfo] = useState({ name: '', email: '', phone: '', message: '' });
+  const [planContactInfo, setPlanContactInfo] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+  const [planSubmitStatus, setPlanSubmitStatus] = useState({ type: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [planSubmitting, setPlanSubmitting] = useState(false);
 
   // ─── Load options from PHP API ─────────────────────────────────────────────
   useEffect(() => {
@@ -85,6 +91,21 @@ export default function CustomizePackage() {
       if (data) setItemsData(hydrateIcons(data));
     }).finally(() => setLoadingOptions(false));
   }, []);
+
+  useEffect(() => {
+    const planName = searchParams.get('plan');
+    if (!planName || typeof window === 'undefined') {
+      setSelectedPlan(null);
+      return;
+    }
+
+    try {
+      const storedPlan = JSON.parse(window.sessionStorage.getItem('selectedPackageInquiry') || 'null');
+      setSelectedPlan(storedPlan?.title === planName ? storedPlan : { title: planName });
+    } catch (error) {
+      setSelectedPlan({ title: planName });
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
@@ -108,6 +129,46 @@ export default function CustomizePackage() {
     if (selections.design)      total += selections.design.price;
     selections.features.forEach(f => total += f.price);
     return total;
+  };
+
+  const planPrice = selectedPlan?.price != null
+    ? `${selectedPlan.symbol || '$'}${selectedPlan.price}${selectedPlan.pricedes || ''}`
+    : '';
+
+  const handlePlanInquirySubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedPlan) return;
+
+    setPlanSubmitting(true);
+    setPlanSubmitStatus({ type: '', message: '' });
+
+    const selectedFeatures = Array.isArray(selectedPlan.features) && selectedPlan.features.length
+      ? `\nFeatures: ${selectedPlan.features.join(', ')}`
+      : '';
+    const planSummary = [
+      `Selected plan: ${selectedPlan.title}`,
+      selectedPlan.category ? `Category: ${selectedPlan.category}` : '',
+      planPrice ? `Price: ${planPrice}` : '',
+      selectedPlan.description ? `Description: ${selectedPlan.description}` : '',
+    ].filter(Boolean).join('\n');
+
+    try {
+      await submitPlanInquiry({
+        package_id: selectedPlan.id || 0,
+        name: planContactInfo.name,
+        email: planContactInfo.email,
+        phone: planContactInfo.phone,
+        message: `${planSummary}${selectedFeatures}${planContactInfo.message ? `\n\nNotes: ${planContactInfo.message}` : ''}`,
+      });
+
+      setPlanSubmitStatus({ type: 'success', message: 'Inquiry submitted! We will contact you shortly.' });
+      setPlanContactInfo({ name: '', email: '', phone: '', message: '' });
+      if (typeof window !== 'undefined') window.sessionStorage.removeItem('selectedPackageInquiry');
+    } catch (error) {
+      setPlanSubmitStatus({ type: 'error', message: error.message });
+    } finally {
+      setPlanSubmitting(false);
+    }
   };
 
   const handleMobileTap = (item, category) => {
@@ -239,6 +300,97 @@ export default function CustomizePackage() {
   return (
     <section className="py-36 text-slate-900 min-h-screen px-4 md:px-8 bg-slate-50">
       <div className="container mx-auto">
+        {selectedPlan ? (
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center my-12">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-[-0.03em] text-slate-900"
+              >
+                Plan Inquiry
+                <br />
+                <span style={{ background: "linear-gradient(135deg, #E879F9 0%, #A855F7 40%, #38BDF8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  {selectedPlan.title}
+                </span>
+              </motion.h2>
+              <p className="text-slate-500 text-lg md:text-xl mt-6 max-w-2xl mx-auto">
+                Share your contact details and we will get back to you about this plan.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8">
+              <motion.div variants={fadeIn} initial="initial" animate="animate" className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/50">
+                <div className="mb-5">
+                  <p className="text-xs font-bold uppercase tracking-widest text-pink-600">{selectedPlan.category || 'Selected Package'}</p>
+                  <h3 className="text-3xl font-bold text-slate-900 mt-2">{selectedPlan.title}</h3>
+                  {selectedPlan.description && <p className="text-slate-500 text-sm mt-3">{selectedPlan.description}</p>}
+                </div>
+                {planPrice && (
+                  <div className="border-y border-slate-100 py-5 mb-5">
+                    <span className="text-sm uppercase tracking-wider text-slate-500">Plan Price</span>
+                    <p className="text-4xl font-extrabold text-slate-900 mt-1">{planPrice}</p>
+                  </div>
+                )}
+                {Array.isArray(selectedPlan.features) && selectedPlan.features.length > 0 && (
+                  <ul className="space-y-3">
+                    {selectedPlan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-3 text-sm text-slate-600">
+                        <FaCheckCircle className="text-pink-600 mt-1 shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+
+              <motion.div variants={fadeIn} initial="initial" animate="animate" className="relative p-[1px] rounded-3xl bg-gradient-to-br from-[#E879F9] to-[#38BDF8]">
+                <div className="bg-white/85 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/40">
+                  <div className="mb-8 border-b border-slate-100 pb-6">
+                    <h2 className="text-2xl font-semibold text-slate-900">Your Details</h2>
+                    <p className="text-sm text-slate-500 mt-1">Name and email are required.</p>
+                  </div>
+                  <form onSubmit={handlePlanInquirySubmit} className="space-y-5">
+                    {["name", "email", "phone"].map(field => (
+                      <div key={field}>
+                        <label className="block text-sm font-medium text-slate-600 mb-1 capitalize">{field}</label>
+                        <input
+                          type={field === "email" ? "email" : "text"}
+                          required={field !== "phone"}
+                          value={planContactInfo[field]}
+                          onChange={e => setPlanContactInfo({ ...planContactInfo, [field]: e.target.value })}
+                          className="w-full bg-white/70 border border-slate-200 rounded-xl px-4 py-3 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition"
+                        />
+                      </div>
+                    ))}
+                    <div>
+                      <label className="block text-sm font-medium text-slate-600 mb-1">Project Notes</label>
+                      <textarea
+                        rows="4"
+                        placeholder="Tell us anything important about your project..."
+                        value={planContactInfo.message}
+                        onChange={e => setPlanContactInfo({ ...planContactInfo, message: e.target.value })}
+                        className="w-full bg-white/70 border border-slate-200 rounded-xl px-4 py-3 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition"
+                      />
+                    </div>
+                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit" disabled={planSubmitting}
+                      className="mt-4 group relative flex items-center justify-center gap-3 w-full px-10 py-5 bg-gradient-to-r from-[#FF1F8E] to-[#FF0055] rounded-full text-white font-bold tracking-[0.16em] uppercase overflow-hidden shadow-[0_15px_35px_rgba(255,31,142,0.3)] hover:shadow-[0_20px_40px_rgba(255,31,142,0.4)] hover:-translate-y-1 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed">
+                      {planSubmitting ? 'Submitting...' : 'Submit Inquiry'} <FaCheckCircle className="inline ml-2 relative z-10 group-hover:translate-x-1 transition-transform" />
+                      <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity z-0" />
+                    </motion.button>
+                    {planSubmitStatus.message && (
+                      <p className={`text-sm font-semibold ${planSubmitStatus.type === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>
+                        {planSubmitStatus.message}
+                      </p>
+                    )}
+                  </form>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        ) : (
+        <>
         <div className="text-center my-12">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -436,6 +588,8 @@ export default function CustomizePackage() {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
     </section>
   );

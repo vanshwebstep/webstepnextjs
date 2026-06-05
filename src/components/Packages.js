@@ -114,6 +114,7 @@ const FALLBACK_PACKAGES = [
 ];
 
 const normalizePackage = (pkg, index) => ({
+  id: pkg.id ?? pkg.package_id ?? null,
   title: pkg.title || `Package ${index + 1}`,
   category: pkg.category || FALLBACK_TABS[0],
   des: pkg.des || pkg.description || "A flexible package for your business needs.",
@@ -128,6 +129,24 @@ const normalizePackage = (pkg, index) => ({
   btn: pkg.btn || "Choose Plan",
   isPopular: Boolean(pkg.isPopular || pkg.popular),
 });
+
+const storeSelectedPlan = (pkg) => {
+  if (typeof window === "undefined") return;
+
+  window.sessionStorage.setItem(
+    "selectedPackageInquiry",
+    JSON.stringify({
+      id: pkg.id,
+      title: pkg.title,
+      category: pkg.category,
+      description: pkg.des,
+      symbol: pkg.symbol,
+      price: pkg.price,
+      pricedes: pkg.pricedes,
+      features: pkg.events.map((event) => event.title),
+    })
+  );
+};
 
 const Packages = () => {
   const [activeTab, setActiveTab] = useState(FALLBACK_TABS[0]);
@@ -251,7 +270,8 @@ const Packages = () => {
                 <div className="mt-auto flex flex-col gap-4">
                   <Modal />
                   <Link
-                    href="/customize-package"
+                    href={`/customize-package?plan=${encodeURIComponent(pkg.title)}`}
+                    onClick={() => storeSelectedPlan(pkg)}
                     className="group relative flex items-center justify-center gap-3 w-full px-8 py-4 bg-gradient-to-r from-[#FF1F8E] to-[#FF0055] rounded-full text-white font-bold tracking-wide uppercase overflow-hidden shadow-[0_15px_35px_rgba(255,31,142,0.3)] hover:shadow-[0_20px_40px_rgba(255,31,142,0.4)] transition-all duration-300"
                   >
                     {pkg.btn}
