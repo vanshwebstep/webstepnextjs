@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const stop = assetImage("FM-FE-18-ImageBody-04.png");
 
-import stop from '@/components/img/FM-FE-18-ImageBody-04.png'
 const Stop = () => {
     return (
         <>
@@ -25,3 +26,6 @@ const Stop = () => {
 }
 
 export default Stop
+
+
+

@@ -1,9 +1,10 @@
 import React from 'react';
-import ui from "@/components/img/uiux-development2.webp";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaPencilRuler, FaUsers, FaFigma } from 'react-icons/fa';
 import Link from 'next/link';
+import { assetImage } from "@/lib/assets";
+const ui = assetImage("uiux-development2.webp");
 
 const UiElevate = () => {
   return (

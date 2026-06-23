@@ -1,9 +1,10 @@
 import React from 'react'
 import { FaCircleCheck } from 'react-icons/fa6'
-import first from '@/components/img/FM-FE-27-ImageBody-08.png'
-import sec from '@/components/img/FM-JV-07-ImageBody-02.png'
-import logogroup from '@/components/img/logos-group.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const first = assetImage("FM-FE-27-ImageBody-08.png");
+const sec = assetImage("FM-JV-07-ImageBody-02.png");
+const logogroup = assetImage("logos-group.png");
 const Access = () => {
     return (
         <>
@@ -69,3 +70,6 @@ const Access = () => {
 }
 
 export default Access
+
+
+

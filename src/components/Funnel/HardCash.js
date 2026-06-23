@@ -1,6 +1,7 @@
 import React from 'react'
-import hardcash from '@/components/img/FM-FE-15-ImageBody-03.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const hardcash = assetImage("FM-FE-15-ImageBody-03.png");
 
 const HardCash = () => {
   return (
@@ -24,3 +25,6 @@ const HardCash = () => {
 }
 
 export default HardCash
+
+
+

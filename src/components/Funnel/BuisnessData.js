@@ -1,16 +1,17 @@
-import marketer from '@/components/img/FM-FE-70-IconBody-02.png'
-import icon from '@/components/img/FM-FE-71-IconBody-03.png'
-import icon1 from '@/components/img/FM-FE-72-IconBody-04.png'
-import icon2 from '@/components/img/FM-FE-73-IconBody-05.png'
-import icon3 from '@/components/img/FM-FE-74-IconBody-06.png'
-import icon4 from '@/components/img/FM-FE-75-IconBody-07.png'
-import icon5 from '@/components/img/FM-FE-76-IconBody-08.png'
-import icon6 from '@/components/img/FM-FE-77-IconBody-09.png'
-import icon7 from '@/components/img/FM-FE-78-IconBody-10.png'
-import icon8 from '@/components/img/FM-FE-79-IconBody-11.png'
-import icon9 from '@/components/img/FM-FE-80-IconBody-12.png'
-import icon10 from '@/components/img/FM-FE-81-IconBody-13.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const marketer = assetImage("FM-FE-70-IconBody-02.png");
+const icon = assetImage("FM-FE-71-IconBody-03.png");
+const icon1 = assetImage("FM-FE-72-IconBody-04.png");
+const icon2 = assetImage("FM-FE-73-IconBody-05.png");
+const icon3 = assetImage("FM-FE-74-IconBody-06.png");
+const icon4 = assetImage("FM-FE-75-IconBody-07.png");
+const icon5 = assetImage("FM-FE-76-IconBody-08.png");
+const icon6 = assetImage("FM-FE-77-IconBody-09.png");
+const icon7 = assetImage("FM-FE-78-IconBody-10.png");
+const icon8 = assetImage("FM-FE-79-IconBody-11.png");
+const icon9 = assetImage("FM-FE-80-IconBody-12.png");
+const icon10 = assetImage("FM-FE-81-IconBody-13.png");
 const BuisnessData = [
     {
         id: 0,
@@ -99,3 +100,6 @@ const BuisnessData = [
     
 ];
 export default BuisnessData
+
+
+

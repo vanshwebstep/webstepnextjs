@@ -1,7 +1,8 @@
 import React from 'react'
-import gimg from '@/components/img/FM-O1-47-ImageBody-28.png'
-import line from '@/components/img/FM-FE-22-ImageBody-05.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const gimg = assetImage("FM-O1-47-ImageBody-28.png");
+const line = assetImage("FM-FE-22-ImageBody-05.png");
 
 const Guarantee = () => {
     return (
@@ -41,3 +42,6 @@ const Guarantee = () => {
 }
 
 export default Guarantee
+
+
+

@@ -1,4 +1,5 @@
-import img from '@/components/img/FM-FE-47-ImageBody-26.png'
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-47-ImageBody-26.png");
 const Features = [
     {
         id: 0,
@@ -51,3 +52,6 @@ const Features = [
     }
 ];
 export default Features
+
+
+

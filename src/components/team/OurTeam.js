@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import dummyuser from '@/components/img/dummyuser.jpg'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const dummyuser = assetImage("dummyuser.jpg");
 
 const OurTeam = () => {
     // Array of team members
@@ -140,3 +141,6 @@ const OurTeam = () => {
 };
 
 export default OurTeam;
+
+
+

@@ -1,8 +1,9 @@
 import React from 'react';
-import wordpress from "@/components/img/wordpress.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaWordpress, FaCogs, FaCheckCircle } from 'react-icons/fa';
+import { assetImage } from "@/lib/assets";
+const wordpress = assetImage("wordpress.png");
 
 const Elevate = () => {
   return (
@@ -63,3 +64,6 @@ const Elevate = () => {
 };
 
 export default Elevate;
+
+
+

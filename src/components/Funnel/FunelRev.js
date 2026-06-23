@@ -1,7 +1,8 @@
 import React from 'react'
-import user from '@/components/img/review-user.png'
 import { FaQuoteLeft, FaQuoteRight, FaStar } from 'react-icons/fa'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const user = assetImage("review-user.png");
 
 const FunelRev = () => {
     return (
@@ -26,3 +27,6 @@ const FunelRev = () => {
 }
 
 export default FunelRev
+
+
+

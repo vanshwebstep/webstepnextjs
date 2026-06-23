@@ -1,7 +1,8 @@
 import React from 'react'
-import once from '@/components/img/onceimg.png'
-import once2 from '@/components/img/once2img.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const once = assetImage("onceimg.png");
+const once2 = assetImage("once2img.png");
 
 const Wrose = () => {
     return (
@@ -48,3 +49,6 @@ const Wrose = () => {
 }
 
 export default Wrose
+
+
+

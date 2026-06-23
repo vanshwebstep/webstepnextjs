@@ -1,7 +1,8 @@
 import React from 'react';
-import php from "@/components/img/php.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
+import { assetImage } from "@/lib/assets";
+const php = assetImage("php.png");
 
 const PhpBanner = () => {
   return (
@@ -54,3 +55,6 @@ const PhpBanner = () => {
 };
 
 export default PhpBanner;
+
+
+

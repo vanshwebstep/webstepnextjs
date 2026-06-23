@@ -1,8 +1,9 @@
 import BlogSlugClient from '@/components/Blog/BlogSlugClient';
-import blog1 from '@/components/img/blog1.png';
-import blog2 from '@/components/img/blog2.png';
-import blog3 from '@/components/img/blog3.png';
-import blog4 from '@/components/img/blog4.png';
+import { assetImage } from "@/lib/assets";
+const blog1 = assetImage("blog1.png");
+const blog2 = assetImage("blog2.png");
+const blog3 = assetImage("blog3.png");
+const blog4 = assetImage("blog4.png");
 
 const ALL_POSTS = {
 
@@ -217,7 +218,8 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export default function BlogSlugPage({ params }) {
-  const post = ALL_POSTS[params.slug] || null;
+export default async function BlogSlugPage({ params }) {
+  const { slug } = await params;
+  const post = ALL_POSTS[slug] || null;
   return <BlogSlugClient post={post} />;
 }

@@ -14,8 +14,7 @@ const MarketingList = () => {
                         </div>
                         {Features.map((curElm) => {
                             return (
-                                <>
-                                    <div className="featured-box">
+                                    <div key={curElm.id ?? curElm.btn} className="featured-box">
                                         <div className="center">
                                             <button className="btn-pink rounded-5">{curElm.btn}</button>
                                             <h2 className='m4'>{curElm.maintitle}</h2>
@@ -35,7 +34,6 @@ const MarketingList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </>
                             )
                         })}
                     </div>

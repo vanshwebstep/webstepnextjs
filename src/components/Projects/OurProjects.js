@@ -1,14 +1,15 @@
 import React from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import projectImage1 from '@/components/img/Rectangle.png';
-import projectImage2 from '@/components/img/Rectangle2.png';
-import projectImage3 from '@/components/img/Rectangle3.png';
-import projectImage4 from '@/components/img/download4.png';
-import projectImage5 from '@/components/img/Rectangle5.png';
-import projectImage6 from '@/components/img/Rectangle4.png';
-import projectImage7 from '@/components/img/Rectangle6.png';
-import projectImage8 from '@/components/img/Rectangle7.png';
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const projectImage1 = assetImage("Rectangle.png");
+const projectImage2 = assetImage("Rectangle2.png");
+const projectImage3 = assetImage("Rectangle3.png");
+const projectImage4 = assetImage("download4.png");
+const projectImage5 = assetImage("Rectangle5.png");
+const projectImage6 = assetImage("Rectangle4.png");
+const projectImage7 = assetImage("Rectangle6.png");
+const projectImage8 = assetImage("Rectangle7.png");
 const OurProjects = () => {
     // Array of image sources
     const projectImages = [
@@ -55,3 +56,6 @@ const OurProjects = () => {
 };
 
 export default OurProjects;
+
+
+

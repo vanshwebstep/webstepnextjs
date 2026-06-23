@@ -1,6 +1,7 @@
 import React from 'react'
-import img from '@/components/img/FM-FE-105-ImageBody-66.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-105-ImageBody-66.png");
 
 const Proverbial = () => {
     return (
@@ -28,3 +29,6 @@ const Proverbial = () => {
 }
 
 export default Proverbial
+
+
+

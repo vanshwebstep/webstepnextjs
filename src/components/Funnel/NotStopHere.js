@@ -1,9 +1,10 @@
 import React from 'react'
 import FunelRev from './FunelRev'
-import img from '@/components/img/vip.png'
-import img2 from '@/components/img/vip2.png'
-import line from '@/components/img/FM-FE-22-ImageBody-05.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("vip.png");
+const img2 = assetImage("vip2.png");
+const line = assetImage("FM-FE-22-ImageBody-05.png");
 const NotStopHere = () => {
     const Features = [
         {
@@ -40,8 +41,7 @@ const NotStopHere = () => {
                         </div>
                         {Features.map((curElm) => {
                             return (
-                                <>
-                                    <div className="featured-box">
+                                    <div key={curElm.id} className="featured-box">
                                         <div className="center">
                                             <button className="btn-pink rounded-5">{curElm.btn}</button>
                                             <h2 className='m4'>{curElm.maintitle}</h2>
@@ -62,7 +62,6 @@ const NotStopHere = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </>
                             )
                         })}
                         <FunelRev />
@@ -74,3 +73,5 @@ const NotStopHere = () => {
 }
 
 export default NotStopHere
+
+

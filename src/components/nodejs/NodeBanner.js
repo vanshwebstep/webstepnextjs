@@ -1,7 +1,8 @@
 import React from 'react';
-import node from "@/components/img/node.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
+import { assetImage } from "@/lib/assets";
+const node = assetImage("node.png");
 
 const NodeBanner = () => {
   return (
@@ -51,3 +52,6 @@ const NodeBanner = () => {
 };
 
 export default NodeBanner;
+
+
+

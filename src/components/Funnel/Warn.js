@@ -1,7 +1,8 @@
 import React from 'react'
-import img from '@/components/img/FM-FE-103-ImageBody-64.png'
-import img2 from '@/components/img/FM-FE-104-ImageBody-65.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-103-ImageBody-64.png");
+const img2 = assetImage("FM-FE-104-ImageBody-65.png");
 
 const Warn = () => {
     return (
@@ -45,3 +46,6 @@ const Warn = () => {
 }
 
 export default Warn
+
+
+

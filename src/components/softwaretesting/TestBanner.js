@@ -1,7 +1,8 @@
 import React from 'react';
-import testing from "@/components/img/software.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
+import { assetImage } from "@/lib/assets";
+const testing = assetImage("software.png");
 
 const TestBanner = () => {
   return (
@@ -51,3 +52,6 @@ const TestBanner = () => {
 };
 
 export default TestBanner;
+
+
+

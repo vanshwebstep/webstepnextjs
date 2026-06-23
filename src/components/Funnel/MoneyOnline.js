@@ -1,6 +1,7 @@
 import React from 'react'
-import commentimg from '@/components/img/FM-FE-82-ImageBody-49.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const commentimg = assetImage("FM-FE-82-ImageBody-49.png");
 
 const MoneyOnline = () => {
     return (
@@ -31,3 +32,6 @@ const MoneyOnline = () => {
 }
 
 export default MoneyOnline
+
+
+

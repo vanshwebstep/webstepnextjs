@@ -1,9 +1,10 @@
 import React from 'react';
-import mobileapp from "@/components/img/mobile_app_development2.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaLayerGroup, FaCode, FaCheckCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import { assetImage } from "@/lib/assets";
+const mobileapp = assetImage("mobile_app_development2.png");
 
 const FullStackElevate = () => {
   return (

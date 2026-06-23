@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { FiInstagram, FiLinkedin, FiTwitter, FiArrowUpRight, FiUsers, FiAward, FiTarget } from 'react-icons/fi';
-import riyaArchitect from '@/components/img/riya_architect.png';
-import amanArchitect from '@/components/img/aman_architect.png';
+import { assetImage } from "@/lib/assets";
+const riyaArchitect = assetImage("riya_architect.png");
+const amanArchitect = assetImage("aman_architect.png");
 
 const team = [
   {

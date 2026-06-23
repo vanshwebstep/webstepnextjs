@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
 import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
-import sidebarimg from '@/components/img/list.png'
 const BlogSidebar = () => {
     return (
         <>
@@ -55,3 +54,8 @@ const BlogSidebar = () => {
 }
 
 export default BlogSidebar
+
+
+
+import { assetImage } from "@/lib/assets";
+const sidebarimg = assetImage("list.png");

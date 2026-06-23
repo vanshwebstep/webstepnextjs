@@ -1,6 +1,7 @@
 import React from 'react';
-import img from '@/components/img/FM-FE-65-ImageBody-44.png';
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-65-ImageBody-44.png");
 
 const Beginning = () => {
     const steps = [
@@ -55,3 +56,6 @@ const Beginning = () => {
 };
 
 export default Beginning;
+
+
+

@@ -1,8 +1,9 @@
 import React from 'react'
-import blog1 from '@/components/img/image 1.png'
 import { FaFacebook, FaHeart, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
 import Link from 'next/link'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const blog1 = assetImage("image 1.png");
 
 const Blogv1 = () => {
     const blogData = [
@@ -82,3 +83,6 @@ const Blogv1 = () => {
 }
 
 export default Blogv1
+
+
+

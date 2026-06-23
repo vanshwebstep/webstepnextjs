@@ -4,11 +4,12 @@ import Image from "next/image";
 import AnimatedSection from "../AnimatedSection";
 import { FaStar, FaShieldAlt, FaAward, FaThumbsUp } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { assetImage } from "@/lib/assets";
+const review = assetImage("review-icon1.png");
+const review1 = assetImage("review-icon2.png");
+const review2 = assetImage("review-icon3.png");
+const review3 = assetImage("review-icon4.png");
 
-import review from '@/components/img/review-icon1.png';
-import review1 from '@/components/img/review-icon2.png';
-import review2 from '@/components/img/review-icon3.png';
-import review3 from '@/components/img/review-icon4.png';
 
 const BlogReview = () => {
     const reviews = [

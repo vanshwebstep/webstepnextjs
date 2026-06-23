@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import ContactForm from './ContactForm'
 import { FaMobile, FaMapMarkerAlt, FaGlobe, FaEnvelope } from 'react-icons/fa'
@@ -135,7 +136,7 @@ const ContactUs = () => {
                             </div>
 
                             {/* PREMIUM CTA CARD */}
-                            <div
+                            <motion.div
                                 whileHover={{ rotateX: 4, rotateY: -4, scale: 1.02 }}
                                 transition={{ type: "spring", stiffness: 120 }}
                                 className="relative rounded-[28px] p-10 mt-6 overflow-hidden cursor-pointer group"
@@ -207,7 +208,7 @@ const ContactUs = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
 
                         </AnimatedSection>
                     </div>

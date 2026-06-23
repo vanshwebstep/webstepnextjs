@@ -4,8 +4,9 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { FiPhone, FiArrowRight } from "react-icons/fi";
-import logo from "@/components/img/logo.png";
 import Menu from "./Menu";
+import { assetImage } from "@/lib/assets";
+const logo = assetImage("logo.png");
 
 const AIChatWidget = dynamic(() => import("./AIChat/AIChatWidget"), {
   ssr: false,
@@ -141,3 +142,6 @@ const Header = () => {
 };
 
 export default Header;
+
+
+

@@ -1,7 +1,8 @@
 import React from 'react';
-import wordpress from "@/components/img/wordpress.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
+import { assetImage } from "@/lib/assets";
+const wordpress = assetImage("wordpress.png");
 
 const WpBanner = () => {
   return (
@@ -51,3 +52,6 @@ const WpBanner = () => {
 };
 
 export default WpBanner;
+
+
+

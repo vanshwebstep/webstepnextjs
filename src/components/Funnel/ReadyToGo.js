@@ -1,11 +1,12 @@
 import React from 'react'
-import marketer from '@/components/img/bg1.png'
-import marketer2 from '@/components/img/bg2.png'
-import marketer3 from '@/components/img/bg3.png'
-import marketer4 from '@/components/img/bg4.png'
-import marketer5 from '@/components/img/bg5.png'
-import marketer6 from '@/components/img/bg6.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const marketer = assetImage("bg1.png");
+const marketer2 = assetImage("bg2.png");
+const marketer3 = assetImage("bg3.png");
+const marketer4 = assetImage("bg4.png");
+const marketer5 = assetImage("bg5.png");
+const marketer6 = assetImage("bg6.png");
 const ReadyToGo = () => {
     const ReadyData=[
         {
@@ -58,14 +59,12 @@ const ReadyToGo = () => {
                         <div className="grid-container m4">
                             {ReadyData.map((curElm) => {
                                 return (
-                                    <>
-                                        <div className="grid-item bg-white rounded p-4">
+                                        <div key={curElm.id} className="grid-item bg-white rounded p-4">
                                             <div className="center">
                                                 <Image src={curElm.img} alt="" />
                                                 <h4 className='blue'><b>{curElm.title}</b></h4>
                                             </div>
                                         </div>
-                                    </>
                                 )
                             })}
 
@@ -78,3 +77,5 @@ const ReadyToGo = () => {
 }
 
 export default ReadyToGo
+
+

@@ -6,7 +6,8 @@ import {
     FaFacebookF, FaInstagram, FaLinkedinIn,
     FaTwitter, FaYoutube, FaPhoneAlt, FaPaperPlane, FaChevronUp,
 } from 'react-icons/fa';
-import logo from "@/components/img/logo.png";
+import { assetImage } from "@/lib/assets";
+const logo = assetImage("logo.png");
 
 const socialLinks = [
     { icon: <FaFacebookF size={15} />, href: "#", label: "Facebook",  hoverColor: "#1877f2" },

@@ -7,9 +7,10 @@ import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import countryList from 'react-select-country-list'
 import { RiShoppingBag3Fill } from "react-icons/ri";
 import { HiOutlineDownload } from "react-icons/hi";
-import banklogo from '@/components/img/banklogo.png'
 import Countdown from './Countdown';
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const banklogo = assetImage("banklogo.png");
 
 const Checkout = () => {
     const [value, setValue] = useState('')
@@ -164,3 +165,6 @@ const Checkout = () => {
 }
 
 export default Checkout
+
+
+

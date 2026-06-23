@@ -1,8 +1,9 @@
 import React from 'react';
-import node from "@/components/img/node.png"; // Keeping the original image reference but naming properly
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaUserTie, FaRocket, FaShieldAlt } from 'react-icons/fa';
+import { assetImage } from "@/lib/assets";
+const node = assetImage("node.png"); // Keeping the original image reference but naming properly
 
 const PhpElevate = () => {
   return (
@@ -63,3 +64,6 @@ const PhpElevate = () => {
 };
 
 export default PhpElevate;
+
+
+

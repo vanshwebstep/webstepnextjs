@@ -13,8 +13,7 @@ const BuilderInside = () => {
 
                         {Inside.map((curElm) => {
                             return (
-                                <>
-                                    <div className="featured-box m4">
+                                    <div key={curElm.id ?? curElm.title} className="featured-box m4">
                                         <div className="grid-container m4">
                                             <div className="grid-item">
                                                 <div className="featured-img">
@@ -30,7 +29,6 @@ const BuilderInside = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </>
                             )
                         })}
                        

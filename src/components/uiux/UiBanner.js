@@ -1,8 +1,9 @@
 import React from 'react';
-import ui from "@/components/img/uiux-development2.webp";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import Link from 'next/link';
+import { assetImage } from "@/lib/assets";
+const ui = assetImage("uiux-development2.webp");
 
 const UiBanner = () => {
   return (

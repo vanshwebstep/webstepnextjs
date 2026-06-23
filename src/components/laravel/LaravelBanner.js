@@ -1,7 +1,8 @@
 import React from 'react';
-import laravel from "@/components/img/laravel.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
+import { assetImage } from "@/lib/assets";
+const laravel = assetImage("laravel.png");
 
 const LaravelBanner = () => {
   return (
@@ -51,3 +52,6 @@ const LaravelBanner = () => {
 };
 
 export default LaravelBanner;
+
+
+

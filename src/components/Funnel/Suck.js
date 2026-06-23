@@ -1,8 +1,9 @@
 import React from 'react'
-import workload from '@/components/img/workload.png'
-import suckimg from '@/components/img/FM-FE-4.png'
-import setting from '@/components/img/setting-img.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const workload = assetImage("workload.png");
+const suckimg = assetImage("FM-FE-4.png");
+const setting = assetImage("setting-img.png");
 const Suck = () => {
   return (
     <>
@@ -77,3 +78,6 @@ const Suck = () => {
 }
 
 export default Suck
+
+
+

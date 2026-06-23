@@ -1,8 +1,9 @@
 import React from 'react';
-import seo from "@/components/img/FM-FE-104-ImageBody-65.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import Link from 'next/link';
+import { assetImage } from "@/lib/assets";
+const seo = assetImage("FM-FE-104-ImageBody-65.png");
 
 const SeoBanner = () => {
   return (

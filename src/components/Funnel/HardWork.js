@@ -1,7 +1,8 @@
 import React from 'react'
-import work from '@/components/img/work.png'
-import money from '@/components/img/money.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const work = assetImage("work.png");
+const money = assetImage("money.png");
 
 const HardWork = () => {
     return (
@@ -62,3 +63,6 @@ const HardWork = () => {
 }
 
 export default HardWork
+
+
+

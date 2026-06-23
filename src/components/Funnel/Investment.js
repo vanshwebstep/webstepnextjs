@@ -1,6 +1,7 @@
 import React from 'react'
-import logogroup from '@/components/img/logos-group.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const logogroup = assetImage("logos-group.png");
 
 const Investment = () => {
     return (
@@ -21,3 +22,6 @@ const Investment = () => {
 }
 
 export default Investment
+
+
+

@@ -1,8 +1,9 @@
 import React from 'react';
-import marketing from "@/components/img/software.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import Link from 'next/link';
+import { assetImage } from "@/lib/assets";
+const marketing = assetImage("software.png");
 
 
 const MarketingBanner = () => {

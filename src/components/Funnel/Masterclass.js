@@ -1,8 +1,9 @@
 import React from 'react'
 import { FaCircleCheck } from 'react-icons/fa6'
-import orderimg from '@/components/img/order-now.png'
 import Image from 'next/image';
-import line from '@/components/img/FM-FE-30-ImageBody-11.png'
+import { assetImage } from "@/lib/assets";
+const orderimg = assetImage("order-now.png");
+const line = assetImage("FM-FE-30-ImageBody-11.png");
 const Masterclass = () => {
     return (
         <>
@@ -59,3 +60,6 @@ const Masterclass = () => {
 }
 
 export default Masterclass
+
+
+

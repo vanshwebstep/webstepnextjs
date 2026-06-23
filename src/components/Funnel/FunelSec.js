@@ -1,7 +1,8 @@
 import React from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
-import money from '@/components/img/money-s.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const money = assetImage("money-s.png");
 
 const FunelSec = () => {
     return (
@@ -50,3 +51,6 @@ const FunelSec = () => {
 }
 
 export default FunelSec
+
+
+

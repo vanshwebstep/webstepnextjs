@@ -2,6 +2,7 @@
 import React from 'react';
 import ContactForm from '../contactus/ContactForm';
 import { FaMapMarkerAlt, FaEnvelope, FaMobile, FaClock, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { motion } from "framer-motion";
 
 const contactItems = [
   {
@@ -150,7 +151,7 @@ const FormSection = () => {
                 </div>
               </div>
             </div>
-            <div
+            <motion.div
               whileHover={{ rotateX: 4, rotateY: -4, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 120 }}
               className="relative rounded-[28px] p-10 mt-6 overflow-hidden cursor-pointer group"
@@ -222,7 +223,7 @@ const FormSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Social links */}
 

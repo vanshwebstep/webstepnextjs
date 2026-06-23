@@ -1,15 +1,16 @@
 "use client";
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import drTreatCase from '@/components/img/dr-treat-case.png';
-import stillwellHansenWork from '@/components/img/Stillwell-Hansen-work.png';
-import retrievrWork1 from '@/components/img/Retrievr-work1.png';
-import graceMercyWork from '@/components/img/Grace-Mercy-work.png';
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import Link from "next/link";
 import { fetchContent } from '@/lib/contentApi';
+import { assetImage } from "@/lib/assets";
+const drTreatCase = assetImage("dr-treat-case.png");
+const stillwellHansenWork = assetImage("Stillwell-Hansen-work.png");
+const retrievrWork1 = assetImage("Retrievr-work1.png");
+const graceMercyWork = assetImage("Grace-Mercy-work.png");
 
 // ── Filter categories ──────────────────────────────────────────────────────────
 const CATEGORIES = ["All", "UI & UX", "Shopify", "WordPress", "Front End Dev", "Development", "PHP", "Laravel", "Node.js", "AI"];
@@ -366,3 +367,6 @@ const Work = () => {
 };
 
 export default Work;
+
+
+

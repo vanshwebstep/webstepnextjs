@@ -1,10 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import blog1 from '@/components/img/blog1.png';
-import blog2 from '@/components/img/blog2.png';
-import blog3 from '@/components/img/blog3.png';
-import blog4 from '@/components/img/blog4.png';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -24,6 +20,11 @@ import {
     FaRegHeart,
     FaChevronRight,
 } from "react-icons/fa";
+import { assetImage } from "@/lib/assets";
+const blog1 = assetImage("blog1.png");
+const blog2 = assetImage("blog2.png");
+const blog3 = assetImage("blog3.png");
+const blog4 = assetImage("blog4.png");
 
 const POST = {
   id: 1,
@@ -562,3 +563,6 @@ const SingleBlogPage = ({ post = POST, relatedPosts = RELATED }) => {
 };
 
 export default SingleBlogPage;
+
+
+

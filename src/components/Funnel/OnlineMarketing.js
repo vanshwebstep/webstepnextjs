@@ -1,9 +1,10 @@
 import React from 'react'
-import img from '@/components/img/FM-FE-67-ImageBody-46.png'
-import img2 from '@/components/img/FM-FE-68-ImageBody-47.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-67-ImageBody-46.png");
+const img2 = assetImage("FM-FE-68-ImageBody-47.png");
+const img3 = assetImage("FM-FE-69-ImageBody-48.png");
 
-import img3 from '@/components/img/FM-FE-69-ImageBody-48.png'
 const OnlineMarketing = () => {
     const MarketingData = [
         {
@@ -39,8 +40,7 @@ const OnlineMarketing = () => {
                         </div>
                         {MarketingData.map((curElm) => {
                             return (
-                                <>
-                                    <div className="featured-box m4">
+                                    <div key={curElm.id} className="featured-box m4">
                                         <div className="grid-container m4">
                                             <div className="grid-item">
                                                 <div className="featured-img">
@@ -56,7 +56,6 @@ const OnlineMarketing = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </>
                             )
                         })}
                     </div>
@@ -68,3 +67,5 @@ const OnlineMarketing = () => {
 }
 
 export default OnlineMarketing
+
+

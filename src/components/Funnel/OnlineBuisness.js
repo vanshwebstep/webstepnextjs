@@ -15,15 +15,13 @@ const OnlineBuisness = () => {
                         <div className="grid-container m4">
                             {BuisnessData.map((curElm) => {
                                 return (
-                                    <>
-                                        <div className="grid-item bg-white rounded p-4">
+                                        <div key={curElm.id ?? curElm.title} className="grid-item bg-white rounded p-4">
                                           <div className="center">
                                                 <Image src={curElm.img} alt="" />
                                                 <h4 className='blue'><b>{curElm.title}</b></h4>
                                                 <p>{curElm.para}</p>
                                           </div>
                                         </div>
-                                    </>
                                 )
                             })}
 

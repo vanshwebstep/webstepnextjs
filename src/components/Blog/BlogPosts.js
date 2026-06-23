@@ -1,12 +1,13 @@
 "use client";
 import React from 'react';
-import blog1 from '@/components/img/blog1.png';
-import blog2 from '@/components/img/blog2.png';
-import blog3 from '@/components/img/blog3.png';
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaCalendarAlt, FaUser, FaEye, FaArrowRight } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { assetImage } from "@/lib/assets";
+const blog1 = assetImage("blog1.png");
+const blog2 = assetImage("blog2.png");
+const blog3 = assetImage("blog3.png");
 
 const BlogPosts = () => {
   const router = useRouter();

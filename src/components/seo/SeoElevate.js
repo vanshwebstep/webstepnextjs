@@ -1,9 +1,10 @@
 import React from 'react';
-import seoImage from "@/components/img/FM-FE-104-ImageBody-65.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaSearch, FaChartLine, FaGlobe } from 'react-icons/fa';
 import Link from 'next/link';
+import { assetImage } from "@/lib/assets";
+const seoImage = assetImage("FM-FE-104-ImageBody-65.png");
 
 const SeoElevate = () => {
   return (

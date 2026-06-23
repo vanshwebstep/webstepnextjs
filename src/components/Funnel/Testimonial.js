@@ -1,7 +1,8 @@
 import React from 'react'
-import better from '@/components/img/FM-FE-34-ImageBody-14.png'
-import testiimg from '@/components/img/FM-JV-21-ImageBody-11.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const better = assetImage("FM-FE-34-ImageBody-14.png");
+const testiimg = assetImage("FM-JV-21-ImageBody-11.png");
 
 const Testimonial = () => {
     return (
@@ -26,3 +27,6 @@ const Testimonial = () => {
 }
 
 export default Testimonial
+
+
+

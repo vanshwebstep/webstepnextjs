@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import dev from "@/components/img/development-company.png";
 import { FaStar } from 'react-icons/fa';
 import { FiTarget, FiUsers, FiCode, FiShield } from 'react-icons/fi';
 import Link from "next/link";
+import { assetImage } from "@/lib/assets";
+const dev = assetImage("development-company.png");
 
 const stats = [
   { num: '120+', label: 'Projects Delivered', icon: <FiTarget />, color: '#7C3AED', shadow: 'rgba(124,58,237,0.12)', border: '#ede9fe' },

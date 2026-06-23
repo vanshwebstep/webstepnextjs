@@ -1,21 +1,22 @@
-import img from '@/components/img/FM-FE-83-ImageBody-50.png'
-import img2 from '@/components/img/inside2.png'
-import img3 from '@/components/img/inside3.png'
-import img4 from '@/components/img/inside4.png'
-import img5 from '@/components/img/inside5.png'
-import img6 from '@/components/img/inside6.png'
-import img7 from '@/components/img/inside7.png'
-import img8 from '@/components/img/inside8.png'
-import img9 from '@/components/img/inside9.png'
-import img10 from '@/components/img/inside10.png'
-import img11 from '@/components/img/inside11.png'
-import img12 from '@/components/img/inside12.png'
-import img13 from '@/components/img/inside13.png'
-import img14 from '@/components/img/inside14.png'
-import img15 from '@/components/img/inside15.png'
-import img16 from '@/components/img/inside16.png'
-import img17 from '@/components/img/inside17.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-83-ImageBody-50.png");
+const img2 = assetImage("inside2.png");
+const img3 = assetImage("inside3.png");
+const img4 = assetImage("inside4.png");
+const img5 = assetImage("inside5.png");
+const img6 = assetImage("inside6.png");
+const img7 = assetImage("inside7.png");
+const img8 = assetImage("inside8.png");
+const img9 = assetImage("inside9.png");
+const img10 = assetImage("inside10.png");
+const img11 = assetImage("inside11.png");
+const img12 = assetImage("inside12.png");
+const img13 = assetImage("inside13.png");
+const img14 = assetImage("inside14.png");
+const img15 = assetImage("inside15.png");
+const img16 = assetImage("inside16.png");
+const img17 = assetImage("inside17.png");
 const Inside=[
     {
       id:0,
@@ -118,3 +119,6 @@ const Inside=[
 
 ];
 export default Inside
+
+
+

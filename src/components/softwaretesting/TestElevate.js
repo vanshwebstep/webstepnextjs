@@ -1,8 +1,9 @@
 import React from 'react';
-import testing from "@/components/img/software.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaBug, FaVial, FaCheckDouble } from 'react-icons/fa';
+import { assetImage } from "@/lib/assets";
+const testing = assetImage("software.png");
 
 const TestElevate = () => {
   return (
@@ -63,3 +64,6 @@ const TestElevate = () => {
 };
 
 export default TestElevate;
+
+
+

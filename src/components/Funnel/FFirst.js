@@ -1,6 +1,7 @@
 import React from 'react'
-import img from '@/components/img/Ffirstimg.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("Ffirstimg.png");
 
 const FFirst = () => {
     return (
@@ -26,3 +27,6 @@ const FFirst = () => {
 }
 
 export default FFirst
+
+
+

@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
-import revimg from '@/components/img/FM-FE-63-ImageBody-42.png'
+import { assetImage } from "@/lib/assets";
+const revimg = assetImage("FM-FE-63-ImageBody-42.png");
 const MarketImg = () => {
     return (
         <section className="marketing-lg padding60">
@@ -12,3 +13,6 @@ const MarketImg = () => {
 }
 
 export default MarketImg
+
+
+

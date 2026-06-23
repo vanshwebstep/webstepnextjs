@@ -2,10 +2,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Code, Terminal, Cpu, Cloud, Smartphone, Layers, Rocket, Zap } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import herobanner1 from "@/components/img/herobanner1.jpg";
-import herobanner from "@/components/img/herobanner.png";
 import Image from "next/image";
 import Link from "next/link";
+import { assetImage } from "@/lib/assets";
+const herobanner1 = assetImage("herobanner1.jpg");
+const herobanner = assetImage("herobanner.png");
 
 const SERVICES = [
   {

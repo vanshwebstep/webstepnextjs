@@ -1,20 +1,21 @@
-import img from '@/components/img/FM-FE-47-ImageBody-26.png'
-import img2 from '@/components/img/FEATURE2.png'
-import img3 from '@/components/img/FEATURE3.png'
-import img4 from '@/components/img/FEATURE4.png'
-import img5 from '@/components/img/FEATURE5.png'
-import img6 from '@/components/img/FEATURE6.png'
-import img7 from '@/components/img/FEATURE7.png'
-import img8 from '@/components/img/FEATURE8.png'
-import img9 from '@/components/img/FEATURE9.png'
-import img10 from '@/components/img/FEATURE10.png'
-import img11 from '@/components/img/FEATURE11.png'
-import img12 from '@/components/img/FEATURE12.png'
-import img13 from '@/components/img/FEATURE13.png'
-import img14 from '@/components/img/FEATURE14.png'
-import img15 from '@/components/img/FEATURE15.png'
-import img16 from '@/components/img/FEATURE16.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const img = assetImage("FM-FE-47-ImageBody-26.png");
+const img2 = assetImage("FEATURE2.png");
+const img3 = assetImage("FEATURE3.png");
+const img4 = assetImage("FEATURE4.png");
+const img5 = assetImage("FEATURE5.png");
+const img6 = assetImage("FEATURE6.png");
+const img7 = assetImage("FEATURE7.png");
+const img8 = assetImage("FEATURE8.png");
+const img9 = assetImage("FEATURE9.png");
+const img10 = assetImage("FEATURE10.png");
+const img11 = assetImage("FEATURE11.png");
+const img12 = assetImage("FEATURE12.png");
+const img13 = assetImage("FEATURE13.png");
+const img14 = assetImage("FEATURE14.png");
+const img15 = assetImage("FEATURE15.png");
+const img16 = assetImage("FEATURE16.png");
 const Features = [
     {
         id: 0,
@@ -175,3 +176,6 @@ const Features = [
     },
 ];
 export default Features
+
+
+

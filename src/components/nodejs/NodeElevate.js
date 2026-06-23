@@ -1,8 +1,9 @@
 import React from 'react';
-import node from "@/components/img/node.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaServer, FaCodeBranch, FaCheckDouble } from 'react-icons/fa';
+import { assetImage } from "@/lib/assets";
+const node = assetImage("node.png");
 
 const NodeElevate = () => {
   return (
@@ -63,3 +64,6 @@ const NodeElevate = () => {
 };
 
 export default NodeElevate;
+
+
+

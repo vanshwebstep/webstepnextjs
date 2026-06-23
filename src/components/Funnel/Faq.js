@@ -1,8 +1,9 @@
 "use client"
 import {React,useState} from 'react'
 import { IoMdArrowDropdown } from "react-icons/io";
-import logogroup from '@/components/img/logos-group.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const logogroup = assetImage("logos-group.png");
 
 const Faq = () => {
     const item=[
@@ -78,3 +79,6 @@ const Faq = () => {
 }
 
 export default Faq
+
+
+

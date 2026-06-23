@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
-import img from '@/components/img/mobile_app_development2.png'
+import { assetImage } from "@/lib/assets";
+const img = assetImage("mobile_app_development2.png");
 const BlogCatogary = () => {
     const catogaryData = [
         {
@@ -83,3 +84,6 @@ const BlogCatogary = () => {
 }
 
 export default BlogCatogary
+
+
+

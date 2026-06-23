@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const review = assetImage("reviews.png");
 
-import review from '@/components/img/reviews.png'
 const FImg = () => {
   return (
     <>
@@ -17,3 +18,6 @@ const FImg = () => {
 }
 
 export default FImg
+
+
+

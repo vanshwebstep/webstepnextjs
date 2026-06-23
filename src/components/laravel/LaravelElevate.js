@@ -1,8 +1,9 @@
 import React from 'react';
-import laravel from "@/components/img/laravel.png";
 import Image from 'next/image';
 import AnimatedSection from '../AnimatedSection';
 import { FaLayerGroup, FaShieldAlt, FaLightbulb } from 'react-icons/fa';
+import { assetImage } from "@/lib/assets";
+const laravel = assetImage("laravel.png");
 
 const LaravelElevate = () => {
   return (
@@ -63,3 +64,6 @@ const LaravelElevate = () => {
 };
 
 export default LaravelElevate;
+
+
+

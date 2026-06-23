@@ -1,7 +1,8 @@
 import React from 'react'
-import heartache from '@/components/img/headeche.png'
-import img from '@/components/img/FM-FE-10-ImageBody-02.png'
 import Image from 'next/image';
+import { assetImage } from "@/lib/assets";
+const heartache = assetImage("headeche.png");
+const img = assetImage("FM-FE-10-ImageBody-02.png");
 
 const HeartAche = () => {
     return (
@@ -36,3 +37,6 @@ const HeartAche = () => {
 }
 
 export default HeartAche
+
+
+

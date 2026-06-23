@@ -1,8 +1,9 @@
 import React from 'react'
-import orderimg from '@/components/img/order-now.png'
 import Image from 'next/image';
-import logogroup from '@/components/img/logos-group.png'
-import logo from '@/components/img/FM-JV-02-LogoBody-01.png'
+import { assetImage } from "@/lib/assets";
+const orderimg = assetImage("order-now.png");
+const logogroup = assetImage("logos-group.png");
+const logo = assetImage("FM-JV-02-LogoBody-01.png");
 const FunelBanner = () => {
     return (
         <>
@@ -17,7 +18,7 @@ const FunelBanner = () => {
                     <button className="bg-blue"><span>5-10 Minutes A Day</span>  Using Automation Software & Our Time-Tested Strategy</button>
                     <h4>See How Your New Site Can Be Live In Just 27 Seconds From Now!</h4>
                     <div className="video-sec">
-                        <iframe width="750" height="450" src="https://www.youtube.com/embed/dkOIxSXyhkA?si=XY4zHezFRHidxgMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="750" height="450" src="https://www.youtube.com/embed/dkOIxSXyhkA?si=XY4zHezFRHidxgMo" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                     <h4>Access Today For Only <span>$197.00</span> $46.95 + $9.97/Month</h4>
                     <div className="order-now">
@@ -37,3 +38,5 @@ const FunelBanner = () => {
 }
 
 export default FunelBanner
+
+

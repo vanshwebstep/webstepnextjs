@@ -1,7 +1,8 @@
 import React from 'react'
 import BlogSidebar from './BlogSidebar'
 import Image from 'next/image';
-import blogimg from '@/components/img/image 1.png'
+import { assetImage } from "@/lib/assets";
+const blogimg = assetImage("image 1.png");
 const BlogSingal = () => {
     return (
         <>
@@ -69,3 +70,6 @@ const BlogSingal = () => {
 }
 
 export default BlogSingal
+
+
+
