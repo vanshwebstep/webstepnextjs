@@ -238,6 +238,72 @@ const INDUSTRIES = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+const normalizeList = (value, fallback = []) => {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed.filter(Boolean);
+    } catch {
+      return value.split(",").map((item) => item.trim()).filter(Boolean);
+    }
+  }
+  return fallback;
+};
+
+const normalizeMetrics = (value, fallback = []) => {
+  const metrics = normalizeList(value, fallback);
+  return metrics
+    .map((metric) => {
+      if (typeof metric === "string") {
+        const [label, val] = metric.split(":").map((part) => part.trim());
+        return { label: label || "Metric", val: val || "" };
+      }
+      return {
+        label: metric.label || "Metric",
+        val: metric.val || metric.value || "",
+      };
+    })
+    .filter((metric) => metric.label && metric.val);
+};
+
+const normalizeCaseStudy = (study, index) => {
+  const base = CASE_STUDIES[index % CASE_STUDIES.length];
+  const testimonial = study.testimonial || {};
+
+  return {
+    ...base,
+    ...study,
+    id: study.id || study.slug || base.id,
+    title: study.title || base.title,
+    tagline: study.tagline || base.tagline,
+    category: study.category || base.category,
+    tags: normalizeList(study.tags, base.tags),
+    img: study.img || study.image || base.img,
+    logo: study.logo || base.logo,
+    client: study.client || base.client,
+    duration: study.duration || base.duration,
+    year: String(study.year || base.year),
+    tech: normalizeList(study.tech || study.technologies, base.tech),
+    challenge: study.challenge || base.challenge,
+    solution: study.solution || base.solution,
+    result: study.result || base.result,
+    metrics: normalizeMetrics(study.metrics, base.metrics),
+    deliverables: normalizeList(study.deliverables, base.deliverables),
+    testimonial: {
+      quote: testimonial.quote || study.testimonial_quote || base.testimonial.quote,
+      author: testimonial.author || study.testimonial_author || base.testimonial.author,
+      role: testimonial.role || study.testimonial_role || base.testimonial.role,
+      avatar: testimonial.avatar || study.testimonial_avatar || base.testimonial.avatar,
+    },
+    featured: Boolean(study.featured ?? base.featured),
+    color: study.color || base.color,
+    accent: study.accent || base.accent,
+    lightText: study.lightText || study.light_text || base.lightText,
+    darkBg: study.darkBg || study.dark_bg || base.darkBg,
+  };
+};
+
 // ANIMATION HELPER
 // ─────────────────────────────────────────────────────────────────────────────
 const Reveal = ({ children, delay = 0, direction = "up", className = "" }) => {
@@ -950,7 +1016,7 @@ export default function CaseStudiesPage() {
     fetchContent('case-studies', { categories: CATEGORIES, caseStudies: CASE_STUDIES }).then((data) => {
       if (!mounted) return;
       setCategories(data.categories?.length ? data.categories : CATEGORIES);
-      setCaseStudies(data.caseStudies?.length ? data.caseStudies : CASE_STUDIES);
+      setCaseStudies(data.caseStudies?.length ? data.caseStudies.map(normalizeCaseStudy) : CASE_STUDIES);
     });
 
     return () => { mounted = false; };

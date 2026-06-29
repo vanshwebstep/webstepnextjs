@@ -14,11 +14,9 @@ const STATS = [
 const WorkBanner = () => {
   return (
     <section className="py-16 md:py-[8.5rem] bg-white relative z-10 px-6 overflow-hidden font-roboto">
-
       {/* Decorative background glows */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
-
       <div className="container mx-auto relative z-10">
         <AnimatedSection delay={0.1} direction="up">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -62,9 +60,9 @@ const WorkBanner = () => {
 
                 {/* Description — Webstep ke liye updated */}
                 <p className="text-slate-500 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
-                  With <span className="font-semibold text-slate-700">15+ years of excellence</span>, 
-                  Webstep Solutions has delivered 500+ world-class digital products — from blazing-fast 
-                  React & Next.js web apps to powerful Shopify stores, WordPress solutions, and 
+                  With <span className="font-semibold text-slate-700">15+ years of excellence</span>,
+                  Webstep Solutions has delivered 500+ world-class digital products — from blazing-fast
+                  React & Next.js web apps to powerful Shopify stores, WordPress solutions, and
                   cutting-edge AI integrations. We build for performance, scale, and results.
                 </p>
 

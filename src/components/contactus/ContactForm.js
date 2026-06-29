@@ -105,8 +105,7 @@ const ContactForm = ({ light = false }) => {
                                 type="checkbox"
                                 id="privacy"
                                 name="privacy"
-                                required
-                                className={`appearance-none w-5 h-5 border border-slate-200 rounded ${light ? 'bg-white' : 'bg-white/5'} checked:bg-[#FF1F8E] checked:border-[#FF1F8E] transition-all cursor-pointer`}
+                                className={`peer appearance-none w-5 h-5 border border-slate-200 rounded ${light ? 'bg-white' : 'bg-white/5'} checked:bg-[#FF1F8E] checked:border-[#FF1F8E] transition-all cursor-pointer`}
                             />
                             <svg className="absolute w-3 h-3 text-white pointer-events-none opacity-0 peer-checked:opacity-100" viewBox="0 0 14 10" fill="none">
                                 <path d="M1 5L4.5 8.5L13 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

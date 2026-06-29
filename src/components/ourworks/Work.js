@@ -83,6 +83,29 @@ const STATS = [
     { num: "13+",  label: "Technologies" },
 ];
 
+const normalizeList = (value, fallback = []) => {
+    if (Array.isArray(value)) return value.filter(Boolean);
+    if (typeof value === "string") {
+        try {
+            const parsed = JSON.parse(value);
+            if (Array.isArray(parsed)) return parsed.filter(Boolean);
+        } catch {
+            return value.split(",").map((item) => item.trim()).filter(Boolean);
+        }
+    }
+    return fallback;
+};
+
+const normalizeProject = (project, index) => ({
+    img: project.img || project.image || ALL_PROJECTS[index % ALL_PROJECTS.length].img,
+    title: project.title || `Project ${index + 1}`,
+    category: project.category || "Development",
+    tags: normalizeList(project.tags, ["Development"]),
+    tech: normalizeList(project.tech || project.technologies, ["Web"]),
+    desc: project.desc || project.description || "",
+    year: String(project.year || new Date().getFullYear()),
+});
+
 // ── Filter Bar ─────────────────────────────────────────────────────────────────
 const FilterBar = ({ activeFilter, setActiveFilter, categories, projects }) => {
     const counts = categories.reduce((acc, cat) => {
@@ -221,7 +244,7 @@ const Work = () => {
         fetchContent('portfolio', { categories: CATEGORIES, projects: ALL_PROJECTS }).then((data) => {
             if (!mounted) return;
             const nextCategories = data.categories?.length ? data.categories : CATEGORIES;
-            const nextProjects = data.projects?.length ? data.projects : ALL_PROJECTS;
+            const nextProjects = data.projects?.length ? data.projects.map(normalizeProject) : ALL_PROJECTS;
             setCategories(nextCategories);
             setProjects(nextProjects);
             setActiveFilter((current) => nextCategories.includes(current) ? current : "All");
@@ -367,6 +390,5 @@ const Work = () => {
 };
 
 export default Work;
-
 
 

@@ -3,6 +3,9 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import OfferTopbar from "@/components/OfferTopbar"
+import { IMAGE_ASSET_BASE_URL } from "@/lib/assets";
+
+const logoIconUrl = `${IMAGE_ASSET_BASE_URL}/logo.png`;
 const oswald = Oswald({
   subsets: ["latin"],
   variable: "--font-oswald",
@@ -17,6 +20,11 @@ const roboto = Roboto({
 export const metadata = {
   title: "Webstep Solutions",
   description: "Enterprise Software Development at Scale",
+  icons: {
+    icon: [{ url: logoIconUrl, type: "image/png" }],
+    shortcut: [logoIconUrl],
+    apple: [{ url: logoIconUrl, type: "image/png" }],
+  },
 };
 
 export default function RootLayout({ children }) {

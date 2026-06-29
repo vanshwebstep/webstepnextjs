@@ -2,9 +2,9 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'name' => 'webstep',
-        'user' => 'root',
-        'pass' => '',
+        'name' => 'u510451310_webstepphp',
+        'user' => 'u510451310_webstepphp',
+        'pass' => 'Webstepphp@135',
         'charset' => 'utf8mb4',
     ],
     'mail' => [

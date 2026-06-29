@@ -7,6 +7,7 @@ import {
     FaTwitter, FaYoutube, FaPhoneAlt, FaPaperPlane, FaChevronUp,
 } from 'react-icons/fa';
 import { assetImage } from "@/lib/assets";
+import { submitNewsletter } from "@/lib/contentApi";
 const logo = assetImage("logo.png");
 
 const socialLinks = [
@@ -31,8 +32,9 @@ const services = [
     { name: "WordPress & Plugins", href: "/services/wordpress" },
     { name: "Shopify Themes & Apps", href: "/services/shopify" },
     { name: "Laravel & PHP",       href: "/services/laravel" },
+    { name: "Industrial Training", href: "/industrial-training" },
+    { name: "Hire Developers",     href: "/hire-full-time-developers" },
     { name: "AI Chatbots",         href: "/services/ai" },
-    { name: "Vue.js & Node.js",    href: "/services/vuejs" },
 ];
 
 const ColTitle = ({ children }) => (
@@ -57,11 +59,28 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [subscribeError, setSubscribeError] = useState('');
 
-    const handleSubscribe = () => {
-        if (email.includes('@')) {
+    const handleSubscribe = async () => {
+        const trimmedEmail = email.trim();
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+            setSubscribeError('Please enter a valid email address.');
+            return;
+        }
+
+        setSubmitting(true);
+        setSubscribeError('');
+
+        try {
+            await submitNewsletter({ email: trimmedEmail, source: 'footer' });
             setSubmitted(true);
             setEmail('');
+        } catch (error) {
+            setSubscribeError(error.message || 'Subscription failed. Please try again.');
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -172,21 +191,29 @@ const Footer = () => {
                                     <input
                                         type="email"
                                         value={email}
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={e => {
+                                            setEmail(e.target.value);
+                                            setSubscribeError('');
+                                        }}
                                         onKeyDown={e => e.key === 'Enter' && handleSubscribe()}
                                         placeholder="your@email.com"
-                                        className="w-full bg-transparent text-slate-900 placeholder:text-slate-400 text-sm px-4 py-3 focus:outline-none"
+                                        disabled={submitting}
+                                        className="w-full bg-transparent text-slate-900 placeholder:text-slate-400 text-sm px-4 py-3 pr-32 focus:outline-none disabled:opacity-60"
                                     />
                                     <button
                                         onClick={handleSubscribe}
                                         aria-label="Subscribe"
+                                        disabled={submitting}
                                         className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-[11px] font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-[0_6px_20px_rgba(232,121,249,0.3)]"
                                         style={{ background: "linear-gradient(135deg, #E879F9, #A855F7)" }}
                                     >
                                         <FaPaperPlane size={10} />
-                                        Subscribe
+                                        {submitting ? 'Sending' : 'Subscribe'}
                                     </button>
                                 </div>
+                                {subscribeError && (
+                                    <p className="text-rose-500 text-[10px] px-1 font-semibold">{subscribeError}</p>
+                                )}
                                 <p className="text-slate-600 text-[10px] px-1">No spam. Unsubscribe anytime.</p>
                             </div>
                         )}

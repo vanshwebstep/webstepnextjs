@@ -45,6 +45,8 @@ const submenus = {
                 heading: "Our Work",
                 items: [
                     { name: "Our Work",   href: "/works",            icon: FiLayers,   desc: "Full portfolio"      },
+                    { name: "Industrial Training", href: "/industrial-training",    icon: FiBookOpen,     desc: "Career-ready programs" },
+                    { name: "Hire Developers", href: "/hire-full-time-developers", icon: FiBriefcase, desc: "Dedicated talent" },
                 ],
             },
             {

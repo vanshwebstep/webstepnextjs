@@ -1,8 +1,37 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLock, FaPaperPlane, FaHeadset } from 'react-icons/fa';
+import { submitLead } from "@/lib/contentApi";
 
 const ExpertsForm = () => {
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    setSubmitting(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      await submitLead({
+        source: "experts-form",
+        name: formData.get("fname"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("Describe"),
+      });
+      form.reset();
+      setStatus({ type: "success", message: "Request submitted. We will contact you shortly." });
+    } catch (error) {
+      setStatus({ type: "error", message: error.message || "Submission failed. Please try again." });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <>
      
@@ -26,13 +55,14 @@ const ExpertsForm = () => {
           <p className="text-slate-500 text-medium font-medium"> Strategic technology advisory for your next digital breakthrough.</p>
         </div>
 
-        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div className="group">
             <input
               type="text"
               id="fname"
               name="fname"
               placeholder="Full Name"
+              required
               className="w-full bg-white border border-slate-200 rounded-2xl py-4 px-6 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-pink-500 transition-all duration-300 shadow-sm"
             />
           </div>
@@ -42,6 +72,7 @@ const ExpertsForm = () => {
               id="email"
               name="email"
               placeholder="Business Email"
+              required
               className="w-full bg-white border border-slate-200 rounded-2xl py-4 px-6 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-pink-500 transition-all duration-300 shadow-sm"
             />
           </div>
@@ -64,11 +95,17 @@ const ExpertsForm = () => {
           </div>
 
           <div className="pt-2">
-            <button className="group relative flex items-center justify-center gap-3 w-full px-8 py-4 bg-gradient-to-r  from-[#FF1F8E] to-[#FF0055] rounded-2xl text-white font-bold tracking-[0.2em] capitalize overflow-hidden shadow-lg shadow-pink-600/20 hover:shadow-pink-600/40 transition-all duration-300">
-              <span className="relative z-10">Initiate Discussion</span>
+            <button disabled={submitting} className="group relative flex items-center justify-center gap-3 w-full px-8 py-4 bg-gradient-to-r  from-[#FF1F8E] to-[#FF0055] rounded-2xl text-white font-bold tracking-[0.2em] capitalize overflow-hidden shadow-lg shadow-pink-600/20 hover:shadow-pink-600/40 transition-all duration-300 disabled:opacity-70">
+              <span className="relative z-10">{submitting ? "Submitting..." : "Initiate Discussion"}</span>
               <FaPaperPlane className="relative z-10 group-hover:translate-x-1 transition-transform" />
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity z-0"></div>
             </button>
+
+            {status.message && (
+              <p className={`mt-4 text-sm font-semibold ${status.type === "success" ? "text-emerald-600" : "text-red-500"}`}>
+                {status.message}
+              </p>
+            )}
 
             <div className="flex items-center justify-center gap-2 mt-6 text-slate-500">
               <FaLock className="text-[10px]" />
