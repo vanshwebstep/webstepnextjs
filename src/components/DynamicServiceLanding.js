@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   FiArrowRight,
@@ -17,6 +18,7 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { fetchServicePage, submitLead } from "@/lib/contentApi";
+import { THANK_YOU_ROUTE } from "@/lib/routes";
 
 const iconMap = {
   users: FiUsers,
@@ -66,6 +68,7 @@ function SectionIntro({ eyebrow, title, text, light = false }) {
 }
 
 function LeadForm({ slug, page, variant }) {
+  const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [status, setStatus] = useState({ type: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
@@ -83,7 +86,7 @@ function LeadForm({ slug, page, variant }) {
         message: `${page.title} inquiry\n${form.message}`,
       });
       setForm({ name: "", email: "", phone: "", message: "" });
-      setStatus({ type: "success", message: "Request submitted. We will contact you shortly." });
+      router.push(THANK_YOU_ROUTE);
     } catch (error) {
       setStatus({ type: "error", message: error.message || "Submission failed. Please try again." });
     } finally {

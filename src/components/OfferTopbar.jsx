@@ -95,13 +95,13 @@ export default function OfferTopbar() {
           <div style={{ width: "1px", height: "16px", background: "#2d2d35" }} />
 
           {/* Live dot */}
-          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          {/* <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <span style={{ position: "relative", display: "inline-flex", width: "7px", height: "7px" }}>
               <span style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#f43f8e", opacity: 0.5, animation: "ws-ping 1.2s cubic-bezier(0,0,0.2,1) infinite" }} />
               <span style={{ position: "relative", width: "7px", height: "7px", borderRadius: "50%", background: "#f43f8e", display: "inline-block" }} />
             </span>
             <span style={{ fontSize: "10px", fontWeight: 700, color: "#f43f8e", letterSpacing: "0.1em", textTransform: "uppercase" }}>Live Offers</span>
-          </div>
+          </div> */}
         </div>
 
         {/* ── CENTER: Ticker ── */}
@@ -109,7 +109,7 @@ export default function OfferTopbar() {
           <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: "40px", background: "linear-gradient(to right, #111116, transparent)", zIndex: 10, pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 0, top: 0, height: "100%", width: "40px", background: "linear-gradient(to left, #111116, transparent)", zIndex: 10, pointerEvents: "none" }} />
 
-          <div className="ws-ticker-wrap">
+          {/* <div className="ws-ticker-wrap">
             {doubled.map((o, i) => (
               <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "7px", padding: "0 20px", whiteSpace: "nowrap" }}>
                 <span style={{
@@ -123,7 +123,7 @@ export default function OfferTopbar() {
                 {SEP}
               </span>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* ── RIGHT: CTA ── */}

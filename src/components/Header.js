@@ -39,7 +39,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-[3rem] left-0 w-full z-[9999] transition-all duration-500 ${
+        className={`fixed  top-[3rem]  left-0 w-full z-[9999] transition-all duration-500 ${
           scrolled
             ? "bg-white/80 backdrop-blur-2xl py-3 border-b border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.05)]"
             : "bg-white/80 backdrop-blur-2xl py-3 border-b border-slate-200/60 shadow-[0_10px_40px_rgba(0,0,0,0.05)]"

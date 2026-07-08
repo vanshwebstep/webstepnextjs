@@ -2,12 +2,14 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
     FaFacebookF, FaInstagram, FaLinkedinIn,
     FaTwitter, FaYoutube, FaPhoneAlt, FaPaperPlane, FaChevronUp,
 } from 'react-icons/fa';
 import { assetImage } from "@/lib/assets";
 import { submitNewsletter } from "@/lib/contentApi";
+import { THANK_YOU_ROUTE } from "@/lib/routes";
 const logo = assetImage("logo.png");
 
 const socialLinks = [
@@ -56,6 +58,7 @@ const NavLink = ({ href, children }) => (
 );
 
 const Footer = () => {
+    const router = useRouter();
     const currentYear = new Date().getFullYear();
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
@@ -77,6 +80,7 @@ const Footer = () => {
             await submitNewsletter({ email: trimmedEmail, source: 'footer' });
             setSubmitted(true);
             setEmail('');
+            router.push(THANK_YOU_ROUTE);
         } catch (error) {
             setSubscribeError(error.message || 'Subscription failed. Please try again.');
         } finally {

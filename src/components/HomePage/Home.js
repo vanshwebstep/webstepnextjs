@@ -34,7 +34,7 @@ const Home = () => {
           <Services />
         </AnimatedSection>
 
-       
+
 
         <AnimatedSection delay={0.2} direction="left">
           <Process />
@@ -43,7 +43,7 @@ const Home = () => {
         {/* <AnimatedSection delay={0.2} direction="right">
           <ServicesPage />
         </AnimatedSection> */}
-{/* 
+        {/* 
         <AnimatedSection delay={0.2} direction="up">
           <Design />
         </AnimatedSection> */}
@@ -55,18 +55,18 @@ const Home = () => {
         <AnimatedSection delay={0.2} direction="right">
           <Experience />
         </AnimatedSection>
- <AnimatedSection delay={0.2} direction="up">
+        <AnimatedSection delay={0.2} direction="up">
           <OurExpertize />
         </AnimatedSection>
-        <AnimatedSection delay={0.2} direction="up">
+        {/* <AnimatedSection delay={0.2} direction="up">
           <MarketingTeam />
-        </AnimatedSection>
+        </AnimatedSection> */}
 
         <AnimatedSection delay={0.2} direction="up">
           <FormSection />
         </AnimatedSection>
 
-         {/* <AnimatedSection delay={0.2} direction="up">
+        {/* <AnimatedSection delay={0.2} direction="up">
           <HomePage />
         </AnimatedSection> */}
       </div>

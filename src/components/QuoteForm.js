@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { FaLock, FaPaperPlane } from "react-icons/fa";
 import { submitLead } from "@/lib/contentApi";
+import { THANK_YOU_ROUTE } from "@/lib/routes";
 
 const QuoteForm = () => {
+    const router = useRouter();
     const [status, setStatus] = useState({ type: "", message: "" });
     const [submitting, setSubmitting] = useState(false);
 
@@ -24,7 +27,7 @@ const QuoteForm = () => {
                 message: formData.get("Describe"),
             });
             form.reset();
-            setStatus({ type: "success", message: "Request submitted. We will contact you shortly." });
+            router.push(THANK_YOU_ROUTE);
         } catch (error) {
             setStatus({ type: "error", message: error.message || "Submission failed. Please try again." });
         } finally {

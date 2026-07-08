@@ -6,6 +6,6 @@ export const metadata = {
     "Meet the Webstep Solutions team covering strategy, UI/UX design, web development, mobile apps, QA, and digital growth.",
 };
 
-export default function TeamPage() {
+export default function Page() {
   return <OurTeamPage />;
 }

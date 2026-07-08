@@ -4,7 +4,7 @@
 // Falls back to hardcoded data if API is unavailable
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   FaLaptopCode, FaShoppingCart, FaBriefcase, FaPaintBrush,
   FaSearch, FaPenNib, FaCreditCard, FaShareAlt,
@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchCustomOptions, submitLead, submitPlanInquiry } from '@/lib/contentApi';
+import { THANK_YOU_ROUTE } from '@/lib/routes';
 
 // ─── Icon map (add more here if you add icons in admin) ───────────────────────
 const ICON_MAP = {
@@ -66,6 +67,7 @@ function hydrateIcons(items) {
 }
 
 export default function CustomizePackage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [itemsData, setItemsData] = useState(hydrateIcons(FALLBACK_ITEMS));
   const [loadingOptions, setLoadingOptions] = useState(true);
@@ -161,9 +163,9 @@ export default function CustomizePackage() {
         message: `${planSummary}${selectedFeatures}${planContactInfo.message ? `\n\nNotes: ${planContactInfo.message}` : ''}`,
       });
 
-      setPlanSubmitStatus({ type: 'success', message: 'Inquiry submitted! We will contact you shortly.' });
       setPlanContactInfo({ name: '', email: '', phone: '', message: '' });
       if (typeof window !== 'undefined') window.sessionStorage.removeItem('selectedPackageInquiry');
+      router.push(THANK_YOU_ROUTE);
     } catch (error) {
       setPlanSubmitStatus({ type: 'error', message: error.message });
     } finally {
@@ -245,10 +247,10 @@ export default function CustomizePackage() {
         message: contactInfo.message || `Custom package request. Estimated total: $${calculateTotal()}`,
       });
 
-      setSubmitStatus({ type: 'success', message: 'Request submitted! We will contact you shortly.' });
       setContactInfo({ name: '', email: '', phone: '', message: '' });
       setSelections({ websiteType: null, pages: null, design: null, features: [] });
-      setTimeout(() => setShowForm(false), 900);
+      setShowForm(false);
+      router.push(THANK_YOU_ROUTE);
     } catch (error) {
       setSubmitStatus({ type: 'error', message: error.message });
     } finally {
